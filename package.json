@@ -1,0 +1,29 @@
+{
+  "name": "cql-search",
+  "version": "1.0.0",
+  "description": "CQL Search platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandy081/CQL-Search.git"
+  },
+  "keywords": [
+    "CQL",
+    "Search"
+  ],
+  "author": "Sandeep Somavarapu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandy081/CQL-Search/issues"
+  },
+  "homepage": "https://github.com/sandy081/CQL-Search#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.1",
+    "lodash": "^4.6.1",
+    "react": "^0.14.7"
+  }
+}
