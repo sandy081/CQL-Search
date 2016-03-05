@@ -1,0 +1,3 @@
+class App {
+    show = true
+}
