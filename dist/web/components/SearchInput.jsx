@@ -1,16 +1,21 @@
-var React= require('React');
+define([
+        'react'
+       ],
+function(
+         React
+        ) {
 
-var SearchInput= React.createClass({
-   
-    render: function() {
-        return (
-                <div className="searchInputContainer">
-                      <input type="search" autoComplete="off" disabled="disabled"/>
-                      <input className="enabledInput" type="search" autoComplete="off"
-                             placeholder="Type to search..."/>
-                </div>
-              );
-    }
+    return React.createClass({
+    
+        render: function() {
+            return (
+                    <div className="searchInputContainer">
+                        <input ref="disabledInput" type="search" autoComplete="off" disabled="disabled"/>
+                        <input ref="enabledInput" className="enabledInput" type="search" autoComplete="off"
+                                placeholder="Type to search..."/>
+                    </div>
+                );
+        }
+    });
+      
 });  
-
-module.exports= SearchInput;

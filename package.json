@@ -2,7 +2,7 @@
   "name": "cql-search",
   "version": "1.0.0",
   "description": "CQL Search platform",
-  "main": "index.js",
+  "main": "Index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,15 +24,9 @@
     "bootstrap": "^3.3.6",
     "express": "^4.13.4",
     "jquery": "^2.2.1",
-    "lodash": "^4.6.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "require": "^2.4.20"
-  },
-  "devDependencies": {
-    "babel-register": "^6.6.5",
-    "browserify": "^13.0.0",
-    "babel-plugin-transform-react-jsx": "^6.6.5",
-    "babelify": "^7.2.0"
+    "requirejs": "^2.1.22",
+    "text": "github:requirejs/text"
   }
 }
