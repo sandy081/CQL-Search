@@ -3,6 +3,7 @@ define([
         'react',
         'bootstrap',
         'react-dom',
+        'web/components/ReactMixin',
         'jsx!web/components/SearchContainer'
        ],
 function(
@@ -10,6 +11,7 @@ function(
          React,
          Bootstrap,
          ReactDOM,
+         ReactMixin,
          SearchContainer
         ) {
     $('body').append("<div data-id='searchContainer' class='container'/>");
