@@ -1,19 +1,19 @@
-define([
+require([
         'jquery',
         'react',
         'bootstrap',
         'react-dom',
-        'web/components/ReactMixin',
-        'jsx!web/components/SearchContainer'
+        'web/components/ReactMixin'
        ],
 function(
          $,
          React,
          Bootstrap,
          ReactDOM,
-         ReactMixin,
-         SearchContainer
+         ReactMixin
         ) {
-    $('body').append("<div data-id='searchContainer' class='container'/>");
-    ReactDOM.render(<SearchContainer/>, $("div[data-id='searchContainer']").get(0));
+    require(['jsx!web/components/SearchContainer'], function(SearchContainer){        
+        $('body').append("<div data-id='searchContainer' class='container'/>");
+        ReactDOM.render(<SearchContainer/>, $("div[data-id='searchContainer']").get(0));
+    });
 });

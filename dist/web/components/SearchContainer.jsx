@@ -10,14 +10,14 @@ function(
         ) {
 
     return React.createClass({
-    
+        
         render: function() {
-            return ( <div className="searchContainer">
+            return ( <div ref="searchContainer" className="searchContainer">
                         <table>
                             <tbody>
                                 <tr>
                                     <td className="searchIconContainer"><span className="glyphicon glyphicon-search" aria-hidden="true"></span></td>
-                                    <td><SearchInput/></td>
+                                    <td><SearchInput ref="inputContainer"/></td>
                                 </tr>
                             </tbody>
                         </table>
