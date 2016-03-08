@@ -7,23 +7,17 @@ var SearchNavbar= React.createClass({
                 <header className="navbar navbar-inverse navbar-static-top bs-docs-nav" role="banner">
                     <div className="container">
                         <div className="navbar-header">
-                            <a href="../" className="navbar-brand">Flights Search</a>
+                            <a href="../" className="navbar-brand">Search</a>
                         </div>
                         <nav id="bs-navbar" className="collapse navbar-collapse">
                             <ul className="nav navbar-nav"> 
                                 <li> 
-                                    <a href="../getting-started/">Getting started</a> 
-                                </li> 
-                                <li> 
-                                    <a href="../css/">CSS</a> 
+                                    <a href="../">Flights</a> 
                                 </li> 
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
                                 <li> 
-                                    <a href="../getting-started/">Blog</a> 
-                                </li> 
-                                <li> 
-                                    <a href="../css/">Themes</a> 
+                                    <a href="../">Log in</a> 
                                 </li> 
                             </ul> 
                         </nav>
