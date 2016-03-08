@@ -12,8 +12,8 @@ function(
          ReactDOM,
          ReactMixin
         ) {
-    require(['jsx!web/components/SearchContainer'], function(SearchContainer){        
-        $('body').append("<div data-id='searchContainer' class='container'/>");
-        ReactDOM.render(<SearchContainer/>, $("div[data-id='searchContainer']").get(0));
+    require(['jsx!web/components/SearchPage'], function(SearchPage){        
+        $('body').append("<div data-id='searchPageContainer'/>");
+        ReactDOM.render(<SearchPage/>, $("div[data-id='searchPageContainer']").get(0));
     });
 });

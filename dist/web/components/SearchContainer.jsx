@@ -12,7 +12,7 @@ function(
     return React.createClass({
         
         render: function() {
-            return ( <div ref="searchContainer" className="searchContainer">
+            return ( <div ref="searchContainer" className="searchContainer container">
                         <table>
                             <tbody>
                                 <tr>
