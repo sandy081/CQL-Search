@@ -7,6 +7,7 @@ var babelify = require('babelify');
 
 var app= express(); 
 
+app.use(express.static('dist'));
 app.use(express.static('dist/web'));
 app.use(express.static('node_modules'));
 
@@ -18,10 +19,11 @@ app.get('/', function(req, res){
 app.get('/SearchModule.js', function(req, res){
     browserify({
             entries: ['./dist/web/SearchApp.jsx'],
-             paths: ['./dist/', './dist/web'],
-             debug: true
+            paths: ['./dist/', './dist/web'],
+            debug: true
          })
      .exclude("lodash")    
+     .exclude("backbone")    
      .transform(babelify, {sourceMaps: true, presets: ['react']})
      .bundle()
      .pipe(res);;

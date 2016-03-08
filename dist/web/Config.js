@@ -1,8 +1,9 @@
 require.config({
    paths: {
+       'backbone': 'backbone/backbone',
        'lodash': 'lodash/lodash',
-       'react': 'react/dist/react-with-addons',
-       'react-dom': 'react-dom/dist/react-dom',
+       'jquery': 'jquery/dist/jquery',
+       'underscore': 'underscore/underscore'
    },
    shim: {
      'bootstrap': ['jquery']  
