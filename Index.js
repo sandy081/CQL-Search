@@ -22,7 +22,7 @@ app.get('/SearchModule.js', function(req, res){
              debug: true
          })
      .exclude("lodash")    
-     .transform(babelify, {sourceMaps: false})
+     .transform(babelify, {sourceMaps: true, presets: ['react']})
      .bundle()
      .pipe(res);;
 });
