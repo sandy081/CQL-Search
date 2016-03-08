@@ -16,7 +16,7 @@ function(
                     <div className="searchInputContainer">
                         <input ref="disabledInput" type="search" autoComplete="off" disabled="disabled"/>
                         <input ref="enabledInput" className="enabledInput" type="search" autoComplete="off"
-                                placeholder="Type to search..."
+                                placeholder="Type to search for flights..."
                                 onClick={this._onFocus}/>
                     </div>
                 );
