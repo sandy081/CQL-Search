@@ -1,19 +1,21 @@
 var React= require('react');
 var SearchInput= require('./SearchInput.jsx');
 var ContentAssist= require('./ContentAssist.jsx');
+var SearchModel= require('./models/SearchModel');
 
 var SearchContainer= React.createClass({
     
     componentDidMount: function() {
         this.refs.searchInput.actions.inputFocussed.listen(_.bind(function(){
-            this.refs.contentAssist.showProposals();
+            this.refs.contentAssist.fetchProposals(this.refs.searchInput.getSearchText());
         }, this));
         
         this.refs.searchInput.actions.inputChanged.listen(_.bind(function(input){
-            this.refs.searchInput.showValueInDisabledInput(input ? input + "proposal text" : "");
+            this.refs.contentAssist.fetchProposals(input);
         }, this));
         
         this.refs.searchInput.actions.arrowDown.listen(_.bind(function(){
+            this.refs.searchInput.hideValueInDisabledInput();
             this.refs.contentAssist.refs.dropdownmenu.focus();
         }, this));
         
@@ -35,7 +37,7 @@ var SearchContainer= React.createClass({
                             <tr>
                                 <td/>
                                 <td className="contentAssistContainer">
-                                    <ContentAssist ref="contentAssist"/>
+                                    <ContentAssist ref="contentAssist" model={this.getValue(SearchModel.propContentAssist)}/>
                                  </td>
                             </tr>
                         </tbody>
@@ -43,6 +45,7 @@ var SearchContainer= React.createClass({
                 </div>
             ); 
     }
+    
 });
 
 module.exports= SearchContainer;

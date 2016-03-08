@@ -4,10 +4,35 @@ var React= require('react');
 var ReactDOM= require('react-dom');
 var Reflux= require('reflux'); 
 
+var StateUpdater= function(component) {
+    this.newState= {};
+    this.component= component;
+};
+
+StateUpdater.prototype.set= function(prop, value) {
+    this.newState[prop]= value;
+    return this;
+};
+
+StateUpdater.prototype.update= function(prop, value) {
+    if (prop) {
+        this.set(prop, value);
+    }
+    this.component.setState(this.newState);
+};
+
 var mixin= {
     
     getValue: function(prop) {
         return this.props.model.get(prop);
+    },
+    
+    getStateValue: function(prop) {
+        return this.state[prop];
+    },
+    
+    getStateUpdater: function() {
+        return new StateUpdater(this);
     },
     
     componentWillMount: function() {

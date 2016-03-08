@@ -1,15 +1,21 @@
+var _= require("lodash");
 var React= require('react');
 var DropDownMenu= require('../dropdown/DropDownMenu.jsx');
 var DropDownMenuModel= require('../dropdown/models/DropDownMenuModel');
-var MenuHeaderModel= require('../dropdown/models/MenuHeaderModel');
-var MenuSepartorModel= require('../dropdown/models/MenuSeparatorModel');
-var MenuItemModel= require('../dropdown/models/MenuItemModel');
 
-var SearchInput= React.createClass({
+var _STATE_MENU_ITEMS_= "_STATE_MENU_ITEMS_";
+
+var ContetnAssist= React.createClass({
     
     actions: {
       proposalFocussed: 'proposal-focussed',
       proposalSelected: 'proposal-selected'  
+    },
+    
+    getInitialState: function() {
+      var initialState= {};
+      initialState[_STATE_MENU_ITEMS_]= this.props.model.toMenuEntries();
+      return initialState;  
     },
     
     componentDidMount: function() {
@@ -19,17 +25,7 @@ var SearchInput= React.createClass({
     
     render: function() {
         var dropDownMenuModel= new DropDownMenuModel();
-        var menuEntries= [];
-        menuEntries.push(new MenuHeaderModel({label : "Switzerland"}));
-        menuEntries.push(new MenuItemModel({displayString : "Zurich"}));
-        menuEntries.push(new MenuItemModel({displayString : "Geneva"}));
-        menuEntries.push(new MenuItemModel({displayString : "Berne"}));
-        menuEntries.push(new MenuSepartorModel());
-        menuEntries.push(new MenuHeaderModel({label : "Gernany"}));
-        menuEntries.push(new MenuItemModel({displayString : "Munich"}));
-        menuEntries.push(new MenuItemModel({displayString : "Frankfurt"}));
-        menuEntries.push(new MenuItemModel({displayString : "Berlin"}));
-        dropDownMenuModel.set(DropDownMenuModel.propMenuEntries, menuEntries);
+        dropDownMenuModel.set(DropDownMenuModel.propMenuEntries, this.getStateValue(_STATE_MENU_ITEMS_));
         return (
                 <div className="dropdown">
                     <button className="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style={{display: 'none'}}/>
@@ -38,10 +34,14 @@ var SearchInput= React.createClass({
             );
     },
     
-    showProposals: function() {
-        this.$el.addClass("open");
-    }
+    fetchProposals: function(searchText) {
+        this.props.model.fetchProposals(searchText)
+                        .done(_.bind(function(){
+                            this.getStateUpdater().update(_STATE_MENU_ITEMS_, this.props.model.toMenuEntries());
+                            this.$el.addClass("open");
+                        }, this));  
+    },
     
 });
 
-module.exports= SearchInput;
+module.exports= ContetnAssist;

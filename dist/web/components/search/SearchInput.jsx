@@ -21,8 +21,16 @@ var SearchInput= React.createClass({
             );
     },
     
+    getSearchText: function() {
+        return this.$ui.enabledInput.val();  
+    },
+    
     showValueInDisabledInput: function(value) {
         this.$ui.disabledInput.val(value);
+    },
+    
+    hideValueInDisabledInput: function(value) {
+        this.$ui.disabledInput.val("");
     },
     
     showValueInEnabledInput: function(value) {
