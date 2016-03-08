@@ -1,25 +1,17 @@
-define([
-        'jquery',
-        'react',
-        'jsx!web/components/SearchNavbar',
-        'jsx!web/components/SearchContainer'
-       ],
-function(
-         $,
-         React,
-         SearchNavbar,
-         SearchContainer
-        ) {
+var $= require('jquery');
+var React= require('react');
+var SearchNavbar= require('components/SearchNavbar.jsx');
+var SearchContainer= require('components/SearchContainer.jsx');
 
-    return React.createClass({
-        
-        render: function() {
-            return ( 
-                    <div>
-                        <SearchNavbar/>
-                         <SearchContainer/>
-                    </div>
-                ); 
-        }
-    });
+var SearchPage= React.createClass({
+    render: function() {
+        return ( 
+                <div>
+                    <SearchNavbar/>
+                        <SearchContainer/>
+                </div>
+            ); 
+    }
 });
+
+module.exports= SearchPage;

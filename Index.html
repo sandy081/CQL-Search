@@ -1,10 +1,12 @@
 <!doctype html>
     <body>
-        <link type="text/css" rel="stylesheet" href="web/SearchApp.css"></link>
+        <link type="text/css" rel="stylesheet" href="SearchApp.css"></link>
         <script type="text/javascript" src="requirejs/require.js"></script>
         <script type="text/javascript" src="Config.js"></script>
         <script type="text/javascript">
-            require(['jsx!web/SearchApp']);
+            require(['lodash'], function(){
+                require(["SearchModule.js"]);
+            });
         </script>
     </body>    
 </html>
