@@ -6,6 +6,10 @@ var Reflux= require('reflux');
 
 var mixin= {
     
+    getValue: function(prop) {
+        return this.props.model.get(prop);
+    },
+    
     componentWillMount: function() {
         this.actions= this.actions || {};
         this.actions= _.mapValues(this.actions, Reflux.createAction);  

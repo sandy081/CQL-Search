@@ -16,7 +16,11 @@
     padding-left: 5px;
 }
 
-.searchInputContainer {
+.searchContainer .searchInputContainer {
+    vertical-align: top;
+}
+
+.searchInput {
     position: relative;
 }
 
@@ -24,6 +28,9 @@ input[type="search"] {
     border: none;
     width: 100%;
     vertical-align: top;
+    position: absolute;
+    left: 0px;
+    background-color: transparent;
 }
 
 input[type="search"]:focus {
@@ -31,6 +38,17 @@ input[type="search"]:focus {
 }
 
 input[type="search"].enabledInput {
-    position: absolute;
-    left: 0px;
+    z-index: 6;
+    padding: 0px;
+    margin: -0.125em 0px 0px;
+    height: 2.25em;
+}
+
+input[type="search"].disabledInput {
+     padding: 0px; 
+     margin: 0px; 
+     height: auto; 
+     z-index: 1;
+     -webkit-text-fill-color: silver; 
+     color: silver;
 }

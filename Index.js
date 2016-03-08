@@ -17,9 +17,9 @@ app.get('/', function(req, res){
 });
 
 app.get('/SearchApp.js', function(req, res){
-    browserify({
-            entries: ['./dist/web/SearchApp.jsx'],
-            paths: ['./dist/', './dist/web'],
+    browserify("./SearchApp.jsx", {
+            paths: ['./dist', './dist/web'],
+            basedir: './dist/web',
             debug: true
          })
      .exclude("lodash")    
