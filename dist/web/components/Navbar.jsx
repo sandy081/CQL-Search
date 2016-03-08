@@ -1,5 +1,5 @@
 var React= require('react');
-var SearchContainer= require('components/SearchContainer.jsx');
+var SearchContainer= require('components/search/SearchContainer.jsx');
 
 var SearchNavbar= React.createClass({
     render: function() {

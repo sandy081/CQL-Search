@@ -16,7 +16,7 @@ app.get('/', function(req, res){
     res.sendFile("index.html", {root: "."});
 });
 
-app.get('/SearchModule.js', function(req, res){
+app.get('/SearchApp.js', function(req, res){
     browserify({
             entries: ['./dist/web/SearchApp.jsx'],
             paths: ['./dist/', './dist/web'],

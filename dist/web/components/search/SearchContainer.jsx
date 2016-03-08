@@ -1,5 +1,5 @@
 var React= require('react');
-var SearchInput= require('components/SearchInput.jsx');
+var SearchInput= require('components/search/SearchInput.jsx');
 
 var SearchContainer= React.createClass({
     render: function() {

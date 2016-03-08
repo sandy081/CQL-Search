@@ -1,18 +1,16 @@
 var React= require('react');
 
-var SearchInput= React.createClass({
+var EditableInput= React.createClass({
+    
     actions: {
         inputFocussed: "input-focussed"  
     },
     
     render: function() {
         return (
-                <div className="searchInputContainer">
-                    <input ref="disabledInput" type="search" autoComplete="off" disabled="disabled"/>
                     <input ref="enabledInput" className="enabledInput" type="search" autoComplete="off"
                             placeholder="Type to search for flights..."
                             onClick={this._onFocus}/>
-                </div>
             );
     },
     
@@ -21,4 +19,4 @@ var SearchInput= React.createClass({
     }
 });
 
-module.exports= SearchInput;
+module.exports= EditableInput;
