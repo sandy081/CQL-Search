@@ -1,5 +1,6 @@
 var $= require("jquery");
 var Backbone= require("backbone");
+var URI= require("urijs");
 var ProposalsGroup= require("./../../../../shared/models/proposals/ProposalsGroup");
 var Proposal= require("./../../../../shared/models/proposals/Proposal");
 var MenuHeaderModel= require("./../../dropdown/models/MenuHeaderModel");
@@ -43,7 +44,10 @@ var ContentAssistModel= Backbone.Model.extend({
         innerOptions.accepts.json = 'text/json'; 
         innerOptions.dataType = 'json';
         innerOptions.reset = true;
-        innerOptions.url= "/proposals/flights?input=" + text;
+        var url= new URI("/proposals/flights");
+        url.search({input: text});
+        innerOptions.url= url.toString();
+        
         this.get(_PROP_PROPOSALS_).fetch(innerOptions)
                                     .done(_.bind(function(){
                                         this._current= -1;

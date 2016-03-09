@@ -7,7 +7,7 @@ var FlightsProposalsService= function(){};
 
 FlightsProposalsService.prototype.getProposals= function(searchText) {
    var parser= ParserUtils.createSilentParser(searchText);
-   var flightsProposalsBuilder= new FlightsProposalsBuilder();
+   var flightsProposalsBuilder= new FlightsProposalsBuilder(searchText);
    new FlightsProposalsVisitor(flightsProposalsBuilder, new SelectionHelper(searchText)).visit(parser.search());
    return flightsProposalsBuilder.getProposals();
 };

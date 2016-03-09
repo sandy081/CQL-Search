@@ -17,6 +17,16 @@ FlightsProposalVisitor.prototype.visitSimpleClause= function(clauseCtx) {
     return handled;
 }
 
+FlightsProposalVisitor.prototype.visitFullTextClause= function(fullTextClauseCtx) {
+    var selection= this._selectionHelper.createSelection(fullTextClauseCtx);
+    if (this._selectionHelper.hasTrailingSpace(fullTextClauseCtx)) {
+    } else {
+        var addLeadingText= this._selectionHelper.needsLeadingSpace(fullTextClauseCtx);
+        this._proposalsBuilder.createAttributeProposals(selection, addLeadingText);
+    }
+    return LastChildVisitor.prototype.visitFullTextClause.call(this, fullTextClauseCtx);
+}
+
 FlightsProposalVisitor.prototype._handleClauseContextException= function(clauseCtx) {
     var selection= this._selectionHelper.createSelection(clauseCtx);
     var needsLeadingSpace= this._selectionHelper.needsLeadingSpace(clauseCtx);

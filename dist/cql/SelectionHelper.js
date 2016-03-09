@@ -20,7 +20,7 @@ SelectionHelper.prototype.createSelection= function(parserRuleContext) {
 
 SelectionHelper.prototype._createAfterSelectionWithStartAndStop= function(start, stop) {
     var trailingSpace= this._getTrailingSpaceAfter(stop);
-    var additionalOffset= this._isWhitespaceStr(trailingSpace) ? trailingSpace.length() : 0;
+    var additionalOffset= this._isWhitespaceStr(trailingSpace) ? trailingSpace.length : 0;
     return this._createSelection(start, stop + additionalOffset);
 }
 
@@ -34,7 +34,7 @@ SelectionHelper.prototype._hasTrailingSpaceAfter= function(stop) {
 }
 
 SelectionHelper.prototype._isWhitespaceStr= function(remaining) {
-     return remaining.length > 0 && remaining.trim();
+     return remaining.length > 0 && remaining.trim().length === 0;
 }
 
 SelectionHelper.prototype._getTrailingSpaceAfter= function(stop) {

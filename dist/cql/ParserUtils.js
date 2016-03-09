@@ -6,6 +6,8 @@ var CqlParser= require("./generated/grammar/flights/CqlParser").CqlParser;
 
 var ParserUtils= function(){};
 
+ParserUtils.QUOTE= "\"";
+
 ParserUtils.createSilentParser= function(cqlText) {
    var chars = new InputStream(cqlText);
    var lexer = new CqlLexer(chars);
@@ -20,6 +22,17 @@ ParserUtils.getAllTokens= function(cqlText) {
    var chars = new InputStream(cqlText);
    var lexer = new CqlLexer(chars);
    return lexer.getAllTokens();
+};
+
+ParserUtils.isQuoted= function(text) {
+    return text.length > 1 && text.startsWith(ParserUtils.QUOTE) && text.endsWith(ParserUtils.QUOTE);
+};
+
+ParserUtils.stripQuotes= function(text) {
+    if (ParserUtils.isQuoted(text)) {
+        return text.substring(1, text.length - 1);
+    }
+    return text;
 };
 
 module.exports= ParserUtils;
