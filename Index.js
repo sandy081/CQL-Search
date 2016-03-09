@@ -5,6 +5,7 @@ var React= require('react');
 var browserify= require('browserify');
 var babelify = require('babelify');
 var ProposalsRestService = require('./dist/server/proposals/ProposalsRestService');
+var FlightsGrammarVisitorRestService = require('./dist/server/flights/rest/FlightsGrammarVisitorRestService');
 
 var app= express(); 
 
@@ -21,6 +22,12 @@ app.get('/proposals/flights', function(req, res){
     res.setHeader('Content-Type', 'text/json');
     var proposalsRestService= new ProposalsRestService();
     proposalsRestService.serve(req, res);
+});
+
+app.get('/search/flights/tree', function(req, res){
+    res.setHeader('Content-Type', 'text/json');
+    var flightsGrammarVisitorRestService= new FlightsGrammarVisitorRestService();
+    flightsGrammarVisitorRestService.serve(req, res);
 });
 
 app.get('/SearchApp.js', function(req, res){

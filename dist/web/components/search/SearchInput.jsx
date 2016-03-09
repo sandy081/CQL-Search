@@ -15,7 +15,7 @@ var SearchInput= React.createClass({
     },
     
     componentDidMount: function() {
-	   this._delayInputChanged= _.debounce(this._inputChanged, 300);
+	   this._delayInputChanged= _.debounce(this._inputChanged, 200);
 	},
     
     render: function() {

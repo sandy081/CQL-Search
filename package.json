@@ -35,6 +35,12 @@
     "react-dom": "^0.14.7",
     "reflux": "^0.3.0",
     "requirejs": "^2.1.22",
-    "text": "github:requirejs/text"
+    "text": "github:requirejs/text",
+    "antlr4": "^4.5.2"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-antlr4": "^0.1.5",
+    "grunt-npm-install": "^0.3.0"
   }
 }
