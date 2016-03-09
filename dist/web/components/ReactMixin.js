@@ -28,7 +28,7 @@ var mixin= {
     },
     
     getStateValue: function(prop) {
-        return this.state[prop];
+        return this.state ? this.state[prop] : null;
     },
     
     getStateUpdater: function() {

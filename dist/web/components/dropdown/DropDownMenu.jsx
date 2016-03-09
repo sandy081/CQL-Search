@@ -37,7 +37,7 @@ var DropDownMenu= React.createClass({
     
     _renderMenuEntry: function(menuEntry) {
         if (menuEntry instanceof MenuHeaderModel) {
-            return (<li className="dropdown-header" role="presentation">
+            return (<li key={menuEntry.get(MenuHeaderModel.propLabel)} className="dropdown-header" role="presentation">
 							{menuEntry.get(MenuHeaderModel.propLabel)}
 					</li>);
         }
@@ -56,7 +56,7 @@ var DropDownMenu= React.createClass({
     _bindMenuItem: function(menuItemView) {
         if (menuItemView) {
             menuItemView.actions.selected.listen(this.actions.menuItemSelected);
-            menuItemView.actions.focussed.listen(this.actions.menuItemFocussed);
+            menuItemView.actions.focussed.listen(_.bind(this._onMenuItemFocussed, this, menuItemView));
             menuItemView.actions.blurred.listen(_.bind(this._onMenuItemBlurred, this, menuItemView));
         }
     },
@@ -74,6 +74,11 @@ var DropDownMenu= React.createClass({
             event.preventDefault();
             event.stopPropagation();
         }
+    },
+    
+     _onMenuItemFocussed: function(menuItemView, event) {
+        this.actions.menuItemFocussed(menuItemView.props.model);
+        menuItemView.$ui.menuItemAnchor[0].focus();
     },
     
     _onMenuItemBlurred: function(menuItemView, event) {

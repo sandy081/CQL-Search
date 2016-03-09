@@ -16,7 +16,7 @@ var MenuItem= React.createClass({
         var showText= text && text.trim() !== displayString.trim();
         var ariaLabel= this.getValue(MenuItemModel.propAriaLabel);
         return (<li className="components-dropdown-MenuItem" role="presentation" style={this._getStyle()}>
-                    <a href="javascript:void(0);" role="menuitem" 
+                    <a ref="menuItemAnchor" id={this.getValue(MenuItemModel.propId)} href="javascript:void(0);" role="menuitem" 
                                                     onClick={this._handleClick} 
                                                     onFocus={this._handleFocus} 
                                                     onKeyDown={this._handleKeyDown}

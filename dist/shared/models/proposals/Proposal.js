@@ -1,5 +1,6 @@
 var Backbone= require('backbone');
 
+var _PROP_ID_ 	            = "id";		
 var _PROP_DISPLAY_STRING_ 	= "displayString";		
 var _PROP_TEXT_ 			= "text";		
 var _PROP_ICON_URL_ 		= "iconUrl";		
@@ -23,6 +24,7 @@ var Proposal= Backbone.Model.extend({
     },
     
 }, {
+    propId: _PROP_ID_,
     propDisplayString: _PROP_DISPLAY_STRING_,
     propText: _PROP_TEXT_,
     propIconUrl: _PROP_ICON_URL_,
