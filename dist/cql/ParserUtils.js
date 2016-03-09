@@ -1,8 +1,8 @@
 var antlr4= require('antlr4');
 var InputStream= antlr4.InputStream;
 var CommonTokenStream= antlr4.CommonTokenStream;
-var CqlLexer= require("./../../../cql/generated/grammar/flights/CqlLexer").CqlLexer;
-var CqlParser= require("./../../../cql/generated/grammar/flights/CqlParser").CqlParser;
+var CqlLexer= require("./generated/grammar/flights/CqlLexer").CqlLexer;
+var CqlParser= require("./generated/grammar/flights/CqlParser").CqlParser;
 
 var ParserUtils= function(){};
 
@@ -12,8 +12,14 @@ ParserUtils.createSilentParser= function(cqlText) {
    var tokens  = new CommonTokenStream(lexer);
    var parser = new CqlParser(tokens);
    parser.buildParseTrees = true;
-//    parser.removeErrorListeners();
+   parser.removeErrorListeners();
    return parser;
+};
+
+ParserUtils.getAllTokens= function(cqlText) {
+   var chars = new InputStream(cqlText);
+   var lexer = new CqlLexer(chars);
+   return lexer.getAllTokens();
 };
 
 module.exports= ParserUtils;

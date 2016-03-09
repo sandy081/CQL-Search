@@ -18,9 +18,9 @@ FlightsProposalVisitor.prototype.visitSimpleClause= function(clauseCtx) {
 }
 
 FlightsProposalVisitor.prototype._handleClauseContextException= function(clauseCtx) {
-    // var selection= this._selectionHelper.createSelection(clauseCtx);
-    // var needsLeadingSpace= this._selectionHelper.needsLeadingSpace(clauseCtx);
-    this._proposalsBuilder.createAttributeProposals(null, true);
+    var selection= this._selectionHelper.createSelection(clauseCtx);
+    var needsLeadingSpace= this._selectionHelper.needsLeadingSpace(clauseCtx);
+    this._proposalsBuilder.createAttributeProposals(selection, needsLeadingSpace);
 }
 
 module.exports = FlightsProposalVisitor;

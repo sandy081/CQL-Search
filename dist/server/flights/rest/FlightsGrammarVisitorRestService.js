@@ -1,4 +1,4 @@
-var ParserUtils= require("./../visitors/ParserUtils");
+var ParserUtils= require("./../../../cql/ParserUtils");
 var PrintTreeVisitor= require("./../visitors/PrintTreeVisitor");
 
 var FlightsGrammarVisitorRestService= function(){};
