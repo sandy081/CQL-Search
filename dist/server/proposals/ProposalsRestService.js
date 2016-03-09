@@ -1,5 +1,5 @@
 // TODO: Dynamic services in node js
-var FlightsProposalsService= require("./../flights/FlightsProposalsService");
+var FlightsProposalsService= require("./../flights/proposals/FlightsProposalsService");
 
 var ProposalsRestService= function(){};
   

@@ -12,7 +12,7 @@ ParserUtils.createSilentParser= function(cqlText) {
    var tokens  = new CommonTokenStream(lexer);
    var parser = new CqlParser(tokens);
    parser.buildParseTrees = true;
-   parser.removeAllListeners = true;
+//    parser.removeErrorListeners();
    return parser;
 };
 

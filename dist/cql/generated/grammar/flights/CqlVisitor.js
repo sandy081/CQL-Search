@@ -1,82 +1,76 @@
-var ParseTreeVisitor = require('./CustomParseTreeVisitor');
+// Generated from grammar/flights/Cql.g4 by ANTLR 4.5.1
+// jshint ignore: start
+var antlr4 = require('antlr4/index');
+
+// This class defines a complete generic visitor for a parse tree produced by CqlParser.
 
 function CqlVisitor() {
-	ParseTreeVisitor.call(this);
+	antlr4.tree.ParseTreeVisitor.call(this);
 	return this;
 }
 
-CqlVisitor.prototype = Object.create(ParseTreeVisitor.prototype);
+CqlVisitor.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
 CqlVisitor.prototype.constructor = CqlVisitor;
 
 // Visit a parse tree produced by CqlParser#search.
 CqlVisitor.prototype.visitSearch = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#clauses.
 CqlVisitor.prototype.visitClauses = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#simpleClause.
 CqlVisitor.prototype.visitSimpleClause = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#attributeClause.
 CqlVisitor.prototype.visitAttributeClause = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#shortClause.
 CqlVisitor.prototype.visitShortClause = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#fullTextClause.
 CqlVisitor.prototype.visitFullTextClause = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#searchWord.
 CqlVisitor.prototype.visitSearchWord = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#attribute.
 CqlVisitor.prototype.visitAttribute = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#operation.
 CqlVisitor.prototype.visitOperation = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#value.
 CqlVisitor.prototype.visitValue = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#stringValue.
 CqlVisitor.prototype.visitStringValue = function(ctx) {
-    return this.visitChildren(ctx);
 };
 
 
 // Visit a parse tree produced by CqlParser#numberValue.
 CqlVisitor.prototype.visitNumberValue = function(ctx) {
-    return this.visitChildren(ctx);
 };
+
+
 
 exports.CqlVisitor = CqlVisitor;

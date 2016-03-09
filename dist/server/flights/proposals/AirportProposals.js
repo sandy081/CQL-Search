@@ -1,25 +1,24 @@
 var Backbone= require('backbone');
 var _= require('lodash');
-var Proposal= require('./../../shared/models/proposals/Proposal');
-var ProposalsGroup= require('./../../shared/models/proposals/ProposalsGroup');
+var Proposal= require('./../../../shared/models/proposals/Proposal');
+var ProposalsGroup= require('./../../../shared/models/proposals/ProposalsGroup');
 
-var AirportModel= require("./models/AirportModel")
-var Data= require("./models/Data")
+var AirportModel= require("./../models/AirportModel")
+var Data= require("./../models/Data")
 var airports= new Backbone.Collection(Data.Airports(), {parse: true, model: AirportModel});
 
-var FlightsProposalsService= function(){};
+var AirportProposals= function(){};
 
-FlightsProposalsService.prototype.getProposals= function(searchText) {
-    var proposalsGroups= _.transform(_filterAirports(searchText), function(result, airports, country){
+AirportProposals.prototype.getProposals= function(filterText) {
+    return _.transform(_filterAirports(filterText), function(result, airports, country){
         result.push(_toProposalsGroup(country, _.map(airports, _toProposal)));
         return result;
     }, []);
-    return new Backbone.Collection(proposalsGroups, {model: ProposalsGroup});                                                       
 };
 
-var _filterAirports= function(searchText) {
-  var filtered= searchText ? airports.filter(function(airport){
-        return airport.get(AirportModel.propCountry) === searchText || airport.get(AirportModel.propCity).toLowerCase().startsWith(searchText.toLowerCase());  
+var _filterAirports= function(filterText) {
+  var filtered= filterText ? airports.filter(function(airport){
+        return airport.get(AirportModel.propCountry) === filterText || airport.get(AirportModel.propCity).toLowerCase().startsWith(filterText.toLowerCase());  
     }) : airports.models;
   return _.reduce(filtered, function(result, airport) {
       var values= result[airport.get(AirportModel.propCountry)];
@@ -46,4 +45,4 @@ var _toProposalsGroup= function(title, proposalOrProposals) {
     return proposalsGroup;
 }
 
-module.exports= FlightsProposalsService;
+module.exports= AirportProposals;

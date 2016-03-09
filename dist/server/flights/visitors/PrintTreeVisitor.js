@@ -13,8 +13,8 @@ PrintTreeVisitor.prototype.aggregateResult= function(aggregate, nextResult) {
     return this.nextResult;
 };
 
-PrintTreeVisitor.prototype.visitSearch= function(ctx) {
-    return this.result;
+PrintTreeVisitor.prototype.visit= function(ctx) {
+    return CqlVisitor.prototype.visit.call(this, ctx);
 };
 
 module.exports = PrintTreeVisitor;

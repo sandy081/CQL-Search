@@ -1,15 +1,13 @@
-var _= require('lodash');
-var CqlVisitor= require("./../../../generated/cql/grammar/flights/CqlVisitor").CqlVisitor;
+var _= require("lodash");
+var CqlVisitor= require("./../../../cql/CqlVisitor").CqlVisitor;
 
 var LastChildVisitor= function() {
-    CqlVisitor.call(this);
-};
+	CqlVisitor.call(this);
+    return this;
+}
 
 LastChildVisitor.prototype= Object.create(CqlVisitor.prototype);
 LastChildVisitor.prototype.constructor= LastChildVisitor;
-
-LastChildVisitor.prototype.visitSearch= function(ctx) {
-    return this.visitLastChild(ctx);
 
 LastChildVisitor.prototype.visitClauses= function(ctx) {
     return this.visitLastChild(ctx);
@@ -20,8 +18,16 @@ LastChildVisitor.prototype.visitLastChild= function(ctx) {
 		return false;
     }
 
-    var lastChild= ctx.children.get(ctx.children.size() - 1);
+    var lastChild= _.last(ctx.children);
     return lastChild != null ? lastChild.accept(this) : false;
+}
+
+LastChildVisitor.prototype.defaultResult= function() {
+    return false;
+}
+
+LastChildVisitor.prototype.aggregateResult= function(aggregate, nextResult) {
+    return aggregate || nextResult;
 }
 
 module.exports = LastChildVisitor;
