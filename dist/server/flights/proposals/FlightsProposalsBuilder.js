@@ -1,4 +1,5 @@
 var Backbone= require("backbone");
+var AttributeProposals= require("./AttributeProposals");
 var AirportProposals= require("./AirportProposals");
 var ParserUtils= require('./../../../cql/ParserUtils');
 var ProposalsGroup= require('./../../../shared/models/proposals/ProposalsGroup');
@@ -10,7 +11,7 @@ var FlightsProposalsBuilder= function(input) {
 }
 
 FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, needsLeadingSpace) {
-    var airports= new AirportProposals().getProposals(this._getFilterText(selection));
+    var airports= new AttributeProposals().getProposals(this._getFilterText(selection));
     this._proposals.add(airports);
 }
 

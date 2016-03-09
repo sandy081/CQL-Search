@@ -22,3 +22,17 @@ exports.Airports= function() {
         {country: "Germany", city: "Berlin"}   
     ];
 }
+
+exports.Attributes= function() {
+    return [
+        {name: "to", text: "to", ops: [":"]},   
+        {name: "from", text: "from", ops: [":"]},   
+        {name: "Persons", text: "#"},   
+        {name: "adults", text: "adults", ops: [":"]},   
+        {name: "children", text: "children", ops: [":"]},   
+        {name: "infants", text: "infants", ops: [":"]},   
+        {name: "on", text: "on", ops: [":"]},   
+        {name: "back", text: "back", ops: [":"]},   
+        {name: "Airlines", text: "@"}   
+    ];
+}

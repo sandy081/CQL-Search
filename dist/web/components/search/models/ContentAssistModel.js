@@ -82,9 +82,12 @@ var ContentAssistModel= Backbone.Model.extend({
     _toMenuEntriesFromGroups: function(proposalGroups) {
         var menuEntries= [];
         proposalGroups.each(function(proposalGroup, index){
-            var menuHeader= new MenuHeaderModel();
-            menuHeader.set(MenuHeaderModel.propLabel, proposalGroup.get(ProposalsGroup.propTitle));
-            menuEntries.push(menuHeader);
+            
+            if (proposalGroup.get(ProposalsGroup.propTitle)) {
+                var menuHeader= new MenuHeaderModel();
+                menuHeader.set(MenuHeaderModel.propLabel, proposalGroup.get(ProposalsGroup.propTitle));
+                menuEntries.push(menuHeader);
+            }
             
             var menuItems= this._toMenuEntriesFromProposals(proposalGroup.get(ProposalsGroup.propProposals));
             menuEntries= menuEntries.concat(menuItems);
