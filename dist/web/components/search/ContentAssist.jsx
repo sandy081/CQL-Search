@@ -24,7 +24,7 @@ var ContetnAssist= React.createClass({
     
     componentDidMount: function() {
       this.refs.dropdownmenu.actions.menuItemSelected.listen(this.actions.proposalSelected);  
-      this.refs.dropdownmenu.actions.menuItemFocussed.listen(this.actions.proposalFocussed);  
+      this.refs.dropdownmenu.actions.menuItemFocussed.listen(_.bind(this._menuItemFocussed, this));  
     },
     
     componentDidUpdate: function() {
@@ -53,19 +53,20 @@ var ContetnAssist= React.createClass({
     },
     
     _menuItemFocussed: function(menuItem) {
-        var proposal= this.props.model.getProposalFromMenuEntry(menuItem)
-        this.focusProposal(proposal);
+        this.actions.proposalFocussed(this.props.model.getProposalFromMenuEntry(menuItem));
     },
     
-    focusProposal: function(proposal, previous) {
-        if (previous) {
-            this.refs.dropdownmenu.$el.find("#"+previous.get(Proposal.propId)).removeClass("focus");
-        }
-        if (proposal) {
-            this.getStateUpdater().update(_STATE_ACTIVE_DESCENDANT_, proposal.get(Proposal.propId));
-            this.refs.dropdownmenu.$el.find("#"+proposal.get(Proposal.propId)).addClass("focus");
-            this.actions.proposalFocussed(proposal);
-        }
+    focusNext: function() {
+        this.refs.dropdownmenu.focusNext();
+    },
+    
+    focusPrevious: function() {
+        this.refs.dropdownmenu.focusPrevious();
+    },
+    
+    getFocussedProposal: function() {
+        var menuItem= this.refs.dropdownmenu.getFocussedMenuItem()
+        return menuItem ? this.props.model.getProposalFromMenuEntry(menuItem) : null;
     }
     
 });

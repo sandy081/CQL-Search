@@ -9,6 +9,7 @@ var _PROP_ICON_CLASS_ 		= "iconClass";
 var _PROP_DEPTH_ 			= "depth";		
 var _PROP_DISABLED_ 		= "disabled";		
 var _PROP_ARIA_LABEL_ 		= "aria-label";		
+var _PROP_FOCUS_ 		    = "focus";		
 
 var MenuItemModel= MenuEntryModel.extend({
     
@@ -20,7 +21,8 @@ var MenuItemModel= MenuEntryModel.extend({
     propIconClass: _PROP_ICON_CLASS_,
     propDepth: _PROP_DEPTH_,
     propDisabled: _PROP_DISABLED_,
-    propAriaLabel: _PROP_ARIA_LABEL_
+    propAriaLabel: _PROP_ARIA_LABEL_,
+    propFocus: _PROP_FOCUS_
 });
 
 module.exports= MenuItemModel;

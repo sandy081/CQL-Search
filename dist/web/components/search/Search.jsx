@@ -1,6 +1,7 @@
 var React= require('react');
 var SearchInput= require('./SearchInput.jsx');
 var ContentAssist= require('./ContentAssist.jsx');
+var ContentAssistModel= require('./models/ContentAssistModel');
 var SearchModel= require('./models/SearchModel');
 var Proposal= require('./../../../shared/models/proposals/Proposal');
 
@@ -17,21 +18,16 @@ var SearchContainer= React.createClass({
         
         this.refs.searchInput.actions.arrowDown.listen(_.bind(function(){
             this.refs.searchInput.hideValueInDisabledInput();
-            var current= this.getValue(SearchModel.propContentAssist).getCurrent();
-            var next= this.getValue(SearchModel.propContentAssist).getNext();
-            this.refs.contentAssist.focusProposal(next, current);
+            this.refs.contentAssist.focusNext();
         }, this));
         
         this.refs.searchInput.actions.arrowUp.listen(_.bind(function(){
             this.refs.searchInput.hideValueInDisabledInput();
-            var current= this.getValue(SearchModel.propContentAssist).getCurrent();
-            var previous= this.getValue(SearchModel.propContentAssist).getPrevious();
-            this.refs.contentAssist.focusProposal(previous, current);
+            this.refs.contentAssist.focusPrevious();
         }, this));
         
         this.refs.searchInput.actions.arrowRight.listen(_.bind(function(){
-            var proposal= this.getValue(SearchModel.propContentAssist).getCurrent();
-            proposal= proposal || this.getValue(SearchModel.propContentAssist).getFirstProposal();
+            var proposal= this.refs.contentAssist.getFocussedProposal() || this.getValue(SearchModel.propContentAssist).getFirstProposal();
             if (proposal) {
                 this.refs.searchInput.showValueInEnabledInput(proposal, true);
                 this.refs.contentAssist.fetchProposals(this.refs.searchInput.getSearchText());
@@ -47,6 +43,7 @@ var SearchContainer= React.createClass({
         }, this));
         
         this.refs.contentAssist.actions.proposalFocussed.listen(_.bind(function(proposal){
+            this.getValue(SearchModel.propContentAssist).set(ContentAssistModel.propFocussed, proposal);
             this.refs.searchInput.showValueInEnabledInput(proposal, false);
             this.refs.searchInput.setActiveDescendant(proposal.get(Proposal.propId));
         }, this));

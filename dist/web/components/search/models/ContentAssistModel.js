@@ -49,34 +49,10 @@ var ContentAssistModel= Backbone.Model.extend({
         innerOptions.url= url.toString();
         
         this.get(_PROP_PROPOSALS_).fetch(innerOptions)
-                                    .done(_.bind(function(){
-                                        this._current= -1;
-                                        this._allProposals= this._toFlatList(this.get(_PROP_PROPOSALS_)); 
-                                        result.resolve();
-                                    }, this))
+                                    .done(result.resolve)
                                     .fail(result.reject);
         result.notify();
         return result.promise();
-    },
-    
-    getNext: function() {
-        return this._current < this._allProposals.length ?  this._allProposals[++this._current] : null;
-    },
-    
-    getCurrent: function() {
-        return this._current > -1 && this._current < this._allProposals.length ? this._allProposals[this._current] : null;
-    },
-    
-    getPrevious: function() {
-        return this._current > -1 ?  this._allProposals[--this._current] : null;
-    },
-    
-    _toFlatList: function(proposalGroups) {
-       var proposals= [];
-        proposalGroups.each(function(proposalGroup, index){
-            proposals= proposals.concat(proposalGroup.get(ProposalsGroup.propProposals).models)
-        }, this);
-        return proposals; 
     },
     
     _toMenuEntriesFromGroups: function(proposalGroups) {

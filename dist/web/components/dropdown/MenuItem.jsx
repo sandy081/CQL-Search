@@ -10,6 +10,18 @@ var MenuItem= React.createClass({
         blurred: 'blurred'
     },
     
+    componentDidMount: function() {
+        if (this.getValue(MenuItemModel.propFocus)) {
+            this._handleFocus();
+        }
+    },
+    
+    componentDidUpdate: function() {
+        if (this.getValue(MenuItemModel.propFocus)) {
+            this._handleFocus();
+        }
+    },
+    
     render: function() {
         var displayString= this.getValue(MenuItemModel.propDisplayString);
         var text= this.getValue(MenuItemModel.propText);
@@ -17,6 +29,7 @@ var MenuItem= React.createClass({
         var ariaLabel= this.getValue(MenuItemModel.propAriaLabel);
         return (<li className="components-dropdown-MenuItem" role="presentation" style={this._getStyle()}>
                     <a ref="menuItemAnchor" id={this.getValue(MenuItemModel.propId)} href="javascript:void(0);" role="menuitem" 
+                                                    className={this.getValue(MenuItemModel.propFocus) ? 'focus' : null}
                                                     onClick={this._handleClick} 
                                                     onFocus={this._handleFocus} 
                                                     onKeyDown={this._handleKeyDown}

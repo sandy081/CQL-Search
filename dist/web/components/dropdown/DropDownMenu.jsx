@@ -6,6 +6,8 @@ var MenuSeparatorModel= require("./models/MenuSeparatorModel");
 var MenuItemModel= require("./models/MenuItemModel");
 var MenuItem= require("./MenuItem.jsx");
 
+var _STATE_CURRENT_FOCUS_MENU_ITEM_ = "_CURRENT_FOCUS_MENU_ITEM_";
+
 var DropDownMenu= React.createClass({
 			
     actions: {
@@ -14,12 +16,32 @@ var DropDownMenu= React.createClass({
         menuBlurred: 'menu-blurred'
     },
     
+    getInitialState: function() {
+        var initialState= {};
+        initialState[_STATE_CURRENT_FOCUS_MENU_ITEM_]= -1;
+        return initialState;  
+    },
+    
     componentWillMount: function() {
         this._bindMenuItemFn = _.bind(this._bindMenuItem);
     },
     
-    focus: function() {
-        this.$el.find("li a").eq(0).focus();
+    componentWillReceiveProps: function() {
+        this.getStateUpdater().update(_STATE_CURRENT_FOCUS_MENU_ITEM_, -1);
+    },
+    
+    focusNext: function() {
+        this.getStateUpdater().update(_STATE_CURRENT_FOCUS_MENU_ITEM_, this._getNextFocussableMenuItemIndex());
+    },
+    
+    focusPrevious: function() {
+        this.getStateUpdater().update(_STATE_CURRENT_FOCUS_MENU_ITEM_, this._getPreviousFocussableMenuItemIndex());
+    },
+    
+    getFocussedMenuItem: function() {
+        return _.find(this._getMenuEntries(), function(menuEntry) {
+            return menuEntry instanceof MenuItemModel && menuEntry.get(MenuItemModel.propFocus); 
+        }); 
     },
     
     render: function() {
@@ -35,7 +57,7 @@ var DropDownMenu= React.createClass({
         return (_.map(this._getMenuEntries(), _.bind(this._renderMenuEntry, this)));
     },
     
-    _renderMenuEntry: function(menuEntry) {
+    _renderMenuEntry: function(menuEntry, index) {
         if (menuEntry instanceof MenuHeaderModel) {
             return (<li key={menuEntry.get(MenuHeaderModel.propLabel)} className="dropdown-header" role="presentation">
 							{menuEntry.get(MenuHeaderModel.propLabel)}
@@ -46,6 +68,7 @@ var DropDownMenu= React.createClass({
             return <li className="divider"></li>;
         }
         
+        menuEntry.set(MenuItemModel.propFocus, index === this.getStateValue(_STATE_CURRENT_FOCUS_MENU_ITEM_));
         return <MenuItem model={menuEntry} ref={this._bindMenuItemFn}/>;
     },
     
@@ -59,6 +82,30 @@ var DropDownMenu= React.createClass({
             menuItemView.actions.focussed.listen(_.bind(this._onMenuItemFocussed, this, menuItemView));
             menuItemView.actions.blurred.listen(_.bind(this._onMenuItemBlurred, this, menuItemView));
         }
+    },
+    
+    _getNextFocussableMenuItemIndex: function() {
+        var currentFocussableMenuItemIndex= this.getStateValue(_STATE_CURRENT_FOCUS_MENU_ITEM_);
+        var menuEntries= this._getMenuEntries();
+        for (var i = 0; i < menuEntries.length; i++) {
+            var menuEntry= menuEntries[i];
+            if ((menuEntry instanceof MenuItemModel) && i > currentFocussableMenuItemIndex) {
+                return i;
+            } 
+        }
+        return currentFocussableMenuItemIndex;  
+    },
+    
+    _getPreviousFocussableMenuItemIndex: function() {
+        var currentFocussableMenuItemIndex= this.getStateValue(_STATE_CURRENT_FOCUS_MENU_ITEM_);
+        var menuEntries= this._getMenuEntries();
+        for (var i = menuEntries.length - 1; i > -1; i--) {
+            var menuEntry= menuEntries[i];
+            if ((menuEntry instanceof MenuItemModel) && i < currentFocussableMenuItemIndex) {
+                return i;
+            } 
+        }
+        return currentFocussableMenuItemIndex;  
     },
     
     _handleKeyDown: function(event) {
@@ -78,7 +125,6 @@ var DropDownMenu= React.createClass({
     
      _onMenuItemFocussed: function(menuItemView, event) {
         this.actions.menuItemFocussed(menuItemView.props.model);
-        menuItemView.$ui.menuItemAnchor[0].focus();
     },
     
     _onMenuItemBlurred: function(menuItemView, event) {
