@@ -12,7 +12,8 @@ var SearchInput= React.createClass({
         inputChanged: "input-changed",  
         arrowUp: "arrow-up", 
         arrowRight: "arrow-right", 
-        arrowDown: "arrow-down"  
+        arrowDown: "arrow-down",
+        submit: "submit"  
     },
     
     componentDidMount: function() {
@@ -35,6 +36,15 @@ var SearchInput= React.createClass({
                     <input ref="disabledInput" className="disabledInput" type="search" autoComplete="off" disabled="disabled"/>
                 </div>
             );
+    },
+    
+    commit: function() {
+        this._comittedValue= this.$ui.enabledInput.val();
+        this.$ui.disabledInput.val(this._comittedValue);
+    },
+    
+    focus: function() {
+        this.$ui.enabledInput.focus();  
     },
     
     getSearchText: function() {
@@ -72,15 +82,6 @@ var SearchInput= React.createClass({
         return newInput;
     },
     
-    commit: function() {
-        this._comittedValue= this.$ui.enabledInput.val();
-        this.$ui.disabledInput.val(this._comittedValue);
-    },
-    
-    focus: function() {
-        this.$ui.enabledInput.focus();  
-    },
-    
     _onFocus: function() {
         this.actions.inputFocussed();
     },
@@ -97,6 +98,10 @@ var SearchInput= React.createClass({
     _onKeyDown: function(event) {
         var handled= false;
         switch(event.keyCode) {
+            case 13: //ENTER
+                this.actions.submit();
+                handled= true;
+                break;
             case 38: //ARROW_UP
                 if (!event.ctrlKey && !event.altKey && !event.metaKey) {
                     this.actions.arrowUp();
