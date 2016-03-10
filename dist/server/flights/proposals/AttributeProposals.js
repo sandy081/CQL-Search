@@ -13,7 +13,7 @@ var AttributeProposals= function(){};
 
 AttributeProposals.prototype.getProposals= function(filterText, values) {
     var proposalsGroups= [];
-    if (_.isEmpty(values)) {
+    if (_.isEmpty(values) && !filterText) {
         var proposalsGroup= new ProposalsGroup();
         proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(attributesGroups["1"].models, _toProposal), {model : Proposal}))
         proposalsGroups.push(proposalsGroup);
