@@ -17,18 +17,23 @@ var SearchContainer= React.createClass({
         
         this.refs.searchInput.actions.arrowDown.listen(_.bind(function(){
             this.refs.searchInput.hideValueInDisabledInput();
-            this.refs.contentAssist.focusNextProposal();
+            var current= this.getValue(SearchModel.propContentAssist).getCurrent();
+            var next= this.getValue(SearchModel.propContentAssist).getNext();
+            this.refs.contentAssist.focusProposal(next, current);
         }, this));
         
         this.refs.searchInput.actions.arrowUp.listen(_.bind(function(){
             this.refs.searchInput.hideValueInDisabledInput();
-            this.refs.contentAssist.focusPreviousProposal();
+            var current= this.getValue(SearchModel.propContentAssist).getCurrent();
+            var previous= this.getValue(SearchModel.propContentAssist).getPrevious();
+            this.refs.contentAssist.focusProposal(previous, current);
         }, this));
         
         this.refs.searchInput.actions.arrowRight.listen(_.bind(function(){
-            var firstProposal= this.getValue(SearchModel.propContentAssist).getFirstProposal();
-            if (firstProposal) {
-                this.refs.searchInput.showValueInEnabledInput(firstProposal.get(Proposal.propDisplayString));
+            var proposal= this.getValue(SearchModel.propContentAssist).getCurrent();
+            proposal= proposal || this.getValue(SearchModel.propContentAssist).getFirstProposal();
+            if (proposal) {
+                this.refs.searchInput.showValueInEnabledInput(proposal.get(Proposal.propDisplayString));
                 this.refs.contentAssist.fetchProposals(this.refs.searchInput.getSearchText());
             }
         }, this));

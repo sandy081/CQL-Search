@@ -48,34 +48,20 @@ var ContetnAssist= React.createClass({
                         }, this));  
     },
     
-    focusNextProposal: function() {
-        var currentProposal= this.props.model.getCurrent();
-        var nextProposal= this.props.model.getNext();
-        if (nextProposal) {
-            this._proposalFocussed(nextProposal, currentProposal);
-        }
-    },
-    
-    focusPreviousProposal: function() {
-        var currentProposal= this.props.model.getCurrent();
-        var previousProposal= this.props.model.getPrevious();
-        if (previousProposal) {
-            this._proposalFocussed(previousProposal, currentProposal);
-        }
-    },
-    
     _menuItemFocussed: function(menuItem) {
         var proposal= this.props.model.getProposalFromMenuEntry(menuItem)
-        this._proposalFocussed(proposal);
+        this.focusProposal(proposal);
     },
     
-    _proposalFocussed: function(proposal, previous) {
-        this.getStateUpdater().update(_STATE_ACTIVE_DESCENDANT_, proposal.get(Proposal.propId));
+    focusProposal: function(proposal, previous) {
         if (previous) {
             this.refs.dropdownmenu.$el.find("#"+previous.get(Proposal.propId)).removeClass("focus");
         }
-        this.refs.dropdownmenu.$el.find("#"+proposal.get(Proposal.propId)).addClass("focus");
-        this.actions.proposalFocussed(proposal);
+        if (proposal) {
+            this.getStateUpdater().update(_STATE_ACTIVE_DESCENDANT_, proposal.get(Proposal.propId));
+            this.refs.dropdownmenu.$el.find("#"+proposal.get(Proposal.propId)).addClass("focus");
+            this.actions.proposalFocussed(proposal);
+        }
     }
     
 });

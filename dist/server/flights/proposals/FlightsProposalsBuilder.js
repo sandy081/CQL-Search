@@ -11,7 +11,12 @@ var FlightsProposalsBuilder= function(input) {
 }
 
 FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, needsLeadingSpace) {
-    var airports= new AttributeProposals().getProposals(this._getFilterText(selection));
+    var attributes= new AttributeProposals().getProposals(this._getFilterText(selection));
+    this._proposals.add(attributes);
+}
+
+FlightsProposalsBuilder.prototype.createValueProposals= function(attribute, selection, needsLeadingSpace) {
+    var airports= new AirportProposals().getProposals(this._getFilterText(selection));
     this._proposals.add(airports);
 }
 

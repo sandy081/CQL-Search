@@ -1,0 +1,5 @@
+.components-dropdown-MenuItem > a[role="menuitem"] .menu-item-text {
+    opacity: .7;
+    margin-left: 8px;
+    font-size: 11px;
+}

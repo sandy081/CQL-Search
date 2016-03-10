@@ -24,10 +24,13 @@ var _filterAttribues= function(filterText) {
 
 var _toProposal= function(attribute) {
     var proposal= new Proposal();
-    // proposal.set(Proposal.propDisplayString, attribute.get(AttributeModel.propName));
+    var name= attribute.get(AttributeModel.propName);
     var text= attribute.get(AttributeModel.propText);
     var ops= attribute.get(AttributeModel.propOps);
     proposal.set(Proposal.propDisplayString, ops ? text + ops[0] : text);
+    if (name !== text) {
+        proposal.set(Proposal.propText, attribute.get(AttributeModel.propName));
+    }
     return proposal;
 }
 

@@ -60,7 +60,7 @@ SelectionHelper.prototype.needsLeadingSpace= function(ctx) {
         return false;
     }
     var previousToken= this._tokens[index - 1];
-    return this._input.substring(previousToken.stop + 1, token.start).isEmpty();
+    return this._input.substring(previousToken.stop + 1, token.start).length === 0;
 }
 
 module.exports = SelectionHelper;

@@ -10,11 +10,18 @@ FlightsProposalVisitor.prototype= Object.create(LastChildVisitor.prototype);
 FlightsProposalVisitor.prototype.constructor= FlightsProposalVisitor;
 
 FlightsProposalVisitor.prototype.visitSimpleClause= function(clauseCtx) {
-    var handled= LastChildVisitor.prototype.visitSimpleClause.call(this, clauseCtx);
+    var handled= this.visitLastChild(clauseCtx);
     if (clauseCtx.exception !== null) {
         this._handleClauseContextException(clauseCtx);
     }
     return handled;
+}
+
+FlightsProposalVisitor.prototype.visitValue= function(valueCLauseCtx) {
+    var selection= this._selectionHelper.createSelection(valueCLauseCtx);
+    var addLeadingText= this._selectionHelper.needsLeadingSpace(valueCLauseCtx);
+    this._proposalsBuilder.createValueProposals(null,selection, addLeadingText);
+    return true;
 }
 
 FlightsProposalVisitor.prototype.visitFullTextClause= function(fullTextClauseCtx) {

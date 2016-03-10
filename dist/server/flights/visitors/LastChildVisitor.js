@@ -13,6 +13,10 @@ LastChildVisitor.prototype.visitClauses= function(ctx) {
     return this.visitLastChild(ctx);
 }
 
+LastChildVisitor.prototype.visitAttributeClause= function(ctx) {
+    return this.visitLastChild(ctx);
+}
+
 LastChildVisitor.prototype.visitLastChild= function(ctx) {
     if (ctx.children == null) {
 		return false;
