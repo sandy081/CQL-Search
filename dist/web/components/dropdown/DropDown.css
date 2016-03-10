@@ -10,6 +10,10 @@
     font-size: 11px;
 }
 
+.components-dropdown-MenuItem > a[role="menuitem"] .menu-item-icon {
+	margin-right: 3px;	
+}
+
 .dropdown-menu > li > a.disabled-menu-item,
 .dropdown-menu > li > a.disabled-menu-item:visited ,
 .dropdown-menu > li > a.disabled-menu-item:active,

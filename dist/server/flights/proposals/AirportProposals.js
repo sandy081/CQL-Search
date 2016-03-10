@@ -34,6 +34,7 @@ var _filterAirports= function(filterText, usedValue) {
 var _toProposal= function(aiport) {
     var proposal= new Proposal();
     proposal.set(Proposal.propDisplayString, aiport.get(AirportModel.propCity));
+    proposal.set(Proposal.propIconClass, "glyphicon glyphicon-globe");
     return proposal;
 }
 
