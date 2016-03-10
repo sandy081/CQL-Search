@@ -52,3 +52,16 @@ input[type="search"].disabledInput {
      -webkit-text-fill-color: silver; 
      color: silver;
 }
+
+.contentAssist.dropdown .components-dropdown-DropDownMenu.dropdown-menu {
+    min-width: 20em;
+}
+
+.contentAssist.dropdown .components-dropdown-DropDownMenu.dropdown-menu {
+    min-width: 20em;
+}
+
+.contentAssist.dropdown .components-dropdown-DropDownMenu.dropdown-menu .menu-item-text {
+    float: right;
+    margin-top: 3px;
+}
