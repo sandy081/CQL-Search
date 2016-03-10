@@ -11,13 +11,32 @@ var FlightsProposalsBuilder= function(input) {
 }
 
 FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, needsLeadingSpace) {
-    var attributes= new AttributeProposals().getProposals(this._getFilterText(selection));
+    var attributes= new AttributeProposals().getProposals(this._getFilterText(selection), this._input);
     this._proposals.add(attributes);
 }
 
 FlightsProposalsBuilder.prototype.createValueProposals= function(attribute, selection, needsLeadingSpace) {
-    var airports= new AirportProposals().getProposals(this._getFilterText(selection));
-    this._proposals.add(airports);
+    switch (attribute.toLowerCase()) {
+        case "to": 
+        case "from": 
+            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
+            return;        
+        case "on": 
+        case "back": 
+            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
+            return;
+        case "#": 
+            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
+            return;
+        case "adults": 
+        case "children": 
+        case "infants": 
+            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
+            return;        
+        case "@": 
+            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
+            return;        
+    }
 }
 
 FlightsProposalsBuilder.prototype.getProposals= function() {

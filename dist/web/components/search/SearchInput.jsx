@@ -1,6 +1,7 @@
 var _= require('lodash');
 var React= require('react');
 var SearchInputModel= require('./models/SearchInputModel');
+var Proposal= require('./../../../shared/models/proposals/Proposal');
 
 var _STATE_ACTIVE_DESCENDANT_ = "_ACTIVE_DESCENDANT_";
 
@@ -53,8 +54,8 @@ var SearchInput= React.createClass({
         this.$ui.disabledInput.val("");
     },
     
-    showValueInEnabledInput: function(value) {
-        this.$ui.enabledInput.val(value);
+    showValueInEnabledInput: function(proposal) {
+        this.$ui.enabledInput.val(proposal.get(Proposal.propDisplayString));
     },
     
     focus: function() {

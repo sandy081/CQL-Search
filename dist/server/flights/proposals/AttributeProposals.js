@@ -9,8 +9,8 @@ var attributes= new Backbone.Collection(Data.Attributes(), {parse: true, model: 
 
 var AttributeProposals= function(){};
 
-AttributeProposals.prototype.getProposals= function(filterText) {
-    var attributes= _filterAttribues(filterText);
+AttributeProposals.prototype.getProposals= function(filterText, input) {
+    var attributes= input ? _filterAttribues(filterText) : _getInitialAttributes();
     var proposalsGroup= new ProposalsGroup();
     proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(attributes, _toProposal), {model : Proposal}))
     return [proposalsGroup]; 
@@ -20,6 +20,13 @@ var _filterAttribues= function(filterText) {
   return filterText ? attributes.filter(function(attribute){
         return attribute.get(AttributeModel.propText).toLowerCase().startsWith(filterText.toLowerCase());  
     }) : attributes.models;
+};
+
+var _getInitialAttributes= function() {
+  var initialAttributes= ["to", "from"];  
+  return attributes.filter(function(attribute){
+        return _.indexOf(initialAttributes, attribute.get(AttributeModel.propText)) !== -1;  
+    });
 };
 
 var _toProposal= function(attribute) {

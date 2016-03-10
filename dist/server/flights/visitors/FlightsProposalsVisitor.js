@@ -20,7 +20,7 @@ FlightsProposalVisitor.prototype.visitSimpleClause= function(clauseCtx) {
 FlightsProposalVisitor.prototype.visitValue= function(valueCLauseCtx) {
     var selection= this._selectionHelper.createSelection(valueCLauseCtx);
     var addLeadingText= this._selectionHelper.needsLeadingSpace(valueCLauseCtx);
-    this._proposalsBuilder.createValueProposals(null,selection, addLeadingText);
+    this._proposalsBuilder.createValueProposals("airport", selection, addLeadingText);
     return true;
 }
 
