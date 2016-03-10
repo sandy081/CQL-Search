@@ -9,17 +9,17 @@ var attributes= new Backbone.Collection(Data.Attributes(), {parse: true, model: 
 
 var AttributeProposals= function(){};
 
-AttributeProposals.prototype.getProposals= function(filterText, input) {
-    var attributes= input ? _filterAttribues(filterText) : _getInitialAttributes();
+AttributeProposals.prototype.getProposals= function(filterText, values) {
+    var attributes= _.isEmpty(values) ? _getInitialAttributes() : _filterAttribues(filterText, values);
     var proposalsGroup= new ProposalsGroup();
     proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(attributes, _toProposal), {model : Proposal}))
     return [proposalsGroup]; 
 };
 
-var _filterAttribues= function(filterText) {
-  return filterText ? attributes.filter(function(attribute){
-        return attribute.get(AttributeModel.propText).toLowerCase().startsWith(filterText.toLowerCase());  
-    }) : attributes.models;
+var _filterAttribues= function(filterText, values) {
+  return attributes.filter(function(attribute){
+        return !_.has(values, attribute.get(AttributeModel.propText)) && attribute.get(AttributeModel.propText).toLowerCase().startsWith(filterText.toLowerCase());  
+    });
 };
 
 var _getInitialAttributes= function() {

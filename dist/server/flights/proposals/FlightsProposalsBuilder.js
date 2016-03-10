@@ -1,3 +1,4 @@
+var _= require("lodash");
 var Backbone= require("backbone");
 var AttributeProposals= require("./AttributeProposals");
 var AirportProposals= require("./AirportProposals");
@@ -17,28 +18,28 @@ var FlightsProposalsBuilder= function(input) {
 }
 
 FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, needsLeadingSpace) {
-    var attributes= new AttributeProposals().getProposals(this._getFilterText(selection), this._input);
-    this._proposals.add(attributes);
+    var attributeProposals= new AttributeProposals().getProposals(this._getFilterText(selection), this._values);
+    this._addToProposals(attributeProposals, selection);
 }
 
 FlightsProposalsBuilder.prototype.createValueProposals= function(attribute, selection, needsLeadingSpace) {
     switch (attribute.toLowerCase()) {
         case "to": 
         case "from": 
-            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
+            this._addToProposals(new AirportProposals().getProposals(this._getFilterText(selection), attribute, this._values), selection);
             return;        
         case "on": 
         case "back": 
-            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
+            this._addToProposals(new AirportProposals().getProposals(this._getFilterText(selection)), selection);
             return;
         case "#": 
         case "adults": 
         case "children": 
         case "infants": 
-            this._proposals.add(new MembersProposals().getProposals(this._getFilterText(selection), attribute, this._values));
+            this._addToProposals(new MembersProposals().getProposals(this._getFilterText(selection), attribute, this._values), selection);
             return;        
         case "@": 
-            this._proposals.add(new AirlinesProposals().getProposals(this._getFilterText(selection)));
+            this._addToProposals(new AirlinesProposals().getProposals(this._getFilterText(selection)), selection);
             return;        
     }
 }
@@ -65,5 +66,18 @@ FlightsProposalsBuilder.prototype._getFilterText= function(selection) {
     }
     return text;
 }
+
+FlightsProposalsBuilder.prototype._addToProposals= function(proposalsGroups, selection) {
+    this._setSelection(proposalsGroups, selection);
+    this._proposals.add(proposalsGroups);
+};
+
+FlightsProposalsBuilder.prototype._setSelection= function(proposalsGroups, selection) {
+    _.each(proposalsGroups, function(proposalsGroup){
+       proposalsGroup.get(ProposalsGroup.propProposals).each(function(proposal){
+          proposal.set(Proposal.propSelection, selection); 
+       }); 
+    });
+};
 
 module.exports = FlightsProposalsBuilder;

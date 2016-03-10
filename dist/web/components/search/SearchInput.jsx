@@ -16,7 +16,8 @@ var SearchInput= React.createClass({
     },
     
     componentDidMount: function() {
-	   this._delayInputChanged= _.debounce(this._inputChanged, 200);
+        this._comittedValue= "";
+	   this._delayInputChanged= _.debounce(this._inputChanged, 100);
 	},
     
     render: function() {
@@ -44,9 +45,10 @@ var SearchInput= React.createClass({
         this.getStateUpdater().update(_STATE_ACTIVE_DESCENDANT_, id);
     },
     
-    showValueInDisabledInput: function(value) {
+    showValueInDisabledInput: function(proposal) {
         if (this.getSearchText()) {
-            // this.$ui.disabledInput.val(value);
+            var newInput= this._getValueAfterApplyingProposal(proposal);
+            this.$ui.disabledInput.val(newInput);
         }
     },
     
@@ -54,8 +56,25 @@ var SearchInput= React.createClass({
         this.$ui.disabledInput.val("");
     },
     
-    showValueInEnabledInput: function(proposal) {
-        this.$ui.enabledInput.val(proposal.get(Proposal.propDisplayString));
+    showValueInEnabledInput: function(proposal, commit) {
+        var newInput= this._getValueAfterApplyingProposal(proposal);
+        this.$ui.enabledInput.val(newInput);
+        if (commit) {
+            this.commit();;
+        }
+    },
+    
+    _getValueAfterApplyingProposal: function(proposal) {
+        var proposalText= proposal.get(Proposal.propDisplayString);
+        var from= proposal.getSelectionFrom();
+        var newInput= this._comittedValue.substring(0, from);
+        newInput+= proposalText;
+        return newInput;
+    },
+    
+    commit: function() {
+        this._comittedValue= this.$ui.enabledInput.val();
+        this.$ui.disabledInput.val(this._comittedValue);
     },
     
     focus: function() {
@@ -67,10 +86,7 @@ var SearchInput= React.createClass({
     },
     
     _onChange: function() {
-        if (this._hideValueInDisabledInput || !this.getSearchText()) {
-            this.hideValueInDisabledInput();
-            this._hideValueInDisabledInput= false;
-        }
+        this.commit();
         this._delayInputChanged();
     },
     
@@ -81,9 +97,6 @@ var SearchInput= React.createClass({
     _onKeyDown: function(event) {
         var handled= false;
         switch(event.keyCode) {
-            case 37: //ARROW_LEFT
-                this._hideValueInDisabledInput= true;
-                break;
             case 38: //ARROW_UP
                 if (!event.ctrlKey && !event.altKey && !event.metaKey) {
                     this.actions.arrowUp();
@@ -107,7 +120,6 @@ var SearchInput= React.createClass({
             event.stopPropagation();
         }
     }
-    
 });
 
 module.exports= SearchInput;

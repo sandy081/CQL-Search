@@ -9,17 +9,17 @@ var airports= new Backbone.Collection(Data.Airports(), {parse: true, model: Airp
 
 var AirportProposals= function(){};
 
-AirportProposals.prototype.getProposals= function(filterText) {
-    return _.transform(_filterAirports(filterText), function(result, airports, country){
+AirportProposals.prototype.getProposals= function(filterText, attribute, values) {
+    return _.transform(_filterAirports(filterText, values[attribute === "to" ? "from" : "to"] || ""), function(result, airports, country){
         result.push(_toProposalsGroup(country, _.map(airports, _toProposal)));
         return result;
     }, []);
 };
 
-var _filterAirports= function(filterText) {
-  var filtered= filterText ? airports.filter(function(airport){
-        return airport.get(AirportModel.propCountry) === filterText || airport.get(AirportModel.propCity).toLowerCase().startsWith(filterText.toLowerCase());  
-    }) : airports.models;
+var _filterAirports= function(filterText, usedValue) {
+  var filtered= airports.filter(function(airport){
+        return usedValue !== airport.get(AirportModel.propCity) && (airport.get(AirportModel.propCountry) === filterText || airport.get(AirportModel.propCity).toLowerCase().startsWith(filterText.toLowerCase()));  
+    });
   return _.reduce(filtered, function(result, airport) {
       var values= result[airport.get(AirportModel.propCountry)];
       if (!values) {

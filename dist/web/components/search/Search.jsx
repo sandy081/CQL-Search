@@ -33,7 +33,7 @@ var SearchContainer= React.createClass({
             var proposal= this.getValue(SearchModel.propContentAssist).getCurrent();
             proposal= proposal || this.getValue(SearchModel.propContentAssist).getFirstProposal();
             if (proposal) {
-                this.refs.searchInput.showValueInEnabledInput(proposal);
+                this.refs.searchInput.showValueInEnabledInput(proposal, true);
                 this.refs.contentAssist.fetchProposals(this.refs.searchInput.getSearchText());
             }
         }, this));
@@ -42,12 +42,12 @@ var SearchContainer= React.createClass({
             this.refs.searchInput.hideValueInDisabledInput();
             var firstProposal= this.getValue(SearchModel.propContentAssist).getFirstProposal();
             if (firstProposal) {
-                this.refs.searchInput.showValueInDisabledInput(firstProposal.get(Proposal.propDisplayString));
+                this.refs.searchInput.showValueInDisabledInput(firstProposal);
             }
         }, this));
         
         this.refs.contentAssist.actions.proposalFocussed.listen(_.bind(function(proposal){
-            this.refs.searchInput.showValueInEnabledInput(proposal);
+            this.refs.searchInput.showValueInEnabledInput(proposal, false);
             this.refs.searchInput.setActiveDescendant(proposal.get(Proposal.propId));
         }, this));
         

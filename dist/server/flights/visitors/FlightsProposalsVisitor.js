@@ -12,10 +12,12 @@ var FlightsProposalVisitor= function(proposalsBuilder, selectionHelper) {
 FlightsProposalVisitor.prototype= Object.create(LastChildVisitor.prototype);
 FlightsProposalVisitor.prototype.constructor= FlightsProposalVisitor;
 
-FlightsProposalVisitor.prototype.visitSimpleClause= function(clauseCtx) {
-    var handled= this.visitLastChild(clauseCtx);
-    if (clauseCtx.exception !== null) {
-        this._handleClauseContextException(clauseCtx);
+FlightsProposalVisitor.prototype.visitSimpleClause= function(ctx) {
+    var handled= this.visitLastChild(ctx);
+    if (!handled || ctx.exception !== null) {
+        var selection= this._selectionHelper.createSelection(ctx);
+        var needsLeadingSpace= this._selectionHelper.needsLeadingSpace(ctx);
+        this._proposalsBuilder.createAttributeProposals(selection, needsLeadingSpace);
     }
     return handled;
 }
@@ -27,32 +29,27 @@ FlightsProposalVisitor.prototype.visitShortClause= function(ctx) {
         var attribute= ParserUtils.getTokenName(ctx.shortIdentifier.type);
         var selection= isValidValue ? this._selectionHelper.createSelection(ctx.value()) : this._selectionHelper.createAfterSelectionWithContext(ctx);
         this._proposalsBuilder.createValueProposals(attribute, selection, true);
+        return true;
     }
-    return true;
+    return false;
 }
 
-FlightsProposalVisitor.prototype.visitValue= function(valueClauseCtx) {
-    if (valueClauseCtx.exception != null || !this._proposalsBuilder.hasTrailingSpace(valueClauseCtx)) {
-        var selection= this._selectionHelper.createSelection(valueClauseCtx);
-        var attribute= new AttributeVisitor().visit(valueClauseCtx.parentCtx);
-        var addLeadingText= this._selectionHelper.needsLeadingSpace(valueClauseCtx);
+FlightsProposalVisitor.prototype.visitValue= function(ctx) {
+    if (ctx.exception != null || !this._selectionHelper.hasTrailingSpace(ctx)) {
+        var selection= this._selectionHelper.createSelection(ctx);
+        var attribute= new AttributeVisitor().visit(ctx.parentCtx);
+        var addLeadingText= this._selectionHelper.needsLeadingSpace(ctx);
         this._proposalsBuilder.createValueProposals(attribute, selection, addLeadingText);
         return true;
     }
     return false;
 }
 
-FlightsProposalVisitor.prototype.visitFullTextClause= function(fullTextClauseCtx) {
-    var selection= this._selectionHelper.createSelection(fullTextClauseCtx);
-    var addLeadingText= this._selectionHelper.needsLeadingSpace(fullTextClauseCtx);
+FlightsProposalVisitor.prototype.visitFullTextClause= function(ctx) {
+    var selection= this._selectionHelper.createSelection(ctx);
+    var addLeadingText= this._selectionHelper.needsLeadingSpace(ctx);
     this._proposalsBuilder.createAttributeProposals(selection, addLeadingText);
-    return LastChildVisitor.prototype.visitFullTextClause.call(this, fullTextClauseCtx);
-}
-
-FlightsProposalVisitor.prototype._handleClauseContextException= function(clauseCtx) {
-    var selection= this._selectionHelper.createSelection(clauseCtx);
-    var needsLeadingSpace= this._selectionHelper.needsLeadingSpace(clauseCtx);
-    this._proposalsBuilder.createAttributeProposals(selection, needsLeadingSpace);
+    return true;
 }
 
 FlightsProposalVisitor.prototype._isValidValue= function(ctx) {
