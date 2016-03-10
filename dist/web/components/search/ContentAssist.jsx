@@ -27,6 +27,10 @@ var ContetnAssist= React.createClass({
       this.refs.dropdownmenu.actions.menuItemFocussed.listen(this.actions.proposalFocussed);  
     },
     
+    componentDidUpdate: function() {
+        this.refs.dropdownmenu.$el.find("li a").removeClass("focus");
+    },
+    
     render: function() {
         var dropDownMenuModel= new DropDownMenuModel();
         dropDownMenuModel.set(DropDownMenuModel.propMenuEntries, this.getStateValue(_STATE_MENU_ITEMS_));

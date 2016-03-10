@@ -4,6 +4,7 @@ var AttributeProposals= require("./AttributeProposals");
 var AirportProposals= require("./AirportProposals");
 var AirlinesProposals= require("./AirlinesProposals");
 var MembersProposals= require("./MembersProposals");
+var DatesProposals= require("./DatesProposals");
 var ParserUtils= require('./../../../cql/ParserUtils');
 var ProposalsGroup= require('./../../../shared/models/proposals/ProposalsGroup');
 var Proposal= require('./../../../shared/models/proposals/Proposal');
@@ -19,27 +20,27 @@ var FlightsProposalsBuilder= function(input) {
 
 FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, needsLeadingSpace) {
     var attributeProposals= new AttributeProposals().getProposals(this._getFilterText(selection), this._values);
-    this._addToProposals(attributeProposals, selection);
+    this._addToProposals(attributeProposals, selection, false);
 }
 
 FlightsProposalsBuilder.prototype.createValueProposals= function(attribute, selection, needsLeadingSpace) {
     switch (attribute.toLowerCase()) {
         case "to": 
         case "from": 
-            this._addToProposals(new AirportProposals().getProposals(this._getFilterText(selection), attribute, this._values), selection);
+            this._addToProposals(new AirportProposals().getProposals(this._getFilterText(selection), attribute, this._values), selection, true);
             return;        
-        case "on": 
-        case "back": 
-            this._addToProposals(new AirportProposals().getProposals(this._getFilterText(selection)), selection);
+        case "dep": 
+        case "ret": 
+            this._addToProposals(new DatesProposals().getProposals(this._getFilterText(selection), attribute, this._values), selection, true);
             return;
         case "#": 
         case "adults": 
         case "children": 
         case "infants": 
-            this._addToProposals(new MembersProposals().getProposals(this._getFilterText(selection), attribute, this._values), selection);
+            this._addToProposals(new MembersProposals().getProposals(this._getFilterText(selection), attribute, this._values), selection, true);
             return;        
         case "@": 
-            this._addToProposals(new AirlinesProposals().getProposals(this._getFilterText(selection)), selection);
+            this._addToProposals(new AirlinesProposals().getProposals(this._getFilterText(selection)), selection, true);
             return;        
     }
 }
@@ -67,15 +68,18 @@ FlightsProposalsBuilder.prototype._getFilterText= function(selection) {
     return text;
 }
 
-FlightsProposalsBuilder.prototype._addToProposals= function(proposalsGroups, selection) {
-    this._setSelection(proposalsGroups, selection);
+FlightsProposalsBuilder.prototype._addToProposals= function(proposalsGroups, selection, addTrailingSpace) {
+    this._updateProposal(proposalsGroups, selection, addTrailingSpace);
     this._proposals.add(proposalsGroups);
 };
 
-FlightsProposalsBuilder.prototype._setSelection= function(proposalsGroups, selection) {
+FlightsProposalsBuilder.prototype._updateProposal= function(proposalsGroups, selection, addTrailingSpace) {
     _.each(proposalsGroups, function(proposalsGroup){
        proposalsGroup.get(ProposalsGroup.propProposals).each(function(proposal){
-          proposal.set(Proposal.propSelection, selection); 
+          proposal.set(Proposal.propSelection, selection);
+          if (addTrailingSpace) {
+            proposal.set(Proposal.propDisplayString, proposal.get(Proposal.propDisplayString) + " ");
+          } 
        }); 
     });
 };

@@ -1,15 +1,23 @@
 exports.Attributes= function() {
-    return [
-        {name: "to", text: "to", ops: [":"]},   
-        {name: "from", text: "from", ops: [":"]},   
-        {name: "on", text: "on", ops: [":"]},   
-        {name: "back", text: "back", ops: [":"]},   
-        {name: "Persons", text: "#"},   
-        {name: "adults", text: "adults", ops: [":"]},   
-        {name: "infants", text: "infants", ops: [":"]},   
-        {name: "children", text: "children", ops: [":"]},   
-        {name: "Airlines", text: "@"}   
-    ];
+    return {
+        "1": [
+                {name: "to", text: "to", ops: [":"]},   
+                {name: "from", text: "from", ops: [":"]}   
+             ],
+        "2": [
+                {name: "Persons", text: "#"},   
+                {name: "dep", text: "dep", ops: [":"]},   
+                {name: "ret", text: "ret", ops: [":"]}   
+             ],
+        "3": [
+                {name: "adults", text: "adults", ops: [":"]},   
+                {name: "infants", text: "infants", ops: [":"]},   
+                {name: "children", text: "children", ops: [":"]}   
+             ],
+        "4": [
+                {name: "Airlines", text: "@"}   
+             ]
+     };
 }
 
 exports.Airports= function() {
@@ -43,5 +51,15 @@ exports.Airlines= function() {
         {name: "Oman"},   
         {name: "Swiss"},   
         {name: "Lufthansa"}   
+    ];
+}
+
+exports.Dates= function() {
+    return [
+        {name: "today"},   
+        {name: "tomorrow"},   
+        {name: "\"2 days\""},   
+        {name: "\"3 days\""},   
+        {name: "\"1 week\""}   
     ];
 }

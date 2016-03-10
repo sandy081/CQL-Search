@@ -5,27 +5,35 @@ var ProposalsGroup= require('./../../../shared/models/proposals/ProposalsGroup')
 
 var AttributeModel= require("./../models/AttributeModel")
 var Data= require("./../models/Data")
-var attributes= new Backbone.Collection(Data.Attributes(), {parse: true, model: AttributeModel});
+var attributesGroups= _.mapValues(Data.Attributes(), function(attributes){
+   return new Backbone.Collection(attributes, {parse: true, model: AttributeModel}); 
+});
 
 var AttributeProposals= function(){};
 
 AttributeProposals.prototype.getProposals= function(filterText, values) {
-    var attributes= _.isEmpty(values) ? _getInitialAttributes() : _filterAttribues(filterText, values);
-    var proposalsGroup= new ProposalsGroup();
-    proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(attributes, _toProposal), {model : Proposal}))
-    return [proposalsGroup]; 
+    var proposalsGroups= [];
+    if (_.isEmpty(values)) {
+        var proposalsGroup= new ProposalsGroup();
+        proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(attributesGroups["1"].models, _toProposal), {model : Proposal}))
+        proposalsGroups.push(proposalsGroup);
+    } else {
+        _.forIn(attributesGroups, function(attributes, key){
+            var filteredAttributes= _filterAttribues(attributes, filterText, values);
+            var proposalsGroup= new ProposalsGroup();
+            var proposals= _.map(filteredAttributes, _toProposal)
+            if (!_.isEmpty(proposals)) {
+                proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(filteredAttributes, _toProposal), {model : Proposal}))
+                proposalsGroups.push(proposalsGroup);
+            }
+        });
+    }
+    return proposalsGroups; 
 };
 
-var _filterAttribues= function(filterText, values) {
+var _filterAttribues= function(attributes, filterText, values) {
   return attributes.filter(function(attribute){
         return !_.has(values, attribute.get(AttributeModel.propText)) && attribute.get(AttributeModel.propText).toLowerCase().startsWith(filterText.toLowerCase());  
-    });
-};
-
-var _getInitialAttributes= function() {
-  var initialAttributes= ["to", "from"];  
-  return attributes.filter(function(attribute){
-        return _.indexOf(initialAttributes, attribute.get(AttributeModel.propText)) !== -1;  
     });
 };
 
