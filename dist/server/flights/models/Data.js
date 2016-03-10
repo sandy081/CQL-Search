@@ -1,3 +1,17 @@
+exports.Attributes= function() {
+    return [
+        {name: "to", text: "to", ops: [":"]},   
+        {name: "from", text: "from", ops: [":"]},   
+        {name: "on", text: "on", ops: [":"]},   
+        {name: "back", text: "back", ops: [":"]},   
+        {name: "Persons", text: "#"},   
+        {name: "adults", text: "adults", ops: [":"]},   
+        {name: "infants", text: "infants", ops: [":"]},   
+        {name: "children", text: "children", ops: [":"]},   
+        {name: "Airlines", text: "@"}   
+    ];
+}
+
 exports.Airports= function() {
     return [
         
@@ -23,16 +37,11 @@ exports.Airports= function() {
     ];
 }
 
-exports.Attributes= function() {
+exports.Airlines= function() {
     return [
-        {name: "to", text: "to", ops: [":"]},   
-        {name: "from", text: "from", ops: [":"]},   
-        {name: "Persons", text: "#"},   
-        {name: "adults", text: "adults", ops: [":"]},   
-        {name: "children", text: "children", ops: [":"]},   
-        {name: "infants", text: "infants", ops: [":"]},   
-        {name: "on", text: "on", ops: [":"]},   
-        {name: "back", text: "back", ops: [":"]},   
-        {name: "Airlines", text: "@"}   
+        {name: "Emirates"},   
+        {name: "Oman"},   
+        {name: "Swiss"},   
+        {name: "Lufthansa"}   
     ];
 }

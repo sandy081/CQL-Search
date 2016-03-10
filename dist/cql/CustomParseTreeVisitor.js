@@ -41,7 +41,7 @@ CustomParseTreeVisitor.prototype.defaultResult= function() {
 };
 
 CustomParseTreeVisitor.prototype.aggregateResult= function(aggregate, nextResult) {
-    return nextResult;
+    return nextResult === null ? aggregate : nextResult;
 };
 
 CustomParseTreeVisitor.prototype.shouldVisitNextChild= function(node, currentResult) {

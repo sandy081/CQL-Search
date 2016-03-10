@@ -46,7 +46,7 @@ var SearchInput= React.createClass({
     
     showValueInDisabledInput: function(value) {
         if (this.getSearchText()) {
-            this.$ui.disabledInput.val(value);
+            // this.$ui.disabledInput.val(value);
         }
     },
     

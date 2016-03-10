@@ -35,4 +35,29 @@ ParserUtils.stripQuotes= function(text) {
     return text;
 };
 
+ParserUtils.getStringValue= function(ctx) {
+    if (ctx instanceof CqlParser.StringValueContext) {
+        var parserValue= ctx.STRING_LITERAL() !== null ? ctx.STRING_LITERAL().toString() : ctx.QUOTED_STRING_LITERAL().toString();
+        return ParserUtils.asNormalValue(parserValue);
+    }
+    throw new Error("Not a string context");
+};
+
+ParserUtils.asNormalValue= function(value) {
+    var normalValue= ParserUtils.stripQuotes(value);
+    normalValue= ParserUtils.unEscape(normalValue);
+    return normalValue;
+};
+
+ParserUtils.unEscape= function(value) {
+    value= value.replace("\\\\", "\\");
+    value= value.replace("\\\"", "\"");
+    return value;
+};
+
+ParserUtils.getTokenName= function(tokenIndex) {
+    var tokenName= new CqlParser("").literalNames[tokenIndex];
+    return tokenName.substring(1, tokenName.length - 1);
+};
+
 module.exports= ParserUtils;

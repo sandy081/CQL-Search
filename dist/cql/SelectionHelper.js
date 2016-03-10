@@ -24,9 +24,9 @@ SelectionHelper.prototype._createAfterSelectionWithStartAndStop= function(start,
     return this._createSelection(start, stop + additionalOffset);
 }
 
-SelectionHelper.prototype._createAfterSelectionWithContext= function(parserRuleContext) {
+SelectionHelper.prototype.createAfterSelectionWithContext= function(parserRuleContext) {
     var stop= (parserRuleContext.stop != null ? parserRuleContext.stop : parserRuleContext.start).stop;
-    return this._createAfterSelection(stop + 1, stop);
+    return this._createSelection(stop + 2, stop);
 }
 
 SelectionHelper.prototype._hasTrailingSpaceAfter= function(stop) {

@@ -1,13 +1,19 @@
 var Backbone= require("backbone");
 var AttributeProposals= require("./AttributeProposals");
 var AirportProposals= require("./AirportProposals");
+var AirlinesProposals= require("./AirlinesProposals");
+var MembersProposals= require("./MembersProposals");
 var ParserUtils= require('./../../../cql/ParserUtils');
 var ProposalsGroup= require('./../../../shared/models/proposals/ProposalsGroup');
 var Proposal= require('./../../../shared/models/proposals/Proposal');
+var AttributeValuesVisitor= require('./../visitors/AttributeValuesVisitor');
+var SelectionHelper= require('./../../../cql/SelectionHelper');
 
 var FlightsProposalsBuilder= function(input) {
     this._input= input;
     this._proposals= new Backbone.Collection([], {model: ProposalsGroup});
+    var parser= ParserUtils.createSilentParser(input);
+    this._values= new AttributeValuesVisitor(input, new SelectionHelper(input)).visit(parser.search()); 
 }
 
 FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, needsLeadingSpace) {
@@ -26,15 +32,13 @@ FlightsProposalsBuilder.prototype.createValueProposals= function(attribute, sele
             this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
             return;
         case "#": 
-            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
-            return;
         case "adults": 
         case "children": 
         case "infants": 
-            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
+            this._proposals.add(new MembersProposals().getProposals(this._getFilterText(selection), attribute, this._values));
             return;        
         case "@": 
-            this._proposals.add(new AirportProposals().getProposals(this._getFilterText(selection)));
+            this._proposals.add(new AirlinesProposals().getProposals(this._getFilterText(selection)));
             return;        
     }
 }
