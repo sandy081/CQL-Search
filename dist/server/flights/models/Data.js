@@ -5,9 +5,9 @@ exports.Attributes= function() {
                 {name: "from", text: "from", ops: [":"]}   
              ],
         "2": [
-                {name: "Persons", text: "#"},   
                 {name: "dep", text: "dep", ops: [":"]},   
-                {name: "ret", text: "ret", ops: [":"]}   
+                {name: "ret", text: "ret", ops: [":"]},   
+                {name: "Persons", text: "#"}   
              ],
         "3": [
                 {name: "adults", text: "adults", ops: [":"]},   
