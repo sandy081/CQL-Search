@@ -27,10 +27,10 @@ var _toProposal= function(number) {
 }
 
 var _getMaxValue= function(attribute, values) {
-    var members= values['#'] ? values['#'] : 9;
-    var adults= values['adults'] || 0; 
-    var children= values['children'] || 0; 
-    var infants= values['infants'] || 0;
+    var members= parseInt(values['#'] ? values['#'] : "9");
+    var adults= parseInt(values['adults'] || "0"); 
+    var children= parseInt(values['children'] || "0"); 
+    var infants= parseInt(values['infants'] || "0");
     
     switch(attribute) {
         case "#":

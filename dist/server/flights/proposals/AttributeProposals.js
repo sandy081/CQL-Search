@@ -46,10 +46,10 @@ var _hasToIcludeAttribute= function(attribute, filterText, values) {
         return false;
     }
       
-    var members= values['#'] ? values['#'] : 9;
-    var adults= values['adults'] || 0; 
-    var children= values['children'] || 0; 
-    var infants= values['infants'] || 0;
+    var members= parseInt(values['#'] || "9");
+    var adults= parseInt(values['adults'] || "0"); 
+    var children= parseInt(values['children'] || "0"); 
+    var infants= parseInt(values['infants'] || "0");
 
     switch(attribute.get(AttributeModel.propText)) {
         case "adults":
@@ -57,7 +57,7 @@ var _hasToIcludeAttribute= function(attribute, filterText, values) {
         case "children":
             return members > (adults + infants);
         case "infants":
-            return members > (adults > children);
+            return members > (adults + children);
     }
     
     return true;
