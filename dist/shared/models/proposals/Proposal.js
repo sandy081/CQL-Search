@@ -8,6 +8,7 @@ var _PROP_ICON_CLASS_ 		= "iconClass";
 var _PROP_SELECTION_ 		= "selection";		
 var _PROP_SELECTION_TILL_ 	= "till";		
 var _PROP_SELECTION_FROM_ 	= "from";		
+var _PROP_DISABLED_ 	    = "disabled";		
 
 var Proposal= Backbone.Model.extend({
 		
@@ -31,7 +32,8 @@ var Proposal= Backbone.Model.extend({
     propIconClass: _PROP_ICON_CLASS_,
     propSelection: _PROP_SELECTION_,
     propSelectionTill: _PROP_SELECTION_TILL_,
-    propSelectionFrom: _PROP_SELECTION_FROM_
+    propSelectionFrom: _PROP_SELECTION_FROM_,
+    propDisabled: _PROP_DISABLED_
 });
 
 module.exports= Proposal;

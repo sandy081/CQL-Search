@@ -5,8 +5,8 @@ exports.Attributes= function() {
                 {name: "from", text: "from", ops: [":"]}   
              ],
         "2": [
-                {name: "dep", text: "dep", ops: [":"]},   
-                {name: "ret", text: "ret", ops: [":"]},   
+                {name: "Departure", text: "dep", ops: [":"]},   
+                {name: "Return", text: "ret", ops: [":"]},   
                 {name: "Persons", text: "#"}   
              ],
         "3": [
@@ -58,8 +58,8 @@ exports.Dates= function() {
     return [
         {name: "today"},   
         {name: "tomorrow"},   
-        {name: "\"2 days\""},   
-        {name: "\"3 days\""},   
-        {name: "\"1 week\""}   
+        {name: "2d", description: "In 2 days"},   
+        {name: "3d", description: "In 3 days"},   
+        {name: "1w", description: "In a week"}   
     ];
 }

@@ -23,14 +23,15 @@ var MenuItem= React.createClass({
     },
     
     render: function() {
+        var isDisabled= this.getValue(MenuItemModel.propDisabled);
         var displayString= this.getValue(MenuItemModel.propDisplayString);
         var text= this.getValue(MenuItemModel.propText);
         var showText= text && text.trim() !== displayString.trim();
         var ariaLabel= this.getValue(MenuItemModel.propAriaLabel);
         return (<li className="components-dropdown-MenuItem" role="presentation" style={this._getStyle()}>
                     <a ref="menuItemAnchor" id={this.getValue(MenuItemModel.propId)} href="javascript:void(0);" role="menuitem" 
-                                                    className={this.getValue(MenuItemModel.propFocus) ? 'focus' : null}
-                                                    onClick={this._handleClick} 
+                                                    className={this._getAnchorClassName()}
+                                                    onClick={isDisabled ? null : this._handleClick}  
                                                     onFocus={this._handleFocus} 
                                                     onKeyDown={this._handleKeyDown}
                                                     data-target="#" 
@@ -41,6 +42,17 @@ var MenuItem= React.createClass({
                     </a>
                 </li>
                 );
+    },
+    
+    _getAnchorClassName: function() {
+        var classNames= [];
+        if (this.getValue(MenuItemModel.propDisabled)) {
+            classNames.push("disabled-menu-item");
+        }
+        if (this.getValue(MenuItemModel.propFocus)) {
+            classNames.push("focus");
+        }
+        return _.isEmpty(classNames) ? null : React.className(classNames);
     },
     
     _getIconElement: function() {

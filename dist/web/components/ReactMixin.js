@@ -71,3 +71,12 @@ React.createClass= function(spec) {
     spec.mixins.push(mixin);
     return createClassFunc(spec);  
 };
+
+React.className= function(classes) {
+    if (_.isArray(classes)) {
+        return _.reduce(classes, function(accumulator, clazz){
+            return accumulator + " " + clazz;
+        });
+    }
+    return classes;
+};

@@ -60,7 +60,7 @@ FlightsProposalsBuilder.prototype._getFilterText= function(selection) {
     }
 
     if (text.startsWith(ParserUtils.QUOTE)) {
-        if (text.length() == 1) {
+        if (text.length === 1) {
             return " ";
         }
         return text.substring(1);

@@ -13,9 +13,14 @@ DatesProposals.prototype.getProposals= function(filterText, attribute, values) {
     var proposalsGroups= [];
     var otherDateAttribute= attribute === "dep" ? "ret" : "dep";
     var filteredDates= _filterDates(filterText, otherDateAttribute, values[otherDateAttribute]);
-    var proposalsGroup= new ProposalsGroup();
-    proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(filteredDates, _toProposal), {model : Proposal}))
-    proposalsGroups.push(proposalsGroup);   
+    
+    var proposals= _.map(filteredDates, _toProposal);
+    if (!_.isEmpty(proposals)) {
+        var proposalsGroup= new ProposalsGroup();
+        proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(proposals, {model : Proposal}))
+        proposalsGroups.push(proposalsGroup);
+    }   
+    proposalsGroups.push(_createAnyDateProposalGroup());   
     return proposalsGroups;
 };
 
@@ -37,8 +42,22 @@ var _filterDatesAfter= function(filterText, dateValue) {
 
 var _toProposal= function(date) {
     var proposal= new Proposal();
+    var description= date.get(DateModel.propDescription);
     proposal.set(Proposal.propDisplayString, date.get(DateModel.propName));
+    if (description) {
+        proposal.set(Proposal.propText, description);
+    }
     return proposal;
-}
+};
+
+var _createAnyDateProposalGroup= function(date) {
+    var anyDateProposalsGroup= new ProposalsGroup();
+    var anyDateProposal= new Proposal();
+    anyDateProposal.set(Proposal.propDisplayString, "dd-mm");
+    anyDateProposal.set(Proposal.propText, "Date format");
+    anyDateProposal.set(Proposal.propDisabled, true);
+    anyDateProposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection([anyDateProposal], {model : Proposal}))
+    return anyDateProposalsGroup;
+};
 
 module.exports= DatesProposals;

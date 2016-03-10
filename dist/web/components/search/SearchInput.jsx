@@ -56,18 +56,18 @@ var SearchInput= React.createClass({
     },
     
     showValueInDisabledInput: function(proposal) {
-        if (this.getSearchText()) {
+        if (this.getSearchText() && !proposal.get(Proposal.propDisabled)) {
             var newInput= this._getValueAfterApplyingProposal(proposal);
             this.$ui.disabledInput.val(newInput);
         }
     },
     
-    hideValueInDisabledInput: function(value) {
+    hideValueInDisabledInput: function() {
         this.$ui.disabledInput.val("");
     },
     
     showValueInEnabledInput: function(proposal, commit) {
-        var newInput= this._getValueAfterApplyingProposal(proposal);
+        var newInput= proposal.get(Proposal.propDisabled) ? this._comittedValue : this._getValueAfterApplyingProposal(proposal);
         this.$ui.enabledInput.val(newInput);
         if (commit) {
             this.commit();;

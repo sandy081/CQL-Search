@@ -77,7 +77,6 @@ var SearchContainer= React.createClass({
     },
     
     _onProposalsFocussed: function(proposal) {
-        this.getValue(SearchModel.propContentAssist).set(ContentAssistModel.propFocussed, proposal);
         this.refs.searchInput.showValueInEnabledInput(proposal, false);
         this.refs.searchInput.setActiveDescendant(proposal.get(Proposal.propId));
     },
