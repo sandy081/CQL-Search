@@ -33,8 +33,34 @@ AttributeProposals.prototype.getProposals= function(filterText, values) {
 
 var _filterAttribues= function(attributes, filterText, values) {
   return attributes.filter(function(attribute){
-        return !_.has(values, attribute.get(AttributeModel.propText)) && attribute.get(AttributeModel.propText).toLowerCase().startsWith(filterText.toLowerCase());  
+        return _hasToIcludeAttribute(attribute, filterText, values);  
     });
+};
+
+var _hasToIcludeAttribute= function(attribute, filterText, values) {
+    if (_.has(values, attribute.get(AttributeModel.propText))) {
+        return false;
+    }
+    
+    if (!attribute.get(AttributeModel.propText).toLowerCase().startsWith(filterText.toLowerCase())) {
+        return false;
+    }
+      
+    var members= values['#'] ? values['#'] : 9;
+    var adults= values['adults'] || 0; 
+    var children= values['children'] || 0; 
+    var infants= values['infants'] || 0;
+
+    switch(attribute.get(AttributeModel.propText)) {
+        case "adults":
+            return members > (children + infants);
+        case "children":
+            return members > (adults + infants);
+        case "infants":
+            return members > (adults > children);
+    }
+    
+    return true;
 };
 
 var _toProposal= function(attribute) {
