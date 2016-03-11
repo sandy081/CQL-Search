@@ -23,7 +23,7 @@ var ContetnAssist= React.createClass({
     },
     
     componentDidMount: function() {
-      this.refs.dropdownmenu.actions.menuItemSelected.listen(this.actions.proposalSelected);  
+      this.refs.dropdownmenu.actions.menuItemSelected.listen(_.bind(this._menuItemSelected, this));  
       this.refs.dropdownmenu.actions.menuItemFocussed.listen(_.bind(this._menuItemFocussed, this));  
     },
     
@@ -50,6 +50,10 @@ var ContetnAssist= React.createClass({
                             this.$el.addClass("open");
                             this.actions.proposalsShown();
                         }, this));  
+    },
+    
+    _menuItemSelected: function(menuItem) {
+        this.actions.proposalSelected(this.props.model.getProposalFromMenuEntry(menuItem));
     },
     
     _menuItemFocussed: function(menuItem) {
