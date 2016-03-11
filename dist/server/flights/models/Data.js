@@ -54,12 +54,22 @@ exports.Airlines= function() {
     ];
 }
 
-exports.Dates= function() {
+exports.DepartureDates= function() {
     return [
         {name: "today"},   
-        {name: "tomorrow"},   
+        {name: "tomorrow",},   
         {name: "2d", description: "In 2 days"},   
         {name: "3d", description: "In 3 days"},   
-        {name: "1w", description: "In a week"}   
+        {name: "1w", description: "In a week"},   
+    ];
+}
+
+exports.ReturnDates= function() {
+    return [
+        {name: "same"},   
+        {name: "next"},   
+        {name: "2d", description: "After 2 days"},   
+        {name: "3d", description: "After 3 days"},   
+        {name: "1w", description:  "After a week"},   
     ];
 }
