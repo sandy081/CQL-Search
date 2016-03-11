@@ -56,9 +56,12 @@ var SearchInput= React.createClass({
     },
     
     showValueInDisabledInput: function(proposal) {
-        if (this.getSearchText() && !proposal.get(Proposal.propDisabled)) {
+        var searchText= this.getSearchText();
+        if (searchText && !proposal.get(Proposal.propDisabled)) {
             var newInput= this._getValueAfterApplyingProposal(proposal);
-            this.$ui.disabledInput.val(newInput);
+            if (newInput.startsWith(searchText)) {
+                this.$ui.disabledInput.val(newInput);
+            }
         }
     },
     
