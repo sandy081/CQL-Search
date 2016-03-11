@@ -1,8 +1,8 @@
 exports.Attributes= function() {
     return {
         "1": [
-                {name: "to", text: "to", ops: [":"]},   
-                {name: "from", text: "from", ops: [":"]}   
+                {name: "from", text: "from", ops: [":"]},   
+                {name: "to", text: "to", ops: [":"]}   
              ],
         "2": [
                 {name: "Departure", text: "dep", ops: [":"]},   
@@ -45,8 +45,8 @@ exports.Airports= function() {
         
         //Italy
         {country: "Italy", city: "Venice"},   
-        {country: "Germany", city: "Rome"},   
-        {country: "Germany", city: "Milan"}
+        {country: "Italy", city: "Rome"},   
+        {country: "Italy", city: "Milan"}
     ];
 }
 
