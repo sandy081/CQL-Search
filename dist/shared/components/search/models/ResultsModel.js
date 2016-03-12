@@ -12,13 +12,14 @@ var ResultsModel= Backbone.Model.extend({
         var defaults= {};
         defaults[_PROP_HEADERS_]= new Backbone.Collection([], {model: HeaderModel});
         defaults[_PROP_ROWS_]= new Backbone.Collection([], {model: RowModel});
+        defaults[_PROP_CSS_CLASS_NAMES_]= "table table-striped table-hover";
         return defaults;
     }
     
 }, {
   propHeaders: _PROP_HEADERS_,
   propRows: _PROP_ROWS_,  
-  propClassNames: _PROP_CSS_CLASS_NAMES_  
+  propCssClassNames: _PROP_CSS_CLASS_NAMES_  
 });
 
 module.exports= ResultsModel;

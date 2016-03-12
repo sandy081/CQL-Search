@@ -65,11 +65,12 @@ var mixin= {
     },
     
     renderCollection: function(collection) {
-      return _.map(this.getValue(property), _.bind(this.renderModel, this);
+      return collection.map(_.bind(this.renderModel, this));
     },
     
     renderModel: function(model) {
-      return ComponentsFactory.createComponent(model);  
+      var component= ComponentsFactory.getComponent(model.constructor)
+      return React.createElement(component, {model: model});
     },
     
     _collectReferences: function() {

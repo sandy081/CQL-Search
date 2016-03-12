@@ -1,7 +1,7 @@
 require("babel-register");
-
 var express= require("express");
 var React= require('react');
+require('./dist/shared/components/ReactMixin'); 
 var browserify= require('browserify');
 var babelify = require('babelify');
 var ProposalsRestService = require('./dist/server/proposals/ProposalsRestService');
@@ -63,6 +63,6 @@ app.get('/SearchApp.js', function(req, res){
      .pipe(res);;
 });
 
-app.listen(3000, function(err){    if (err) throw err;
+app.listen(3002, function(err){    if (err) throw err;
     console.log("Listening on 3000...");
 });

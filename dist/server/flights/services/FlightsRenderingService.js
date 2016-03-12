@@ -1,7 +1,8 @@
 var Backbone= require('backbone');
 var _= require('lodash');
-var ReactDOM= require('react-dom');
-var AirportModel= require('./../models/AirportModel');
+var React= require("react");
+var ReactDOMServer= require('react-dom/server');
+var FlightModel= require('./../models/FlightModel');
 var ResultsModel= require('./../../../shared/components/search/models/ResultsModel');
 var HeaderModel= require('./../../../shared/components/search/models/HeaderModel');
 var RowModel= require('./../../../shared/components/search/models/RowModel');
@@ -13,30 +14,30 @@ var FlightsRenderingService= function() {};
 var _toResults= function(flights) {
     var results= new ResultsModel();
     results.set(ResultsModel.propHeaders, _headers());
-    results.set(ResultsModel.propRows, _rows(flights.models));
+    results.set(ResultsModel.propRows, _rows(flights));
     return results;
 }
 
 var _headers= function() {
     return new Backbone.Collection([
-        _headerModel(AirportModel.propFrom),
-        _headerModel(AirportModel.propTo),
-        _headerModel(AirportModel.propPrice)
+        _headerModel(FlightModel.propFrom),
+        _headerModel(FlightModel.propTo),
+        _headerModel("Price")
     ])
 }
 
 var _rows= function(flights) {
-    return _.map(flights, function(flight){
+    return new Backbone.Collection(flights.map(function(flight){
         var row= new RowModel();
         row.set(RowModel.propEntries, _toEntries(flight));
         return row;
-    });
+    }, {model: RowModel}));
 }
 
 var _toEntries= function(flight) {
     return new Backbone.Collection([
-        _entryModel(flight.get(AirportModel.propFrom)),
-        _entryModel(flight.get(AirportModel.propTo)),
+        _entryModel(flight.get(FlightModel.propFrom)),
+        _entryModel(flight.get(FlightModel.propTo)),
         _entryModel(flight.getPrice(2))
     ])
 }
@@ -56,7 +57,8 @@ var _entryModel= function(value) {
 FlightsRenderingService.prototype.render= function(flights) {
     var resultsModel= _toResults(flights);
     var Component= ComponentsFactory.getComponent(ResultsModel);
-    return ReactDOM.renderToString(<Component model={resultsModel}/>);   
+    var reactElement= React.createElement(Component, {model: resultsModel});
+    return ReactDOMServer.renderToString(reactElement);   
 }
 
 module.exports= FlightsRenderingService;

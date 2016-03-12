@@ -4,7 +4,7 @@ var EntryModel= require('./models/EntryModel');
 var Entry= React.createClass({
    render: function() {
        return (
-           <span>this.getValue(EntryModel.propValue)</span>
+           <td>{this.getValue(EntryModel.propValue)}</td>
        );
    }
 });

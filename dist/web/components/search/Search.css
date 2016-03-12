@@ -2,7 +2,12 @@
     max-width: 50em; 
     border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 4px;
+    padding: 4px;   
+}
+
+.searchResultsContainer {
+    margin-top: 2em;
+    max-width: 70em; 
 }
 
 .searchContainer table {

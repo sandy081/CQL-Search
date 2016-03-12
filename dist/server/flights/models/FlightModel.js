@@ -9,11 +9,11 @@ var _PROP_INFANT_PRICE_= "Infant";
 
 var Flight= Backbone.Model.extend({
     
-    getPrice: function(adults, chidlren, infants) {
+    getPrice: function(adults, children, infants) {
         children= children || 0;
         infants= infants || 0;
         return (this.get(_PROP_ADULT_PRICE_) * adults)
-                    + (this.get(_PROP_CHILD_PRICE_) * chidlren)
+                    + (this.get(_PROP_CHILD_PRICE_) * children)
                     + (this.get(_PROP_INFANT_PRICE_) * infants) + " CHF";
     }
     
