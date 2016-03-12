@@ -13,9 +13,6 @@ exports.Attributes= function() {
                 {name: "adults", text: "adults", ops: [":"]},   
                 {name: "infants", text: "infants", ops: [":"]},   
                 {name: "children", text: "children", ops: [":"]}   
-             ],
-        "4": [
-                {name: "Airlines", text: "@"}   
              ]
      };
 }

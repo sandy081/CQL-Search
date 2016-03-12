@@ -2,7 +2,8 @@ var $= require('jquery');
 var _= require('lodash');
 var React= require('react'); 
 var ReactDOM= require('react-dom');
-var Reflux= require('reflux'); 
+var Reflux= require('reflux');
+var ComponentsFactory= require('./ComponentsFactory'); 
 
 var StateUpdater= function(component) {
     this.newState= {};
@@ -53,6 +54,22 @@ var mixin= {
         _.each(this.actions, function(action){
             action.emitter.removeAllListeners();  
         }); 
+    },
+    
+    renderCollectionFromProperty: function(property) {
+      return this.renderCollection(this.getValue(property)); 
+    },
+    
+    renderModelFromProperty: function(property) {
+      return this.renderModel(this.getValue(property)); 
+    },
+    
+    renderCollection: function(collection) {
+      return _.map(this.getValue(property), _.bind(this.renderModel, this);
+    },
+    
+    renderModel: function(model) {
+      return ComponentsFactory.createComponent(model);  
     },
     
     _collectReferences: function() {

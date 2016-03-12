@@ -13,21 +13,15 @@ var AttributeProposals= function(){};
 
 AttributeProposals.prototype.getProposals= function(filterText, values) {
     var proposalsGroups= [];
-    if (_.isEmpty(values) && !filterText) {
+    _.forIn(attributesGroups, function(attributes, key){
+        var filteredAttributes= _filterAttribues(attributes, filterText, values);
         var proposalsGroup= new ProposalsGroup();
-        proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(attributesGroups["1"].models, _toProposal), {model : Proposal}))
-        proposalsGroups.push(proposalsGroup);
-    } else {
-        _.forIn(attributesGroups, function(attributes, key){
-            var filteredAttributes= _filterAttribues(attributes, filterText, values);
-            var proposalsGroup= new ProposalsGroup();
-            var proposals= _.map(filteredAttributes, _toProposal)
-            if (!_.isEmpty(proposals)) {
-                proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(filteredAttributes, _toProposal), {model : Proposal}))
-                proposalsGroups.push(proposalsGroup);
-            }
-        });
-    }
+        var proposals= _.map(filteredAttributes, _toProposal)
+        if (!_.isEmpty(proposals)) {
+            proposalsGroup.set(ProposalsGroup.propProposals, new Backbone.Collection(_.map(filteredAttributes, _toProposal), {model : Proposal}))
+            proposalsGroups.push(proposalsGroup);
+        }
+    });
     return proposalsGroups; 
 };
 

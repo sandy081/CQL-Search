@@ -4,8 +4,9 @@ var FlightsProposalsService= require("./../flights/proposals/FlightsProposalsSer
 var ProposalsRestService= function(){};
   
 ProposalsRestService.prototype.serve= function(request, response) {
-  var proposals= new FlightsProposalsService().getProposals(request.query.input);
-  response.send(proposals.toJSON());
+    res.setHeader('Content-Type', 'text/json');
+    var proposals= new FlightsProposalsService().getProposals(request.query.input);
+    response.send(proposals.toJSON());
 };
 
 module.exports= ProposalsRestService;
