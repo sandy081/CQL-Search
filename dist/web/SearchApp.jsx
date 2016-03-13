@@ -1,14 +1,12 @@
 var $= require('jquery'); 
-require('bootstrap'); 
+var Bootstrap= require('bootstrap'); 
 var React= require('react'); 
+require('./../shared/components/ReactMixin');
+require('./../shared/ComponentsInit'); 
 var ReactDOM= require('react-dom');
-require('./../shared/components/ReactMixin'); 
 var Page= require('./components/Page.jsx'); 
+var PageModel= require('./components/models/PageModel');
+
 
 $('body').append("<div data-id='pageContainer'/>");
-ReactDOM.render(<Page/>, $("div[data-id='pageContainer']").get(0));
-
-$.ajax("/search/flights").done(function(result){
-    debugger;
-    $("div[class='searchResultsContainer container']").append(result);
-});
+ReactDOM.render(<Page model={new PageModel()}/>, $("div[data-id='pageContainer']").get(0));

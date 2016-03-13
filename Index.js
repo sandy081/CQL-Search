@@ -2,26 +2,13 @@ require("babel-register");
 var express= require("express");
 var React= require('react');
 require('./dist/shared/components/ReactMixin'); 
+require('./dist/shared/ComponentsInit');
 var browserify= require('browserify');
 var babelify = require('babelify');
 var ProposalsRestService = require('./dist/server/proposals/ProposalsRestService');
 var FlightsRestService = require('./dist/server/flights/rest/FlightsRestService');
 var FlightsGrammarVisitorRestService = require('./dist/server/flights/rest/FlightsGrammarVisitorRestService');
 
-var ComponentsFactory= require('./dist/shared/components/ComponentsFactory');
-var ResultsModel= require('./dist/shared/components/search/models/ResultsModel');
-var Results= require('./dist/shared/components/search//Results.jsx');
-var HeaderModel= require('./dist/shared/components/search/models/HeaderModel');
-var Header= require('./dist/shared/components/search/Header.jsx');
-var RowModel= require('./dist/shared/components/search/models/RowModel');
-var Row= require('./dist/shared/components/search/Row.jsx');
-var EntryModel= require('./dist/shared/components/search/models/EntryModel');
-var Entry= require('./dist/shared/components/search/Entry');
-
-ComponentsFactory.registerComponent(ResultsModel, Results);
-ComponentsFactory.registerComponent(HeaderModel, Header);
-ComponentsFactory.registerComponent(RowModel, Row);
-ComponentsFactory.registerComponent(EntryModel, Entry);
 
 var app= express(); 
 
@@ -63,6 +50,6 @@ app.get('/SearchApp.js', function(req, res){
      .pipe(res);;
 });
 
-app.listen(3002, function(err){    if (err) throw err;
+app.listen(3000, function(err){    if (err) throw err;
     console.log("Listening on 3000...");
 });

@@ -3,10 +3,10 @@ var _= require('lodash');
 var React= require("react");
 var ReactDOMServer= require('react-dom/server');
 var FlightModel= require('./../models/FlightModel');
-var ResultsModel= require('./../../../shared/components/search/models/ResultsModel');
-var HeaderModel= require('./../../../shared/components/search/models/HeaderModel');
-var RowModel= require('./../../../shared/components/search/models/RowModel');
-var EntryModel= require('./../../../shared/components/search/models/EntryModel');
+var ResultsModel= require('./../../../shared/components/results/models/ResultsModel');
+var HeaderModel= require('./../../../shared/components/results/models/HeaderModel');
+var RowModel= require('./../../../shared/components/results/models/RowModel');
+var EntryModel= require('./../../../shared/components/results/models/EntryModel');
 var ComponentsFactory= require('./../../../shared/components/ComponentsFactory');
 
 var FlightsRenderingService= function() {};
@@ -54,11 +54,16 @@ var _entryModel= function(value) {
     return entryModel;
 }
 
-FlightsRenderingService.prototype.render= function(flights) {
+FlightsRenderingService.prototype.renderHTML= function(flights) {
     var resultsModel= _toResults(flights);
     var Component= ComponentsFactory.getComponent(ResultsModel);
     var reactElement= React.createElement(Component, {model: resultsModel});
     return ReactDOMServer.renderToString(reactElement);   
+}
+
+FlightsRenderingService.prototype.renderJSON= function(flights) {
+    var resultsModel= _toResults(flights);
+    return resultsModel.toJSON();
 }
 
 module.exports= FlightsRenderingService;
