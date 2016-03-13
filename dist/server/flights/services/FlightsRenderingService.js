@@ -46,7 +46,12 @@ var _headerModel= function(name) {
 
 var _entryModel= function(value) {
     var entryModel= new EntryModel();
-    entryModel.set(EntryModel.propValue, value);
+    if (_.has(value, "iconUrl")) {
+        entryModel.set(EntryModel.propIconUrl, value.iconUrl);
+        entryModel.set(EntryModel.propValue, value.value);
+    } else {
+        entryModel.set(EntryModel.propValue, value);
+    }
     return entryModel;
 }
 
