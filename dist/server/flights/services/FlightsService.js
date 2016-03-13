@@ -1,6 +1,7 @@
 var Backbone= require('backbone');
 var FlightModel= require('./../models/FlightModel');
-var flights= new Backbone.Collection(require('./../models/FlightsData')(), {model:FlightModel});
+
+var flights= new Backbone.Collection(require('./../models/FlightsData').flights(), {model:FlightModel});
 
 var FlightsService= function() {};
 

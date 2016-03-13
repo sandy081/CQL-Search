@@ -1,4 +1,5 @@
 var Backbone= require("backbone");
+var columns= require('./FlightsData').columns()
 
 var _PROP_FROM_= "From";
 var _PROP_TO_= "To";
@@ -20,7 +21,8 @@ var Flight= Backbone.Model.extend({
 }, {
     propFrom: _PROP_FROM_,    
     propTo: _PROP_TO_,    
-    propAirLines: _PROP_AIR_LINES_,    
+    propAirLines: _PROP_AIR_LINES_, 
+    propColumns: columns   
 });
 
 module.exports= Flight;

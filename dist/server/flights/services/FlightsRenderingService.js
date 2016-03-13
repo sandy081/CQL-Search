@@ -19,12 +19,9 @@ var _toResults= function(flights) {
 }
 
 var _headers= function() {
-    return new Backbone.Collection([
-        _headerModel(FlightModel.propAirLines),
-        _headerModel(FlightModel.propFrom),
-        _headerModel(FlightModel.propTo),
-        _headerModel("Price")
-    ])
+    var columns= _.map(FlightModel.propColumns, _headerModel);
+    columns.push(_headerModel("Price"));
+    return new Backbone.Collection(columns);
 }
 
 var _rows= function(flights) {
@@ -36,12 +33,9 @@ var _rows= function(flights) {
 }
 
 var _toEntries= function(flight) {
-    return new Backbone.Collection([
-        _entryModel(flight.get(FlightModel.propAirLines)),
-        _entryModel(flight.get(FlightModel.propFrom)),
-        _entryModel(flight.get(FlightModel.propTo)),
-        _entryModel(flight.getPrice(2))
-    ])
+    var entries= _.map(FlightModel.propColumns, _.overArgs(_entryModel, _.bind(flight.get, flight)));
+    entries.push(_entryModel(flight.getPrice(2)));
+    return new Backbone.Collection(entries);
 }
 
 var _headerModel= function(name) {
