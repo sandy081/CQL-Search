@@ -20,6 +20,7 @@ var _toResults= function(flights) {
 
 var _headers= function() {
     return new Backbone.Collection([
+        _headerModel(FlightModel.propAirLines),
         _headerModel(FlightModel.propFrom),
         _headerModel(FlightModel.propTo),
         _headerModel("Price")
@@ -36,6 +37,7 @@ var _rows= function(flights) {
 
 var _toEntries= function(flight) {
     return new Backbone.Collection([
+        _entryModel(flight.get(FlightModel.propAirLines)),
         _entryModel(flight.get(FlightModel.propFrom)),
         _entryModel(flight.get(FlightModel.propTo)),
         _entryModel(flight.getPrice(2))
