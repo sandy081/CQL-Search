@@ -1,0 +1,7 @@
+.components-results .message.container {
+    max-width: 40em;
+}
+
+.components-results .message.container .alert{
+    text-align: center;
+}

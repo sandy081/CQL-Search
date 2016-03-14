@@ -13,6 +13,11 @@ var FlightsRenderingService= function() {};
 
 var _toResults= function(flights) {
     var results= new ResultsModel();
+    if (flights.length === 0) {
+        results.set(ResultsModel.propMessage, "No flights with the given criteria");
+        return results;
+    }
+    
     results.set(ResultsModel.propHeaders, _headers());
     results.set(ResultsModel.propRows, _rows(flights));
     return results;

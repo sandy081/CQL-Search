@@ -3,3 +3,5 @@
 
 @import url("../components/dropdown/DropDown.css");
 @import url("../components/search/Search.css");
+
+@import url("../shared/components/results/Results.css");

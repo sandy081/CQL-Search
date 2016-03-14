@@ -2,6 +2,7 @@ var _= require("lodash");
 var Backbone= require("backbone");
 var ResultsModel= require('./../../../shared/components/results/models/ResultsModel');
 
+var _PROP_FILTER_ = "filter";
 var _PROP_RESULTS_ = "results";
 
 var ResultsContainerModel= Backbone.Model.extend({
@@ -12,13 +13,12 @@ var ResultsContainerModel= Backbone.Model.extend({
                 }, this));
     },
         
-    _refresh: _.memoize(function(searchText){
+    _refresh: function(searchText){
           var results= new ResultsModel();
           return results.fetch(searchText);
-    })
-    
-    
+    }
 }, {
+    propFilter: _PROP_FILTER_,
     propResults: _PROP_RESULTS_
 });
 

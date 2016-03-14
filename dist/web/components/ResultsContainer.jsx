@@ -14,7 +14,7 @@ var ResultsContainer= React.createClass({
     
     shouldComponentUpdate: function(nextProps, nextState) {
         var currentResults= this.getStateValue(_STATE_RESULTS_); 
-        return !currentResults || currentResults.cid === nextState[_STATE_RESULTS_].cid;
+        return !currentResults || currentResults.cid !== nextState[_STATE_RESULTS_].cid;
     },
     
     render: function() {
@@ -26,8 +26,8 @@ var ResultsContainer= React.createClass({
             ); 
     },
     
-    refresh: function(searchText) {
-        this.props.model.refresh(searchText)
+    refresh: function(filter) {
+        this.props.model.refresh(filter)
                         .done(_.bind(function(results){
                             this.getStateUpdater().update(_STATE_RESULTS_, results);
                         }, this));

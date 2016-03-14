@@ -6,6 +6,7 @@ var RowModel= require('./RowModel');
 var _PROP_HEADERS_          = "headers";
 var _PROP_ROWS_             = "rows";
 var _PROP_CSS_CLASS_NAMES_  = "classNames";
+var _PROP_MESSAGE_  = "message";
 
 var ResultsModel= Backbone.Model.extend({
     
@@ -45,7 +46,8 @@ var ResultsModel= Backbone.Model.extend({
 }, {
   propHeaders: _PROP_HEADERS_,
   propRows: _PROP_ROWS_,  
-  propCssClassNames: _PROP_CSS_CLASS_NAMES_  
+  propCssClassNames: _PROP_CSS_CLASS_NAMES_,  
+  propMessage: _PROP_MESSAGE_  
 });
 
 module.exports= ResultsModel;
