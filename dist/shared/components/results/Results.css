@@ -1,7 +1,8 @@
 .components-results .message.container {
-    max-width: 40em;
+    max-width: 50em;
 }
 
 .components-results .message.container .alert{
+    padding: 10px;
     text-align: center;
 }

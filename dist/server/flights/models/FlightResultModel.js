@@ -24,7 +24,7 @@ var FlightResultModel= Backbone.Model.extend({
                                 + (flight.get(FlightModel.propInfantPrice) * infants);
         priceValue= isToAndFro ? priceValue * 2 : priceValue;                                
         this.set(_PROP_PRICE_VALUE_, priceValue);                                
-        this.set(_PROP_PRICE_, priceValue + " CHF");
+        this.set(_PROP_PRICE_, priceValue + " " + flight.get(FlightModel.propCurrency));
     },
     
     setJourney: function(isToAndFro) {

@@ -22,6 +22,48 @@ FlightsService.prototype.search= function(filter) {
     return filtered;    
 }
 
+FlightsService.prototype.flightsMessage= function(filter, flights) {
+    if (flights.length === 0) {
+        return "No flights with the given criteria";
+    }
+    
+    // var attributeValues= _getAttributeValuesFrom(filter);
+    // var fromMessage= attributeValues["From"] ? "from " + attributeValues["From"] + " " : "";
+    // var toMessage= attributeValues["To"] ? "to " + attributeValues["To"]  + " " : "";
+    // var departingMessage= _departingMessage(attributeValues.dep || "today");
+    // var returningMessage= attributeValues.ret ? _returnMessage(attributeValues.ret) : "";
+    // return "All flights " + fromMessage + toMessage + departingMessage + returningMessage;
+    return null;
+}
+
+var _departingMessage= function(departingDate) {
+    switch (departingDate) {
+        case "today":
+            return "departing today ";
+        case "tomorrow":
+            return "departing tomorrow ";
+        case "2d":
+            return "departing in next two days ";
+        case "3d":
+            return "departing in next three days ";
+    }
+    return "departing on " + departingDate;
+}
+
+var _returnMessage= function(retuningDate) {
+    switch (retuningDate) {
+        case "same":
+            return "returning same day as departing day ";
+        case "next":
+            return "returning next day after departing day ";
+        case "2d":
+            return "returning two days after departing day ";
+        case "3d":
+            return "returning three days after departing day ";
+    }
+    return "returning on " + retuningDate;
+}
+
 var _getDirectFilterValue= function (attributeValues) {
     return _.pick(attributeValues, [FlightModel.propFrom, FlightModel.propTo]);
 };
@@ -61,7 +103,7 @@ var _transform= function (flights, attributeValues) {
 };
 
 var _sort= function (flights, attributeValues) {
-    return _toCollection(flights.sortBy(FlightModel.propPriceValue));
+    return _toCollection(flights.sortBy(FlightResultModel.propPriceValue));
 };
 
 module.exports= FlightsService;

@@ -13,13 +13,10 @@ var FlightsRenderingService= function() {};
 
 var _toResults= function(flights) {
     var results= new ResultsModel();
-    if (flights.length === 0) {
-        results.set(ResultsModel.propMessage, "No flights with the given criteria");
-        return results;
+    if (flights.length !== 0) {
+        results.set(ResultsModel.propHeaders, _headers());
+        results.set(ResultsModel.propRows, _rows(flights));
     }
-    
-    results.set(ResultsModel.propHeaders, _headers());
-    results.set(ResultsModel.propRows, _rows(flights));
     return results;
 }
 
@@ -65,8 +62,9 @@ FlightsRenderingService.prototype.renderHTML= function(flights) {
     return ReactDOMServer.renderToString(reactElement);   
 }
 
-FlightsRenderingService.prototype.renderJSON= function(flights) {
+FlightsRenderingService.prototype.renderJSON= function(flights, message) {
     var resultsModel= _toResults(flights);
+    resultsModel.set(ResultsModel.propMessage, message);
     return resultsModel.toJSON();
 }
 

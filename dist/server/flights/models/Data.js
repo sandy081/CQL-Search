@@ -27,10 +27,32 @@ return [
 
 exports.flights= function() {
     return [
-        {From: "Zurich", To: "Madrid", Airlines: {iconUrl: "/images/swiss.png", value:"Swiss Air"}, Adult:100, Child:90, Infant: 10, '#': 5},   
-        {From: "Zurich", To: "Madrid", Airlines: {iconUrl: "/images/lufthansa.png", value:"Lufthansa"}, Adult:80, Child:70, Infant: 10, '#': 2},   
-        {From: "Zurich", To: "Madrid", Airlines: {iconUrl: "/images/airfrance.png", value:"Air France"}, Adult:95, Child:80, Infant: 10, '#': 3},   
-        {From: "Zurich", To: "Madrid", Airlines: {iconUrl: "/images/austrian.png", value:"Austrian Airlines"}, Adult:85, Child:75, Infant: 10, '#': 1}   
+        
+        // Swiss Air
+        {From: "Zurich", To: "Madrid", Airlines: {iconUrl: "/images/swiss.png", value:"Swiss Air"}, Adult:100, Child:90, Infant: 10, '#': 5, Currency: "CHF"},   
+        {From: "Madrid", To: "Zurich", Airlines: {iconUrl: "/images/swiss.png", value:"Swiss Air"}, Adult:95, Child:85, Infant: 10, '#': 10, Currency: "EURO"},
+        
+        {From: "Zurich", To: "Paris", Airlines: {iconUrl: "/images/swiss.png", value:"Swiss Air"}, Adult:110, Child:95, Infant: 10, '#': 6, Currency: "CHF"},   
+        {From: "Paris", To: "Zurich", Airlines: {iconUrl: "/images/swiss.png", value:"Swiss Air"}, Adult:100, Child:90, Infant: 10, '#': 8, Currency: "EURO"},
+           
+        // Lufthansa
+        {From: "Zurich", To: "Madrid", Airlines: {iconUrl: "/images/lufthansa.png", value:"Lufthansa"}, Adult:80, Child:70, Infant: 10, '#': 2, Currency: "CHF"},
+        {From: "Madrid", To: "Zurich", Airlines: {iconUrl: "/images/lufthansa.png", value:"Lufthansa"}, Adult:75, Child:65, Infant: 10, '#': 4, Currency: "EURO"},
+           
+        // Air France   
+        {From: "Zurich", To: "Paris", Airlines: {iconUrl: "/images/airfrance.png", value:"Air France"}, Adult:90, Child:85, Infant: 10, '#': 8, Currency: "CHF"},
+        {From: "Paris", To: "Zurich", Airlines: {iconUrl: "/images/airfrance.png", value:"Air France"}, Adult:85, Child:80, Infant: 10, '#': 5, Currency: "EURO"},
+        
+        {From: "Zurich", To: "Madrid", Airlines: {iconUrl: "/images/airfrance.png", value:"Air France"}, Adult:95, Child:80, Infant: 10, '#': 3, Currency: "CHF"},
+        {From: "Madrid", To: "Zurich", Airlines: {iconUrl: "/images/airfrance.png", value:"Air France"}, Adult:90, Child:85, Infant: 10, '#': 3, Currency: "EURO"},
+           
+        // Austrian   
+        {From: "Zurich", To: "Madrid", Airlines: {iconUrl: "/images/austrian.png", value:"Austrian Airlines"}, Adult:85, Child:75, Infant: 10, '#': 1, Currency: "CHF"},   
+        {From: "Madrid", To: "Zurich", Airlines: {iconUrl: "/images/austrian.png", value:"Austrian Airlines"}, Adult:80, Child:70, Infant: 10, '#': 1, Currency: "EURO"},
+        
+        // Aegean   
+        {From: "Zurich", To: "Venice", Airlines: {iconUrl: "/images/aegean.png", value:"Aegean Airlines"}, Adult:75, Child:65, Infant: 5, '#': 5, Currency: "CHF"},   
+        {From: "Venice", To: "Zurich", Airlines: {iconUrl: "/images/aegean.png", value:"Aegean Airlines"}, Adult:70, Child:60, Infant: 5, '#': 4, Currency: "EURO"}   
     ];
 }
 
@@ -54,13 +76,11 @@ exports.Airports= function() {
            
         //France
         {country: "France", city: "Paris"},   
-        {country: "France", city: "Marsielle"},   
         {country: "France", city: "Nice"},
         
         //Italy
         {country: "Italy", city: "Venice"},   
-        {country: "Italy", city: "Rome"},   
-        {country: "Italy", city: "Milan"}
+        {country: "Italy", city: "Rome"} 
     ];
 }
 

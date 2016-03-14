@@ -9,6 +9,7 @@ var _PROP_MEMEBERS_= "#";
 var _PROP_ADULT_PRICE_= "Adult";
 var _PROP_CHILD_PRICE_= "Child";
 var _PROP_INFANT_PRICE_= "Infant";
+var _PROP_CURRENCEY_= "Currency";
 
 var Flight= Backbone.Model.extend({
 }, {
@@ -19,6 +20,7 @@ var Flight= Backbone.Model.extend({
     propAdultPrice: _PROP_ADULT_PRICE_,    
     propChildPrice: _PROP_CHILD_PRICE_,    
     propInfantPrice: _PROP_INFANT_PRICE_,   
+    propCurrency: _PROP_CURRENCEY_   
 });
 
 module.exports= Flight;
