@@ -27,12 +27,12 @@ AttributeProposals.prototype.getProposals= function(filterText, values) {
 
 var _filterAttribues= function(attributes, filterText, values) {
   return attributes.filter(function(attribute){
-        return _hasToIcludeAttribute(attribute, filterText, values);  
+        return _hasToIncludeAttribute(attribute, filterText, values);  
     });
 };
 
-var _hasToIcludeAttribute= function(attribute, filterText, values) {
-    if (_.has(values, attribute.get(AttributeModel.propText))) {
+var _hasToIncludeAttribute= function(attribute, filterText, values) {
+    if (_.has(values, attribute.get(AttributeModel.propText).toLowerCase())) {
         return false;
     }
     

@@ -9,13 +9,12 @@ var ParserUtils= require('./../../../cql/ParserUtils');
 var ProposalsGroup= require('./../../../shared/models/proposals/ProposalsGroup');
 var Proposal= require('./../../../shared/models/proposals/Proposal');
 var AttributeValuesVisitor= require('./../visitors/AttributeValuesVisitor');
-var SelectionHelper= require('./../../../cql/SelectionHelper');
 
 var FlightsProposalsBuilder= function(input) {
     this._input= input;
     this._proposals= new Backbone.Collection([], {model: ProposalsGroup});
     var parser= ParserUtils.createSilentParser(input);
-    this._values= new AttributeValuesVisitor(input, new SelectionHelper(input)).visit(parser.search()); 
+    this._values= _toLowerCase(new AttributeValuesVisitor(input).visit(parser.search())); 
 }
 
 FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, needsLeadingSpace) {
@@ -24,7 +23,8 @@ FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, 
 }
 
 FlightsProposalsBuilder.prototype.createValueProposals= function(attribute, selection, needsLeadingSpace) {
-    switch (attribute.toLowerCase()) {
+    attribute= attribute.toLowerCase();
+    switch (attribute) {
         case "to": 
         case "from": 
             this._addToProposals(new AirportProposals().getProposals(this._getFilterText(selection), attribute, this._values), selection, true);
@@ -82,6 +82,12 @@ FlightsProposalsBuilder.prototype._updateProposal= function(proposalsGroups, sel
           } 
        }); 
     });
+};
+
+var _toLowerCase= function(attributeValues) {
+    return _.transform(attributeValues, function(result, value, key){
+        result[key.toLowerCase()]= value;
+    }, {});  
 };
 
 module.exports = FlightsProposalsBuilder;

@@ -5,6 +5,7 @@ var DropDownMenuModel= require('../dropdown/models/DropDownMenuModel');
 var Proposal= require('../../../shared/models/proposals/Proposal');
 var ContentAssistModel= require('./models/ContentAssistModel');
 
+var _STATE_SHOW_PROPOSALS_= "_STATE_SHOW_PROPOSALS_";
 var _STATE_MENU_ITEMS_= "_STATE_MENU_ITEMS_";
 var _STATE_ACTIVE_DESCENDANT_ = "_ACTIVE_DESCENDANT_";
 
@@ -18,6 +19,7 @@ var ContetnAssist= React.createClass({
     
     getInitialState: function() {
       var initialState= {};
+      initialState[_STATE_SHOW_PROPOSALS_]= false;
       initialState[_STATE_MENU_ITEMS_]= this.props.model.toMenuEntries();
       return initialState;  
     },
@@ -36,7 +38,7 @@ var ContetnAssist= React.createClass({
         dropDownMenuModel.set(DropDownMenuModel.propMenuEntries, this.getStateValue(_STATE_MENU_ITEMS_));
         var activedescendant= this.getStateValue(_STATE_ACTIVE_DESCENDANT_) || null;
         return (
-                <div className="contentAssist dropdown" role="listbox" id={this.getValue(ContentAssistModel.propId)} aria-activedescendant={activedescendant}>
+                <div className={this._getDropdownClassName()} role="listbox" id={this.getValue(ContentAssistModel.propId)} aria-activedescendant={activedescendant}>
                     <button className="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style={{display: 'none'}}/>
                     <DropDownMenu ref="dropdownmenu" model={dropDownMenuModel}/>
                  </div>
@@ -46,10 +48,24 @@ var ContetnAssist= React.createClass({
     fetchProposals: function(searchText) {
         this.props.model.fetchProposals(searchText)
                         .done(_.bind(function(){
-                            this.getStateUpdater().update(_STATE_MENU_ITEMS_, this.props.model.toMenuEntries());
-                            this.$el.addClass("open");
+                            this.getStateUpdater()
+                                    .set(_STATE_MENU_ITEMS_, this.props.model.toMenuEntries())
+                                    .set(_STATE_SHOW_PROPOSALS_, true)
+                                    .update();
                             this.actions.proposalsShown();
                         }, this));  
+    },
+    
+    hideProposals: function(searchText) {
+        this.getStateUpdater().update(_STATE_SHOW_PROPOSALS_, false);
+    },
+    
+    _getDropdownClassName: function() {
+        var className= "contentAssist dropdown";
+        if (this.areProposalsShown()) {
+            className= React.className([className, "open"]);
+        }
+        return className;
     },
     
     _menuItemSelected: function(menuItem) {
@@ -60,12 +76,20 @@ var ContetnAssist= React.createClass({
         this.actions.proposalFocussed(this.props.model.getProposalFromMenuEntry(menuItem));
     },
     
+    areProposalsShown: function() {
+        return this.getStateValue(_STATE_SHOW_PROPOSALS_); 
+    },
+    
     focusNext: function() {
-        this.refs.dropdownmenu.focusNext();
+        if (this.areProposalsShown()) {
+            this.refs.dropdownmenu.focusNext();
+        }
     },
     
     focusPrevious: function() {
-        this.refs.dropdownmenu.focusPrevious();
+        if (this.areProposalsShown()) {
+            this.refs.dropdownmenu.focusPrevious();
+        }
     },
     
     getFocussedProposal: function() {

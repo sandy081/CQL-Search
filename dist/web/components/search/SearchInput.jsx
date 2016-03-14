@@ -10,6 +10,7 @@ var SearchInput= React.createClass({
      actions: {
         inputFocussed: "input-focussed",  
         inputChanged: "input-changed",  
+        escape: "escape", 
         arrowUp: "arrow-up", 
         arrowRight: "arrow-right", 
         arrowDown: "arrow-down",
@@ -102,7 +103,11 @@ var SearchInput= React.createClass({
         var handled= false;
         switch(event.keyCode) {
             case 13: //ENTER
-                this.actions.submit();
+                this.actions.submit(this.getSearchText());
+                handled= true;
+                break;
+            case 27: //ESCAPE
+                this.actions.escape();
                 handled= true;
                 break;
             case 38: //ARROW_UP
@@ -112,9 +117,15 @@ var SearchInput= React.createClass({
                 }
                 break;
             case 39: //ARROW_RIGHT
-                if (!event.ctrlKey && !event.altKey && !event.metaKey && this.$ui.enabledInput[0].selectionEnd === this.getSearchText().length) {
-                    this.actions.arrowRight();
+                if (event.ctrlKey
+                        || event.altKey
+                        || event.metaKey
+                        || event.shiftKey
+                        || this.$ui.enabledInput[0].selectionEnd !== this.getSearchText().length
+                        || this.$ui.enabledInput[0].selectionStart !== this.getSearchText().length) {
+                    break;
                 }
+                this.actions.arrowRight();
                 break;
             case 40: //ARROW_DOWN
                 if (!event.ctrlKey && !event.altKey && !event.metaKey) {

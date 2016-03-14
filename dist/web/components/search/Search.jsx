@@ -6,12 +6,17 @@ var SearchModel= require('./models/SearchModel');
 var Proposal= require('./../../../shared/models/proposals/Proposal');
 
 var SearchContainer= React.createClass({
+
+    actions: {
+        submit: "submit"  
+    },
     
     componentDidMount: function() {
         this.refs.searchInput.actions.inputFocussed.listen(_.bind(this._fetchProposals, this));
         this.refs.searchInput.actions.inputChanged.listen(_.bind(this._fetchProposals, this));
         
-        this.refs.searchInput.actions.arrowDown.listen(_.bind(this._focusProposal, this, true));
+        this.refs.searchInput.actions.escape.listen(_.bind(this._hideProposals, this));
+        this.refs.searchInput.actions.arrowDown.listen(_.bind(this._arrowDown, this, true));
         this.refs.searchInput.actions.arrowUp.listen(_.bind(this._focusProposal, this, false));
         this.refs.searchInput.actions.arrowRight.listen(_.bind(this._commit, this));
         this.refs.searchInput.actions.submit.listen(_.bind(this._onSubmit, this));
@@ -45,7 +50,7 @@ var SearchContainer= React.createClass({
     },
     
     _commit: function() {
-        var proposal= this.refs.contentAssist.getFocussedProposal() || this.getValue(SearchModel.propContentAssist).getFirstProposal();
+        var proposal= this.refs.contentAssist.areProposalsShown() ? this.refs.contentAssist.getFocussedProposal() || this.getValue(SearchModel.propContentAssist).getFirstProposal() : null;
         if (proposal) {
             this._commitProposal(proposal);
         } 
@@ -58,6 +63,14 @@ var SearchContainer= React.createClass({
     
     _fetchProposals: function() {
         this.refs.contentAssist.fetchProposals(this.refs.searchInput.getSearchText());
+    },
+    
+    _arrowDown: function() {
+        if (this.refs.contentAssist.areProposalsShown()) {
+            this._focusProposal(true);
+        } else {
+            this._fetchProposals();
+        }
     },
     
     _focusProposal: function(next) {
@@ -82,13 +95,19 @@ var SearchContainer= React.createClass({
         this.refs.searchInput.setActiveDescendant(proposal.get(Proposal.propId));
     },
     
-    _onSubmit: function() {
+    _onSubmit: function(searchText) {
         var proposal= this.refs.contentAssist.getFocussedProposal();
         if (proposal) {
             this._commitProposal(proposal);
         } else {
-            // Submit for search
+            this._hideProposals();
+            this.actions.submit(searchText);
         }
+    },
+    
+    _hideProposals: function() {
+        this.refs.contentAssist.hideProposals();
+        this.refs.searchInput.hideValueInDisabledInput();
     }
 });
 
