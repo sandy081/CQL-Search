@@ -14,7 +14,7 @@ var ResultsModel= Backbone.Model.extend({
         var defaults= {};
         defaults[_PROP_HEADERS_]= new Backbone.Collection([], {model: HeaderModel});
         defaults[_PROP_ROWS_]= new Backbone.Collection([], {model: RowModel});
-        defaults[_PROP_CSS_CLASS_NAMES_]= "table table-striped table-hover";
+        defaults[_PROP_CSS_CLASS_NAMES_]= "table table-striped table-hover table-condensed";
         return defaults;
     }, 
     

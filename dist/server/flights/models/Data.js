@@ -20,8 +20,7 @@ exports.Attributes= function() {
 exports.columns= function() { 
 return [
         "Airlines",
-        "From",
-        "To",
+        "Journey",
         "Price"
     ];
 }

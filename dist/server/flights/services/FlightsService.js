@@ -1,6 +1,7 @@
 var _= require('lodash');
 var Backbone= require('backbone');
 var FlightModel= require('./../models/FlightModel');
+var FlightResultModel= require('./../models/FlightResultModel');
 var ParserUtils= require('./../../../cql/ParserUtils');
 var AttributeValuesVisitor= require('./../visitors/AttributeValuesVisitor');
 
@@ -48,9 +49,13 @@ var _transform= function (flights, attributeValues) {
     var infants= attributeValues['infants'] || 0;
     var children= attributeValues['children'] || 0;
     var adults= attributeValues['adults'] || (members - children - infants);
+    var isToAndFro= !!attributeValues['ret'];
     return _toCollection(flights.map(function(flight){
-        var transformed= flight.clone();
-        transformed.setPrice(adults , children, infants);
+        var props= {};
+        props[FlightResultModel.propFlight]= flight;
+        var transformed= new FlightResultModel(props);
+        transformed.setPrice(adults , children, infants, isToAndFro);
+        transformed.setJourney(isToAndFro);
         return transformed;
     }));
 };

@@ -1,18 +1,24 @@
+var Backbone= require('backbone');
 var React= require('react');
 var EntryModel= require('./models/EntryModel');
 
 var Entry= React.createClass({
    
    render: function() {
-    var iconUrl= this.getValue(EntryModel.propIconUrl);
-       return (
-           <td>
-                <div>
-                    {this._getIconElement()}
-                    <span>{this.getValue(EntryModel.propValue)}</span>
-                </div>
-           </td>
-       );
+        var value= this.getValue(EntryModel.propValue);
+        if (value instanceof Backbone.Model) {
+            return this.renderModel(value);
+        }
+        
+        var iconUrl= this.getValue(EntryModel.propIconUrl);
+        return (
+            <td>
+                    <div>
+                        {this._getIconElement()}
+                        <span>{this.getValue(EntryModel.propValue)}</span>
+                    </div>
+            </td>
+        );
    },
    
    _getIconElement: function() {

@@ -2,7 +2,7 @@ var Backbone= require('backbone');
 var _= require('lodash');
 var React= require("react");
 var ReactDOMServer= require('react-dom/server');
-var FlightModel= require('./../models/FlightModel');
+var FlightResultModel= require('./../models/FlightResultModel');
 var ResultsModel= require('./../../../shared/components/results/models/ResultsModel');
 var HeaderModel= require('./../../../shared/components/results/models/HeaderModel');
 var RowModel= require('./../../../shared/components/results/models/RowModel');
@@ -24,7 +24,7 @@ var _toResults= function(flights) {
 }
 
 var _headers= function() {
-    var columns= _.map(FlightModel.propColumns, _headerModel);
+    var columns= _.map(FlightResultModel.propColumns, _headerModel);
     return new Backbone.Collection(columns);
 }
 
@@ -37,7 +37,7 @@ var _rows= function(flights) {
 }
 
 var _toEntries= function(flight) {
-    var entries= _.map(FlightModel.propColumns, _.overArgs(_entryModel, _.bind(flight.get, flight)));
+    var entries= _.map(FlightResultModel.propColumns, _.overArgs(_entryModel, _.bind(flight.get, flight)));
     return new Backbone.Collection(entries);
 }
 
