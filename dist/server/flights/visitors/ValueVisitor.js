@@ -14,7 +14,7 @@ ValueVisitor.prototype.visitStringValue= function(ctx) {
 }
 
 ValueVisitor.prototype.visitNumberValue= function(ctx) {
-    return  ctx.NUMBER().toString();
+    return  parseInt(ctx.NUMBER().toString());
 }
 
 module.exports= ValueVisitor;

@@ -32,7 +32,12 @@ var _getAttributeValuesFrom= function (filter) {
 };
 
 var _filterForMembers= function (flights, attributeValues) {
-    var members= attributeValues['#'] || 1;
+    var members= attributeValues['#'];
+    if (!members) {
+        var children= attributeValues['children'] || 0;
+        var adults= attributeValues['adults'] || 1;
+        members= adults + children;
+    }
     return _toCollection(flights.filter(function(flight) {
         return flight.get(FlightModel.propMembers) >= members;  
     }));
