@@ -52,12 +52,14 @@ var ContetnAssist= React.createClass({
                                     .set(_STATE_MENU_ITEMS_, this.props.model.toMenuEntries())
                                     .set(_STATE_SHOW_PROPOSALS_, true)
                                     .update();
+                            this.$el.addClass("open");
                             this.actions.proposalsShown();
                         }, this));  
     },
     
     hideProposals: function(searchText) {
         this.getStateUpdater().update(_STATE_SHOW_PROPOSALS_, false);
+        this.$el.removeClass("open");
     },
     
     _getDropdownClassName: function() {
