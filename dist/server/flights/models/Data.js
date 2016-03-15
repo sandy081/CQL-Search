@@ -26,7 +26,7 @@ return [
         { title: "Airlines", attribute: "Airlines" },
         { title: "Journey", attribute: "Journey" },
         { title: "Total Price", attribute: "Price" },
-        { title: "Available Seats", attribute: "#" }
+        { title: "Available", attribute: "#" }
     ];
 }
 
