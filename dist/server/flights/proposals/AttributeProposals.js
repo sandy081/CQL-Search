@@ -11,6 +11,14 @@ var attributesGroups= _.mapValues(Data.Attributes(), function(attributes){
 
 var AttributeProposals= function(){};
 
+AttributeProposals.prototype.findAttribute= function(text) {
+    var attribute= null;
+    _.forIn(attributesGroups, function(attributes, key){
+        var attribute= attributes.find({text: text});
+    });
+    return attribute;
+}
+
 AttributeProposals.prototype.getProposals= function(filterText, values) {
     var proposalsGroups= [];
     _.forIn(attributesGroups, function(attributes, key){

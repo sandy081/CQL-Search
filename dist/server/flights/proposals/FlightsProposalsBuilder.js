@@ -24,6 +24,12 @@ FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, 
 }
 
 FlightsProposalsBuilder.prototype.createValueProposals= function(attribute, selection, needsLeadingSpace) {
+    var attributeModel= new AttributeProposals().findAttribute(attribute);
+    if (attributeModel && attributeModel.get(AttributeModel.propType) === "city") {
+        this._addToProposals(new AirportProposals().getProposals(this._getFilterText(selection), attribute.toLowerCase(), this._values), selection, true);
+        return;
+    }
+    
     attribute= attribute.toLowerCase();
     switch (attribute) {
         case "to": 
