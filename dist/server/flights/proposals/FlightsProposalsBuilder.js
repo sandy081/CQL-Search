@@ -10,6 +10,7 @@ var ParserUtils= require('./../../../cql/ParserUtils');
 var ProposalsGroup= require('./../../../shared/models/proposals/ProposalsGroup');
 var Proposal= require('./../../../shared/models/proposals/Proposal');
 var AttributeValuesVisitor= require('./../visitors/AttributeValuesVisitor');
+var AttributeModel= require('./../models/AttributeModel');
 
 var FlightsProposalsBuilder= function(input) {
     this._input= input;
