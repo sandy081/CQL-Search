@@ -43,6 +43,10 @@ CqlVisitor.prototype.visitFullTextClause = function(ctx) {
     return this.visitChildren(ctx);
 };
 
+// Visit a parse tree produced by CqlParser#sortClause.
+CqlVisitor.prototype.visitSortClause = function(ctx) {
+    return this.visitChildren(ctx);
+};
 
 // Visit a parse tree produced by CqlParser#searchWord.
 CqlVisitor.prototype.visitSearchWord = function(ctx) {

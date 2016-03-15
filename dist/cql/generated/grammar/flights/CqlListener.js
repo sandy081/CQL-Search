@@ -65,6 +65,15 @@ CqlListener.prototype.exitFullTextClause = function(ctx) {
 };
 
 
+// Enter a parse tree produced by CqlParser#sortClause.
+CqlListener.prototype.enterSortClause = function(ctx) {
+};
+
+// Exit a parse tree produced by CqlParser#sortClause.
+CqlListener.prototype.exitSortClause = function(ctx) {
+};
+
+
 // Enter a parse tree produced by CqlParser#searchWord.
 CqlListener.prototype.enterSearchWord = function(ctx) {
 };

@@ -5,7 +5,7 @@ search: clauses EOF;
 clauses: simpleClause 
 		 	| clauses simpleClause;
 
-simpleClause: attributeClause | shortClause | fullTextClause;
+simpleClause: attributeClause | shortClause | fullTextClause | sortClause;
 
 attributeClause: attribute operation value;
 
@@ -14,6 +14,8 @@ shortClause: shortIdentifier=(MEMBERS_IDENTIFIER
 
 fullTextClause: searchWord 
 						| fullTextClause searchWord;
+                        
+sortClause: sortOrder=(SORT_ASCENDING | SORT_DESCENDING) EQUALS attribute;
 
 searchWord: numberValue 
 			   | stringValue;
@@ -36,6 +38,9 @@ GREATER_THAN: '>';
 
 MEMBERS_IDENTIFIER: '#';
 OWNER_IDENTIFIER: '@';
+
+SORT_ASCENDING: 'asc';
+SORT_DESCENDING: 'dsc';
 
 NUMBER: [1-9][0-9]*;
 STRING_LITERAL: ((~["\\ \t:#@]) | STRING_ESCAPE )+;
