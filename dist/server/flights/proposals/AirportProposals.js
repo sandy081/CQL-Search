@@ -4,7 +4,7 @@ var Proposal= require('./../../../shared/models/proposals/Proposal');
 var ProposalsGroup= require('./../../../shared/models/proposals/ProposalsGroup');
 
 var AirportModel= require("./../models/AirportModel")
-var Data= require("./../models/Data")
+var Data= require("./../models/Data");
 var airports= new Backbone.Collection(Data.Airports(), {parse: true, model: AirportModel});
 
 var AirportProposals= function(){};

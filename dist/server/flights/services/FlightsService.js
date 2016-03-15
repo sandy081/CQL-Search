@@ -6,6 +6,7 @@ var ParserUtils= require('./../../../cql/ParserUtils');
 var CqlParser= require('./../../../cql/generated/grammar/flights/CqlParser').CqlParser;
 var AttributeValuesVisitor= require('./../visitors/AttributeValuesVisitor');
 var SortAttributesVisitor= require('./../visitors/SortAttributesVisitor');
+var Data= require("./../models/Data")
 
 var _toCollection= function(flights) {
     return new Backbone.Collection(flights, {model: FlightModel});
@@ -67,7 +68,12 @@ var _returnMessage= function(retuningDate) {
 }
 
 var _getDirectFilterValue= function (attributeValues) {
-    return _.pick(attributeValues, [FlightModel.propFrom, FlightModel.propTo]);
+    var directAttributes= _.transform(Data.Attributes(), function(result, attributes){
+                                _.each(_.filter(attributes, "direct"), function(attribute) {
+                                    result.push(attribute.text);
+                                }); 
+                            }, []);
+    return _.pick(attributeValues, directAttributes);
 };
 
 var _getAttributeValuesFrom= function (filter) {

@@ -1,8 +1,8 @@
 exports.Attributes= function() {
     return {
         "1": [
-                {name: "From", text: "From", ops: [":"]},   
-                {name: "To", text: "To", ops: [":"]}   
+                {name: "From", text: "From", ops: [":"], direct: true},   
+                {name: "To", text: "To", ops: [":"], direct: true}   
              ],
         "2": [
                 {name: "Departure", text: "dep", ops: [":"]},   
