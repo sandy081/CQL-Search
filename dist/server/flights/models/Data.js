@@ -23,15 +23,16 @@ exports.Attributes= function() {
 
 exports.columns= function() { 
 return [
-        "Airlines",
-        "Journey",
-        "Price"
+        { title: "Airlines", attribute: "Airlines" },
+        { title: "Journey", attribute: "Journey" },
+        { title: "Total Price", attribute: "Price" },
+        { title: "Available Seats", attribute: "#" }
     ];
 }
 
 exports.sortColumns= function() { 
 return [
-        "Price"
+        { title: "Price", attribute: "PriceValue" }
     ];
 }
 

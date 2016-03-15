@@ -17,13 +17,13 @@ SortAttributeProposals.prototype.getProposals= function(filterText) {
 
 var _filterSortColumns= function(filterText) {
   return _.filter(sortColumns, function(sortColumn) {
-        return sortColumn.toLowerCase().startsWith(filterText.toLowerCase());   
+        return sortColumn.title.toLowerCase().startsWith(filterText.toLowerCase());   
     });
 };
 
 var _toProposal= function(sortColumn) {
     var proposal= new Proposal();
-    proposal.set(Proposal.propDisplayString, sortColumn);
+    proposal.set(Proposal.propDisplayString, sortColumn.title);
     return proposal;
 }
 

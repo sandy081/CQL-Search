@@ -4,6 +4,7 @@ var CqlVisitor= require("./../../../cql/CqlVisitor").CqlVisitor;
 var CqlParser= require("./../../../cql/generated/grammar/flights/CqlParser").CqlParser;
 var AttributeVisitor= require("./AttributeVisitor");
 var FlightResultModel= require("./../models/FlightResultModel");
+var sortColumns= require("./../models/Data").sortColumns();
 
 var SortAttributesVisitor= function(input) {
 	CqlVisitor.call(this);
@@ -24,11 +25,8 @@ SortAttributesVisitor.prototype.aggregateResult= function(aggregate, nextResult)
 SortAttributesVisitor.prototype.visitSortClause= function(ctx) {
     var result= {};
     var sortOrder= ParserUtils.getTokenName(ctx.sortOrder.type);
-    var attribute= new AttributeVisitor().visit(ctx);
-    if (attribute === FlightResultModel.propPrice) {
-        attribute= FlightResultModel.propPriceValue;
-    }
-    result[sortOrder]= attribute;
+    var sortColumnTitle= new AttributeVisitor().visit(ctx);
+    result[sortOrder]= _.find(sortColumns, {title: sortColumnTitle}).attribute;
     return result;
 }
 

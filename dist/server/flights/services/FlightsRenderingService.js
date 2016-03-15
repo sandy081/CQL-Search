@@ -34,13 +34,15 @@ var _rows= function(flights) {
 }
 
 var _toEntries= function(flight) {
-    var entries= _.map(FlightResultModel.propColumns, _.overArgs(_entryModel, _.bind(flight.get, flight)));
+    var entries= _.map(FlightResultModel.propColumns, _.overArgs(_entryModel, function(column) {
+        return flight.get(column.attribute);
+    }));
     return new Backbone.Collection(entries);
 }
 
-var _headerModel= function(name) {
+var _headerModel= function(column) {
     var headerModel= new HeaderModel();
-    headerModel.set(HeaderModel.propName, name);
+    headerModel.set(HeaderModel.propName, column.title);
     return headerModel;
 }
 

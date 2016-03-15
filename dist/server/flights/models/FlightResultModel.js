@@ -12,7 +12,8 @@ var _PROP_PRICE_VALUE_= "PriceValue";
 var FlightResultModel= Backbone.Model.extend({
     
     initialize: function() {
-        this.set(_PROP_AIR_LINES_, this.get(_PROP_FLIGHT_).get(FlightModel.propAirLines));
+        this.set("Available", this.get(_PROP_FLIGHT_).get(FlightModel.propMembers));
+        this.set(this.get(_PROP_FLIGHT_).attributes);
     },
     
     setPrice: function(adults, children, infants, isToAndFro) {
