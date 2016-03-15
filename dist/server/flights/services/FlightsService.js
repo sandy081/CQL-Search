@@ -3,7 +3,9 @@ var Backbone= require('backbone');
 var FlightModel= require('./../models/FlightModel');
 var FlightResultModel= require('./../models/FlightResultModel');
 var ParserUtils= require('./../../../cql/ParserUtils');
+var CqlParser= require('./../../../cql/generated/grammar/flights/CqlParser').CqlParser;
 var AttributeValuesVisitor= require('./../visitors/AttributeValuesVisitor');
+var SortAttributesVisitor= require('./../visitors/SortAttributesVisitor');
 
 var _toCollection= function(flights) {
     return new Backbone.Collection(flights, {model: FlightModel});
@@ -18,7 +20,7 @@ FlightsService.prototype.search= function(filter) {
     var filtered= _toCollection(flights.where(directFilterValues));
     filtered= _filterForMembers(filtered, attributeValues);
     filtered= _transform(filtered, attributeValues);
-    filtered= _sort(filtered, attributeValues);
+    filtered= _sort(filtered, filter);
     return filtered;    
 }
 
@@ -102,7 +104,17 @@ var _transform= function (flights, attributeValues) {
     }));
 };
 
-var _sort= function (flights, attributeValues) {
+var _sort= function (flights, filter) {
+    var sortAttributesVisitor= new SortAttributesVisitor();
+    var parser= ParserUtils.createSilentParser(filter);
+    var sortAttributes= sortAttributesVisitor.visit(parser.search());
+    var sortAscendingToken= ParserUtils.getTokenName(CqlParser.SORT_ASCENDING); 
+    var sortDescendingToken= ParserUtils.getTokenName(CqlParser.SORT_DESCENDING); 
+    if (sortAttributes[sortAscendingToken]) {
+        return _toCollection(flights.sortBy(sortAttributes[sortAscendingToken]));
+    } else if (sortAttributes[sortDescendingToken]) {
+        return _toCollection(_.reverse(flights.sortBy(sortAttributes[sortDescendingToken])));
+    }
     return _toCollection(flights.sortBy(FlightResultModel.propPriceValue));
 };
 

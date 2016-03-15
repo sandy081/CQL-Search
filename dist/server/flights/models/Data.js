@@ -13,6 +13,10 @@ exports.Attributes= function() {
                 {name: "adults", text: "adults", ops: [":"]},   
                 {name: "infants", text: "infants", ops: [":"]},   
                 {name: "children", text: "children", ops: [":"]}   
+             ],
+        "4": [
+                {name: "Sort ascending", text: "asc", ops: [":"]},   
+                {name: "Sort descending", text: "dsc", ops: [":"]}   
              ]
      };
 }
@@ -21,6 +25,12 @@ exports.columns= function() {
 return [
         "Airlines",
         "Journey",
+        "Price"
+    ];
+}
+
+exports.sortColumns= function() { 
+return [
         "Price"
     ];
 }

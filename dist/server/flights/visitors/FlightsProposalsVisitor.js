@@ -23,12 +23,30 @@ FlightsProposalVisitor.prototype.visitSimpleClause= function(ctx) {
 }
 
 FlightsProposalVisitor.prototype.visitShortClause= function(ctx) {
-    var isValidValue= this._isValidValue(ctx.value());
+    var isValidValue= _isValidValue(ctx.value());
     var hasTrailingSpace= this._selectionHelper.hasTrailingSpace(ctx);
     if (!isValidValue || !hasTrailingSpace) {
         var attribute= ParserUtils.getTokenName(ctx.shortIdentifier.type);
         var selection= isValidValue ? this._selectionHelper.createSelection(ctx.value()) : this._selectionHelper.createAfterSelectionWithContext(ctx);
         this._proposalsBuilder.createValueProposals(attribute, selection, true);
+        return true;
+    }
+    return false;
+}
+
+FlightsProposalVisitor.prototype.visitSortClause= function(ctx) {
+    if (ctx.EQUALS() === null) {
+        var selection= this._selectionHelper.createSelection(ctx);
+        var needsLeadingSpace= this._selectionHelper.needsLeadingSpace(ctx);
+        this._proposalsBuilder.createAttributeProposals(selection, needsLeadingSpace);
+        return true;
+    }
+    
+    var isValidValue= _isValidValue(ctx.attribute());
+    var hasTrailingSpace= this._selectionHelper.hasTrailingSpace(ctx);
+    if (!isValidValue || !hasTrailingSpace) {
+        var selection= isValidValue ? this._selectionHelper.createSelection(ctx.attribute()) : this._selectionHelper.createAfterSelectionWithContext(ctx);
+        this._proposalsBuilder.createSortAttributeProposals(selection, true);
         return true;
     }
     return false;
@@ -52,7 +70,7 @@ FlightsProposalVisitor.prototype.visitFullTextClause= function(ctx) {
     return true;
 }
 
-FlightsProposalVisitor.prototype._isValidValue= function(ctx) {
+var _isValidValue= function(ctx) {
     if (ctx === null) {
         return false;
     }

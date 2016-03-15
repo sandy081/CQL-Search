@@ -38,6 +38,7 @@ var FlightResultModel= Backbone.Model.extend({
     
 }, {
     propFlight: _PROP_FLIGHT_,    
+    propPrice: _PROP_PRICE_,    
     propPriceValue: _PROP_PRICE_VALUE_,    
     propAirLines: _PROP_AIR_LINES_, 
     propColumns: columns   

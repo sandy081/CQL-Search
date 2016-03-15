@@ -5,6 +5,7 @@ var AirportProposals= require("./AirportProposals");
 var AirlinesProposals= require("./AirlinesProposals");
 var MembersProposals= require("./MembersProposals");
 var DatesProposals= require("./DatesProposals");
+var SortAttributeProposals= require("./SortAttributeProposals");
 var ParserUtils= require('./../../../cql/ParserUtils');
 var ProposalsGroup= require('./../../../shared/models/proposals/ProposalsGroup');
 var Proposal= require('./../../../shared/models/proposals/Proposal');
@@ -44,6 +45,12 @@ FlightsProposalsBuilder.prototype.createValueProposals= function(attribute, sele
             return;        
     }
 }
+
+FlightsProposalsBuilder.prototype.createSortAttributeProposals= function(selection, needsLeadingSpace) {
+    var sortProposals= new SortAttributeProposals().getProposals(this._getFilterText(selection), this._values);
+    this._addToProposals(sortProposals, selection, false);
+}
+
 
 FlightsProposalsBuilder.prototype.getProposals= function() {
     return this._proposals;
