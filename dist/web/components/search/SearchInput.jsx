@@ -102,6 +102,11 @@ var SearchInput= React.createClass({
     _onKeyDown: function(event) {
         var handled= false;
         switch(event.keyCode) {
+            case 9: //TAB
+                // Eat tab
+                // TODO: Propagate outside
+                handled= true;
+                break;
             case 13: //ENTER
                 this.actions.submit(this.getSearchText());
                 handled= true;

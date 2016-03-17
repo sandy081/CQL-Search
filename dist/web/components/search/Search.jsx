@@ -23,7 +23,7 @@ var SearchContainer= React.createClass({
         
         this.refs.contentAssist.actions.proposalsShown.listen(_.bind(this._onProposalsShown, this));
         this.refs.contentAssist.actions.proposalFocussed.listen(_.bind(this._onProposalFocussed, this));
-        this.refs.contentAssist.actions.proposalSelected.listen(_.bind(this._commitProposal, this));
+        this.refs.contentAssist.actions.proposalSelected.listen(_.bind(this._onProposalSelected, this));
         this.refs.searchInput.focus();
     },
     
@@ -88,6 +88,11 @@ var SearchContainer= React.createClass({
         if (firstProposal) {
             this.refs.searchInput.showValueInDisabledInput(firstProposal);
         }
+    },
+    
+    _onProposalSelected: function(proposal) {
+        this._commitProposal(proposal);
+        this.refs.searchInput.focus();
     },
     
     _onProposalFocussed: function(proposal) {
