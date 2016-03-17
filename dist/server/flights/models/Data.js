@@ -14,8 +14,8 @@ exports.Attributes= function() {
                 {name: "Return", text: "ret", ops: [":"]}   
              ],
         "4": [
-                {name: "Sort ascending", text: "asc", ops: [":"]},   
-                {name: "Sort descending", text: "dsc", ops: [":"]}   
+                {name: "Sort ascending", text: "asc:"},   
+                {name: "Sort descending", text: "dsc:"}   
              ]
      };
 }

@@ -55,7 +55,7 @@ FlightsProposalsBuilder.prototype.createValueProposals= function(attribute, sele
 
 FlightsProposalsBuilder.prototype.createSortAttributeProposals= function(selection, needsLeadingSpace) {
     var sortProposals= new SortAttributeProposals().getProposals(this._getFilterText(selection), this._values);
-    this._addToProposals(sortProposals, selection, false);
+    this._addToProposals(sortProposals, selection, true);
 }
 
 

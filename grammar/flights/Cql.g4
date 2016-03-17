@@ -20,7 +20,7 @@ fullTextClause: searchWord
 					| fullTextClause searchWord
                     ;
 
-sortClause: sortOrder=(SORT_ASCENDING | SORT_DESCENDING) EQUALS attribute;
+sortClause: sortOrder=(SORT_ASCENDING | SORT_DESCENDING) attribute;
 
 searchWord: numberValue 
 			   | stringValue
@@ -44,8 +44,8 @@ numberValue: NUMBER;
 
 EQUALS: ':';
 
-SORT_ASCENDING: 'asc';
-SORT_DESCENDING: 'dsc';
+SORT_ASCENDING: 'asc:';
+SORT_DESCENDING: 'dsc:';
 
 NUMBER: [1-9][0-9]*;
 STRING_LITERAL: ((~["\\ \t:]) | STRING_ESCAPE )+;

@@ -12,8 +12,8 @@ ParserUtils.createLexer= function(cqlText) {
    var chars = new InputStream(cqlText);
    var lexer = new CqlLexer(chars);
    lexer.setExternalIndetifiers({
-       shortIdentifiers: ['#'],
-       operatorIdentifiers: [':']
+       operatorIdentifiers: [':'],
+       shortIdentifiers: ['#']
     });
    return lexer; 
 }

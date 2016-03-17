@@ -35,13 +35,6 @@ FlightsProposalVisitor.prototype.visitShortClause= function(ctx) {
 }
 
 FlightsProposalVisitor.prototype.visitSortClause= function(ctx) {
-    if (ctx.EQUALS() === null) {
-        var selection= this._selectionHelper.createSelection(ctx);
-        var needsLeadingSpace= this._selectionHelper.needsLeadingSpace(ctx);
-        this._proposalsBuilder.createAttributeProposals(selection, needsLeadingSpace);
-        return true;
-    }
-    
     var isValidValue= _isValidValue(ctx.attribute());
     var hasTrailingSpace= this._selectionHelper.hasTrailingSpace(ctx);
     if (!isValidValue || !hasTrailingSpace) {
