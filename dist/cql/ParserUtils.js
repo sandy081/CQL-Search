@@ -8,10 +8,18 @@ var ParserUtils= function(){};
 
 ParserUtils.QUOTE= "\"";
 
-ParserUtils.createSilentParser= function(cqlText) {
+ParserUtils.createLexer= function(cqlText) {
    var chars = new InputStream(cqlText);
    var lexer = new CqlLexer(chars);
-   lexer.setShortIndetifiers(['#']);
+   lexer.setExternalIndetifiers({
+       shortIdentifiers: ['#'],
+       operatorIdentifiers: [':']
+    });
+   return lexer; 
+}
+
+ParserUtils.createSilentParser= function(cqlText) {
+   var lexer = ParserUtils.createLexer(cqlText);
    var tokens  = new CommonTokenStream(lexer);
    var parser = new CqlParser(tokens);
    parser.buildParseTrees = true;
@@ -20,8 +28,7 @@ ParserUtils.createSilentParser= function(cqlText) {
 };
 
 ParserUtils.getAllTokens= function(cqlText) {
-   var chars = new InputStream(cqlText);
-   var lexer = new CqlLexer(chars);
+   var lexer = ParserUtils.createLexer(cqlText);
    return lexer.getAllTokens();
 };
 

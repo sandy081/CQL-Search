@@ -1,7 +1,7 @@
 grammar Cql;
 
 @lexer::members {
-  CqlLexer.prototype.setShortIndetifiers= function(shortIdentifiers) {}
+  CqlLexer.prototype.setExternalIndetifiers= function(externalIdentifiers) {}
 }
 
 search: clauses EOF;

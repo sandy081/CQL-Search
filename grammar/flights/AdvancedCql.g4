@@ -5,27 +5,42 @@ tokens {
 }
 
 @lexer::members {
+  var _ = require('lodash');
+  var CqlParser = require('./CqlParser').CqlParser;
   
-  CqlLexer.SHORT_IDENTIFIER= require('./CqlParser').CqlParser.SHORT_IDENTIFIER;
-  CqlLexer.prototype.shortIdentifiers= [];
+  CqlLexer.SHORT_IDENTIFIER= CqlParser.SHORT_IDENTIFIER;
+  CqlLexer.prototype.externalIdentifiers= {
+        shortIdentifiers: []
+  };
   
-  CqlLexer.prototype.setShortIndetifiers= function(shortIdentifiers) {
-        this.shortIdentifiers = shortIdentifiers;
+  CqlLexer.prototype.setExternalIndetifiers= function(externalIdentifiers) {
+        this.externalIdentifiers = externalIdentifiers;
         return this;
   }
   
-  CqlLexer.prototype.generateShortIdentifierToken= function() {
-       this.type= CqlLexer.SHORT_IDENTIFIER;
+  CqlLexer.prototype.generateExternalIdentifierToken= function(identifier) {
+       if (_isShortIdentifier(identifier, this.externalIdentifiers)) {
+            this.type= CqlLexer.SHORT_IDENTIFIER;
+       }
   }
   
-  CqlLexer.prototype.isShortIdentifierText= function(text) {
-        for (var i= 0; i < this.shortIdentifiers.length; i++) {
-            if (text.startsWith(this.shortIdentifiers[i])) {
-                return true;
-            }
-        }
-        return false;
+  CqlLexer.prototype.isExternalIdentifier= function(identifier) {
+        return _isShortIdentifier(identifier, this.externalIdentifiers); 
   }
+  
+  CqlLexer.prototype.isExternalIdentifierText= function(text) {
+        return _isShortIdentifierText(text, this.externalIdentifiers); 
+  }
+  
+  var _isShortIdentifier= function(identifier, externalIdentifiers) {
+    return _.indexOf(externalIdentifiers.shortIdentifiers, identifier) !== -1;
+  };
+  
+  var _isShortIdentifierText= function(identifier, externalIdentifiers) {
+    return _.findIndex(externalIdentifiers.shortIdentifiers, function(shortIdentifier){
+        return identifier.startsWith(shortIdentifier);
+    }) !== -1;
+  };
 }
 
 search: clauses EOF;
@@ -76,8 +91,8 @@ SORT_ASCENDING: 'asc';
 SORT_DESCENDING: 'dsc';
 
 NUMBER: [1-9][0-9]*;
-ANY_CHAR: . {this.isShortIdentifierText(this.text)}? {this.generateShortIdentifierToken()};
-STRING_LITERAL: ((~["\\ \t:]) | STRING_ESCAPE )+ {!this.isShortIdentifierText(this.text)}?;
+ANY_CHAR: . {this.isExternalIdentifier(this.text)}? {this.generateExternalIdentifierToken(this.text)};
+STRING_LITERAL: ((~["\\ \t:]) | STRING_ESCAPE )+ {!this.isExternalIdentifierText(this.text)}?;
                 
 QUOTED_STRING_LITERAL: '"' ((~["\\]) | STRING_ESCAPE)* '"';
 UNTERMINATED_QUOTED_STRING_LITERAL: '"' ((~["\\]) | STRING_ESCAPE)*;

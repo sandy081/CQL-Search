@@ -88,7 +88,7 @@ CqlLexer.ruleNames = [ "EQUALS", "SORT_ASCENDING", "SORT_DESCENDING", "NUMBER",
 CqlLexer.grammarFileName = "Cql.g4";
 
 
-  CqlLexer.prototype.setShortIndetifiers= function(shortIdentifiers) {}
+  CqlLexer.prototype.setExternalIndetifiers= function(externalIdentifiers) {}
 
 
 
