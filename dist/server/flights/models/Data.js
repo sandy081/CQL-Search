@@ -5,14 +5,13 @@ exports.Attributes= function() {
                 {name: "To", text: "To", ops: [":"], type:"city", direct: true}   
              ],
         "2": [
-                {name: "Departure", text: "dep", ops: [":"]},   
-                {name: "Return", text: "ret", ops: [":"]},   
-                {name: "Persons", text: "#"}   
-             ],
-        "3": [
                 {name: "adults", text: "adults", ops: [":"]},   
                 {name: "infants", text: "infants", ops: [":"]},   
                 {name: "children", text: "children", ops: [":"]}   
+             ],
+        "3": [
+                {name: "Departure", text: "dep", ops: [":"]},   
+                {name: "Return", text: "ret", ops: [":"]}   
              ],
         "4": [
                 {name: "Sort ascending", text: "asc", ops: [":"]},   

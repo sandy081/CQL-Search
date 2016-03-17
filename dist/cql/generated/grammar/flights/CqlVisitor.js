@@ -32,11 +32,6 @@ CqlVisitor.prototype.visitAttributeClause = function(ctx) {
 };
 
 
-// Visit a parse tree produced by CqlParser#shortClause.
-CqlVisitor.prototype.visitShortClause = function(ctx) {
-};
-
-
 // Visit a parse tree produced by CqlParser#fullTextClause.
 CqlVisitor.prototype.visitFullTextClause = function(ctx) {
 };

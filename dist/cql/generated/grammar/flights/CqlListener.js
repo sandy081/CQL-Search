@@ -47,15 +47,6 @@ CqlListener.prototype.exitAttributeClause = function(ctx) {
 };
 
 
-// Enter a parse tree produced by CqlParser#shortClause.
-CqlListener.prototype.enterShortClause = function(ctx) {
-};
-
-// Exit a parse tree produced by CqlParser#shortClause.
-CqlListener.prototype.exitShortClause = function(ctx) {
-};
-
-
 // Enter a parse tree produced by CqlParser#fullTextClause.
 CqlListener.prototype.enterFullTextClause = function(ctx) {
 };

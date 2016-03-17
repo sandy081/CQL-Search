@@ -26,7 +26,7 @@ FlightsProposalVisitor.prototype.visitShortClause= function(ctx) {
     var isValidValue= _isValidValue(ctx.value());
     var hasTrailingSpace= this._selectionHelper.hasTrailingSpace(ctx);
     if (!isValidValue || !hasTrailingSpace) {
-        var attribute= ParserUtils.getTokenName(ctx.shortIdentifier.type);
+        var attribute= ctx.SHORT_IDENTIFIER().toString();
         var selection= isValidValue ? this._selectionHelper.createSelection(ctx.value()) : this._selectionHelper.createAfterSelectionWithContext(ctx);
         this._proposalsBuilder.createValueProposals(attribute, selection, true);
         return true;

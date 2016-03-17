@@ -10,7 +10,7 @@ AttributeVisitor.prototype= Object.create(CqlVisitor.prototype);
 AttributeVisitor.prototype.constructor= AttributeVisitor;
 
 AttributeVisitor.prototype.visitShortClause= function(ctx) {
-    return ParserUtils.getTokenName(ctx.shortIdentifier.type);
+    return ctx.SHORT_IDENTIFIER().toString();
 }
 
 AttributeVisitor.prototype.visitAttribute= function(ctx) {

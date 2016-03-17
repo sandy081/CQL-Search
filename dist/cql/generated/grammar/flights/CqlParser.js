@@ -7,51 +7,47 @@ var CqlVisitor = require('./CqlVisitor').CqlVisitor;
 var grammarFileName = "Cql.g4";
 
 var serializedATN = ["\u0003\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
-    "\u0003\rU\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t\u0004",
+    "\u0003\nO\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t\u0004",
     "\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004\b",
     "\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f\u0004\r",
-    "\t\r\u0004\u000e\t\u000e\u0003\u0002\u0003\u0002\u0003\u0002\u0003\u0003",
-    "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0007\u0003%\n\u0003",
-    "\f\u0003\u000e\u0003(\u000b\u0003\u0003\u0004\u0003\u0004\u0003\u0004",
-    "\u0003\u0004\u0005\u0004.\n\u0004\u0003\u0005\u0003\u0005\u0003\u0005",
-    "\u0003\u0005\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0007\u0003\u0007",
-    "\u0003\u0007\u0003\u0007\u0003\u0007\u0007\u0007<\n\u0007\f\u0007\u000e",
-    "\u0007?\u000b\u0007\u0003\b\u0003\b\u0003\b\u0003\b\u0003\t\u0003\t",
-    "\u0005\tG\n\t\u0003\n\u0003\n\u0003\u000b\u0003\u000b\u0003\f\u0003",
-    "\f\u0005\fO\n\f\u0003\r\u0003\r\u0003\u000e\u0003\u000e\u0003\u000e",
-    "\u0002\u0004\u0004\f\u000f\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012",
-    "\u0014\u0016\u0018\u001a\u0002\u0006\u0003\u0002\u0005\u0006\u0003\u0002",
-    "\u0007\b\u0003\u0002\u0003\u0004\u0003\u0002\n\u000bN\u0002\u001c\u0003",
-    "\u0002\u0002\u0002\u0004\u001f\u0003\u0002\u0002\u0002\u0006-\u0003",
-    "\u0002\u0002\u0002\b/\u0003\u0002\u0002\u0002\n3\u0003\u0002\u0002\u0002",
-    "\f6\u0003\u0002\u0002\u0002\u000e@\u0003\u0002\u0002\u0002\u0010F\u0003",
-    "\u0002\u0002\u0002\u0012H\u0003\u0002\u0002\u0002\u0014J\u0003\u0002",
-    "\u0002\u0002\u0016N\u0003\u0002\u0002\u0002\u0018P\u0003\u0002\u0002",
-    "\u0002\u001aR\u0003\u0002\u0002\u0002\u001c\u001d\u0005\u0004\u0003",
-    "\u0002\u001d\u001e\u0007\u0002\u0002\u0003\u001e\u0003\u0003\u0002\u0002",
-    "\u0002\u001f \b\u0003\u0001\u0002 !\u0005\u0006\u0004\u0002!&\u0003",
-    "\u0002\u0002\u0002\"#\f\u0003\u0002\u0002#%\u0005\u0006\u0004\u0002",
-    "$\"\u0003\u0002\u0002\u0002%(\u0003\u0002\u0002\u0002&$\u0003\u0002",
-    "\u0002\u0002&\'\u0003\u0002\u0002\u0002\'\u0005\u0003\u0002\u0002\u0002",
-    "(&\u0003\u0002\u0002\u0002).\u0005\b\u0005\u0002*.\u0005\n\u0006\u0002",
-    "+.\u0005\f\u0007\u0002,.\u0005\u000e\b\u0002-)\u0003\u0002\u0002\u0002",
-    "-*\u0003\u0002\u0002\u0002-+\u0003\u0002\u0002\u0002-,\u0003\u0002\u0002",
-    "\u0002.\u0007\u0003\u0002\u0002\u0002/0\u0005\u0012\n\u000201\u0005",
-    "\u0014\u000b\u000212\u0005\u0016\f\u00022\t\u0003\u0002\u0002\u0002",
-    "34\t\u0002\u0002\u000245\u0005\u0016\f\u00025\u000b\u0003\u0002\u0002",
-    "\u000267\b\u0007\u0001\u000278\u0005\u0010\t\u00028=\u0003\u0002\u0002",
-    "\u00029:\f\u0003\u0002\u0002:<\u0005\u0010\t\u0002;9\u0003\u0002\u0002",
-    "\u0002<?\u0003\u0002\u0002\u0002=;\u0003\u0002\u0002\u0002=>\u0003\u0002",
-    "\u0002\u0002>\r\u0003\u0002\u0002\u0002?=\u0003\u0002\u0002\u0002@A",
-    "\t\u0003\u0002\u0002AB\u0007\u0003\u0002\u0002BC\u0005\u0012\n\u0002",
-    "C\u000f\u0003\u0002\u0002\u0002DG\u0005\u001a\u000e\u0002EG\u0005\u0018",
-    "\r\u0002FD\u0003\u0002\u0002\u0002FE\u0003\u0002\u0002\u0002G\u0011",
-    "\u0003\u0002\u0002\u0002HI\u0005\u0018\r\u0002I\u0013\u0003\u0002\u0002",
-    "\u0002JK\t\u0004\u0002\u0002K\u0015\u0003\u0002\u0002\u0002LO\u0005",
-    "\u001a\u000e\u0002MO\u0005\u0018\r\u0002NL\u0003\u0002\u0002\u0002N",
-    "M\u0003\u0002\u0002\u0002O\u0017\u0003\u0002\u0002\u0002PQ\t\u0005\u0002",
-    "\u0002Q\u0019\u0003\u0002\u0002\u0002RS\u0007\t\u0002\u0002S\u001b\u0003",
-    "\u0002\u0002\u0002\u0007&-=FN"].join("");
+    "\t\r\u0003\u0002\u0003\u0002\u0003\u0002\u0003\u0003\u0003\u0003\u0003",
+    "\u0003\u0003\u0003\u0003\u0003\u0007\u0003#\n\u0003\f\u0003\u000e\u0003",
+    "&\u000b\u0003\u0003\u0004\u0003\u0004\u0003\u0004\u0005\u0004+\n\u0004",
+    "\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0005\u0003\u0006\u0003\u0006",
+    "\u0003\u0006\u0003\u0006\u0003\u0006\u0007\u00066\n\u0006\f\u0006\u000e",
+    "\u00069\u000b\u0006\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007",
+    "\u0003\b\u0003\b\u0005\bA\n\b\u0003\t\u0003\t\u0003\n\u0003\n\u0003",
+    "\u000b\u0003\u000b\u0005\u000bI\n\u000b\u0003\f\u0003\f\u0003\r\u0003",
+    "\r\u0003\r\u0002\u0004\u0004\n\u000e\u0002\u0004\u0006\b\n\f\u000e\u0010",
+    "\u0012\u0014\u0016\u0018\u0002\u0004\u0003\u0002\u0004\u0005\u0003\u0002",
+    "\u0007\bH\u0002\u001a\u0003\u0002\u0002\u0002\u0004\u001d\u0003\u0002",
+    "\u0002\u0002\u0006*\u0003\u0002\u0002\u0002\b,\u0003\u0002\u0002\u0002",
+    "\n0\u0003\u0002\u0002\u0002\f:\u0003\u0002\u0002\u0002\u000e@\u0003",
+    "\u0002\u0002\u0002\u0010B\u0003\u0002\u0002\u0002\u0012D\u0003\u0002",
+    "\u0002\u0002\u0014H\u0003\u0002\u0002\u0002\u0016J\u0003\u0002\u0002",
+    "\u0002\u0018L\u0003\u0002\u0002\u0002\u001a\u001b\u0005\u0004\u0003",
+    "\u0002\u001b\u001c\u0007\u0002\u0002\u0003\u001c\u0003\u0003\u0002\u0002",
+    "\u0002\u001d\u001e\b\u0003\u0001\u0002\u001e\u001f\u0005\u0006\u0004",
+    "\u0002\u001f$\u0003\u0002\u0002\u0002 !\f\u0003\u0002\u0002!#\u0005",
+    "\u0006\u0004\u0002\" \u0003\u0002\u0002\u0002#&\u0003\u0002\u0002\u0002",
+    "$\"\u0003\u0002\u0002\u0002$%\u0003\u0002\u0002\u0002%\u0005\u0003\u0002",
+    "\u0002\u0002&$\u0003\u0002\u0002\u0002\'+\u0005\b\u0005\u0002(+\u0005",
+    "\n\u0006\u0002)+\u0005\f\u0007\u0002*\'\u0003\u0002\u0002\u0002*(\u0003",
+    "\u0002\u0002\u0002*)\u0003\u0002\u0002\u0002+\u0007\u0003\u0002\u0002",
+    "\u0002,-\u0005\u0010\t\u0002-.\u0005\u0012\n\u0002./\u0005\u0014\u000b",
+    "\u0002/\t\u0003\u0002\u0002\u000201\b\u0006\u0001\u000212\u0005\u000e",
+    "\b\u000227\u0003\u0002\u0002\u000234\f\u0003\u0002\u000246\u0005\u000e",
+    "\b\u000253\u0003\u0002\u0002\u000269\u0003\u0002\u0002\u000275\u0003",
+    "\u0002\u0002\u000278\u0003\u0002\u0002\u00028\u000b\u0003\u0002\u0002",
+    "\u000297\u0003\u0002\u0002\u0002:;\t\u0002\u0002\u0002;<\u0007\u0003",
+    "\u0002\u0002<=\u0005\u0010\t\u0002=\r\u0003\u0002\u0002\u0002>A\u0005",
+    "\u0018\r\u0002?A\u0005\u0016\f\u0002@>\u0003\u0002\u0002\u0002@?\u0003",
+    "\u0002\u0002\u0002A\u000f\u0003\u0002\u0002\u0002BC\u0005\u0016\f\u0002",
+    "C\u0011\u0003\u0002\u0002\u0002DE\u0007\u0003\u0002\u0002E\u0013\u0003",
+    "\u0002\u0002\u0002FI\u0005\u0018\r\u0002GI\u0005\u0016\f\u0002HF\u0003",
+    "\u0002\u0002\u0002HG\u0003\u0002\u0002\u0002I\u0015\u0003\u0002\u0002",
+    "\u0002JK\t\u0003\u0002\u0002K\u0017\u0003\u0002\u0002\u0002LM\u0007",
+    "\u0006\u0002\u0002M\u0019\u0003\u0002\u0002\u0002\u0007$*7@H"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -60,16 +56,15 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 
 var sharedContextCache = new antlr4.PredictionContextCache();
 
-var literalNames = [ 'null', "':'", "'>'", "'#'", "'@'", "'asc'", "'dsc'" ];
+var literalNames = [ 'null', "':'", "'asc'", "'dsc'" ];
 
-var symbolicNames = [ 'null', "EQUALS", "GREATER_THAN", "MEMBERS_IDENTIFIER", 
-                      "OWNER_IDENTIFIER", "SORT_ASCENDING", "SORT_DESCENDING", 
+var symbolicNames = [ 'null', "EQUALS", "SORT_ASCENDING", "SORT_DESCENDING", 
                       "NUMBER", "STRING_LITERAL", "QUOTED_STRING_LITERAL", 
                       "UNTERMINATED_QUOTED_STRING_LITERAL", "WHITESPACE" ];
 
 var ruleNames =  [ "search", "clauses", "simpleClause", "attributeClause", 
-                   "shortClause", "fullTextClause", "sortClause", "searchWord", 
-                   "attribute", "operation", "value", "stringValue", "numberValue" ];
+                   "fullTextClause", "sortClause", "searchWord", "attribute", 
+                   "operation", "value", "stringValue", "numberValue" ];
 
 function CqlParser (input) {
 	antlr4.Parser.call(this, input);
@@ -91,30 +86,26 @@ Object.defineProperty(CqlParser.prototype, "atn", {
 
 CqlParser.EOF = antlr4.Token.EOF;
 CqlParser.EQUALS = 1;
-CqlParser.GREATER_THAN = 2;
-CqlParser.MEMBERS_IDENTIFIER = 3;
-CqlParser.OWNER_IDENTIFIER = 4;
-CqlParser.SORT_ASCENDING = 5;
-CqlParser.SORT_DESCENDING = 6;
-CqlParser.NUMBER = 7;
-CqlParser.STRING_LITERAL = 8;
-CqlParser.QUOTED_STRING_LITERAL = 9;
-CqlParser.UNTERMINATED_QUOTED_STRING_LITERAL = 10;
-CqlParser.WHITESPACE = 11;
+CqlParser.SORT_ASCENDING = 2;
+CqlParser.SORT_DESCENDING = 3;
+CqlParser.NUMBER = 4;
+CqlParser.STRING_LITERAL = 5;
+CqlParser.QUOTED_STRING_LITERAL = 6;
+CqlParser.UNTERMINATED_QUOTED_STRING_LITERAL = 7;
+CqlParser.WHITESPACE = 8;
 
 CqlParser.RULE_search = 0;
 CqlParser.RULE_clauses = 1;
 CqlParser.RULE_simpleClause = 2;
 CqlParser.RULE_attributeClause = 3;
-CqlParser.RULE_shortClause = 4;
-CqlParser.RULE_fullTextClause = 5;
-CqlParser.RULE_sortClause = 6;
-CqlParser.RULE_searchWord = 7;
-CqlParser.RULE_attribute = 8;
-CqlParser.RULE_operation = 9;
-CqlParser.RULE_value = 10;
-CqlParser.RULE_stringValue = 11;
-CqlParser.RULE_numberValue = 12;
+CqlParser.RULE_fullTextClause = 4;
+CqlParser.RULE_sortClause = 5;
+CqlParser.RULE_searchWord = 6;
+CqlParser.RULE_attribute = 7;
+CqlParser.RULE_operation = 8;
+CqlParser.RULE_value = 9;
+CqlParser.RULE_stringValue = 10;
+CqlParser.RULE_numberValue = 11;
 
 function SearchContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -171,9 +162,9 @@ CqlParser.prototype.search = function() {
     this.enterRule(localctx, 0, CqlParser.RULE_search);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 26;
+        this.state = 24;
         this.clauses(0);
-        this.state = 27;
+        this.state = 25;
         this.match(CqlParser.EOF);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -247,10 +238,10 @@ CqlParser.prototype.clauses = function(_p) {
     this.enterRecursionRule(localctx, 2, CqlParser.RULE_clauses, _p);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 30;
+        this.state = 28;
         this.simpleClause();
         this._ctx.stop = this._input.LT(-1);
-        this.state = 36;
+        this.state = 34;
         this._errHandler.sync(this);
         var _alt = this._interp.adaptivePredict(this._input,0,this._ctx)
         while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
@@ -261,14 +252,14 @@ CqlParser.prototype.clauses = function(_p) {
                 _prevctx = localctx;
                 localctx = new ClausesContext(this, _parentctx, _parentState);
                 this.pushNewRecursionContext(localctx, _startState, CqlParser.RULE_clauses);
-                this.state = 32;
+                this.state = 30;
                 if (!( this.precpred(this._ctx, 1))) {
                     throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 1)");
                 }
-                this.state = 33;
+                this.state = 31;
                 this.simpleClause(); 
             }
-            this.state = 38;
+            this.state = 36;
             this._errHandler.sync(this);
             _alt = this._interp.adaptivePredict(this._input,0,this._ctx);
         }
@@ -305,10 +296,6 @@ SimpleClauseContext.prototype.constructor = SimpleClauseContext;
 
 SimpleClauseContext.prototype.attributeClause = function() {
     return this.getTypedRuleContext(AttributeClauseContext,0);
-};
-
-SimpleClauseContext.prototype.shortClause = function() {
-    return this.getTypedRuleContext(ShortClauseContext,0);
 };
 
 SimpleClauseContext.prototype.fullTextClause = function() {
@@ -349,30 +336,24 @@ CqlParser.prototype.simpleClause = function() {
     var localctx = new SimpleClauseContext(this, this._ctx, this.state);
     this.enterRule(localctx, 4, CqlParser.RULE_simpleClause);
     try {
-        this.state = 43;
+        this.state = 40;
         var la_ = this._interp.adaptivePredict(this._input,1,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
-            this.state = 39;
+            this.state = 37;
             this.attributeClause();
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
-            this.state = 40;
-            this.shortClause();
+            this.state = 38;
+            this.fullTextClause(0);
             break;
 
         case 3:
             this.enterOuterAlt(localctx, 3);
-            this.state = 41;
-            this.fullTextClause(0);
-            break;
-
-        case 4:
-            this.enterOuterAlt(localctx, 4);
-            this.state = 42;
+            this.state = 39;
             this.sortClause();
             break;
 
@@ -450,97 +431,11 @@ CqlParser.prototype.attributeClause = function() {
     this.enterRule(localctx, 6, CqlParser.RULE_attributeClause);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 45;
+        this.state = 42;
         this.attribute();
-        this.state = 46;
+        this.state = 43;
         this.operation();
-        this.state = 47;
-        this.value();
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-function ShortClauseContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = CqlParser.RULE_shortClause;
-    this.shortIdentifier = null; // Token
-    return this;
-}
-
-ShortClauseContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-ShortClauseContext.prototype.constructor = ShortClauseContext;
-
-ShortClauseContext.prototype.value = function() {
-    return this.getTypedRuleContext(ValueContext,0);
-};
-
-ShortClauseContext.prototype.MEMBERS_IDENTIFIER = function() {
-    return this.getToken(CqlParser.MEMBERS_IDENTIFIER, 0);
-};
-
-ShortClauseContext.prototype.OWNER_IDENTIFIER = function() {
-    return this.getToken(CqlParser.OWNER_IDENTIFIER, 0);
-};
-
-ShortClauseContext.prototype.enterRule = function(listener) {
-    if(listener instanceof CqlListener ) {
-        listener.enterShortClause(this);
-	}
-};
-
-ShortClauseContext.prototype.exitRule = function(listener) {
-    if(listener instanceof CqlListener ) {
-        listener.exitShortClause(this);
-	}
-};
-
-ShortClauseContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof CqlVisitor ) {
-        return visitor.visitShortClause(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-
-
-CqlParser.ShortClauseContext = ShortClauseContext;
-
-CqlParser.prototype.shortClause = function() {
-
-    var localctx = new ShortClauseContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 8, CqlParser.RULE_shortClause);
-    var _la = 0; // Token type
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 49;
-        localctx.shortIdentifier = this._input.LT(1);
-        _la = this._input.LA(1);
-        if(!(_la===CqlParser.MEMBERS_IDENTIFIER || _la===CqlParser.OWNER_IDENTIFIER)) {
-            localctx.shortIdentifier = this._errHandler.recoverInline(this);
-        }
-        else {
-            this.consume();
-        }
-        this.state = 50;
+        this.state = 44;
         this.value();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -610,14 +505,14 @@ CqlParser.prototype.fullTextClause = function(_p) {
     var _parentState = this.state;
     var localctx = new FullTextClauseContext(this, this._ctx, _parentState);
     var _prevctx = localctx;
-    var _startState = 10;
-    this.enterRecursionRule(localctx, 10, CqlParser.RULE_fullTextClause, _p);
+    var _startState = 8;
+    this.enterRecursionRule(localctx, 8, CqlParser.RULE_fullTextClause, _p);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 53;
+        this.state = 47;
         this.searchWord();
         this._ctx.stop = this._input.LT(-1);
-        this.state = 59;
+        this.state = 53;
         this._errHandler.sync(this);
         var _alt = this._interp.adaptivePredict(this._input,2,this._ctx)
         while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
@@ -628,14 +523,14 @@ CqlParser.prototype.fullTextClause = function(_p) {
                 _prevctx = localctx;
                 localctx = new FullTextClauseContext(this, _parentctx, _parentState);
                 this.pushNewRecursionContext(localctx, _startState, CqlParser.RULE_fullTextClause);
-                this.state = 55;
+                this.state = 49;
                 if (!( this.precpred(this._ctx, 1))) {
                     throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 1)");
                 }
-                this.state = 56;
+                this.state = 50;
                 this.searchWord(); 
             }
-            this.state = 61;
+            this.state = 55;
             this._errHandler.sync(this);
             _alt = this._interp.adaptivePredict(this._input,2,this._ctx);
         }
@@ -715,11 +610,11 @@ CqlParser.SortClauseContext = SortClauseContext;
 CqlParser.prototype.sortClause = function() {
 
     var localctx = new SortClauseContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 12, CqlParser.RULE_sortClause);
+    this.enterRule(localctx, 10, CqlParser.RULE_sortClause);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 62;
+        this.state = 56;
         localctx.sortOrder = this._input.LT(1);
         _la = this._input.LA(1);
         if(!(_la===CqlParser.SORT_ASCENDING || _la===CqlParser.SORT_DESCENDING)) {
@@ -728,9 +623,9 @@ CqlParser.prototype.sortClause = function() {
         else {
             this.consume();
         }
-        this.state = 63;
+        this.state = 57;
         this.match(CqlParser.EQUALS);
-        this.state = 64;
+        this.state = 58;
         this.attribute();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -798,19 +693,19 @@ CqlParser.SearchWordContext = SearchWordContext;
 CqlParser.prototype.searchWord = function() {
 
     var localctx = new SearchWordContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 14, CqlParser.RULE_searchWord);
+    this.enterRule(localctx, 12, CqlParser.RULE_searchWord);
     try {
-        this.state = 68;
+        this.state = 62;
         switch(this._input.LA(1)) {
         case CqlParser.NUMBER:
             this.enterOuterAlt(localctx, 1);
-            this.state = 66;
+            this.state = 60;
             this.numberValue();
             break;
         case CqlParser.STRING_LITERAL:
         case CqlParser.QUOTED_STRING_LITERAL:
             this.enterOuterAlt(localctx, 2);
-            this.state = 67;
+            this.state = 61;
             this.stringValue();
             break;
         default:
@@ -878,10 +773,10 @@ CqlParser.AttributeContext = AttributeContext;
 CqlParser.prototype.attribute = function() {
 
     var localctx = new AttributeContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 16, CqlParser.RULE_attribute);
+    this.enterRule(localctx, 14, CqlParser.RULE_attribute);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 70;
+        this.state = 64;
         this.stringValue();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -907,7 +802,6 @@ function OperationContext(parser, parent, invokingState) {
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
     this.ruleIndex = CqlParser.RULE_operation;
-    this.op = null; // Token
     return this;
 }
 
@@ -916,10 +810,6 @@ OperationContext.prototype.constructor = OperationContext;
 
 OperationContext.prototype.EQUALS = function() {
     return this.getToken(CqlParser.EQUALS, 0);
-};
-
-OperationContext.prototype.GREATER_THAN = function() {
-    return this.getToken(CqlParser.GREATER_THAN, 0);
 };
 
 OperationContext.prototype.enterRule = function(listener) {
@@ -950,19 +840,11 @@ CqlParser.OperationContext = OperationContext;
 CqlParser.prototype.operation = function() {
 
     var localctx = new OperationContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 18, CqlParser.RULE_operation);
-    var _la = 0; // Token type
+    this.enterRule(localctx, 16, CqlParser.RULE_operation);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 72;
-        localctx.op = this._input.LT(1);
-        _la = this._input.LA(1);
-        if(!(_la===CqlParser.EQUALS || _la===CqlParser.GREATER_THAN)) {
-            localctx.op = this._errHandler.recoverInline(this);
-        }
-        else {
-            this.consume();
-        }
+        this.state = 66;
+        this.match(CqlParser.EQUALS);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1029,19 +911,19 @@ CqlParser.ValueContext = ValueContext;
 CqlParser.prototype.value = function() {
 
     var localctx = new ValueContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 20, CqlParser.RULE_value);
+    this.enterRule(localctx, 18, CqlParser.RULE_value);
     try {
-        this.state = 76;
+        this.state = 70;
         switch(this._input.LA(1)) {
         case CqlParser.NUMBER:
             this.enterOuterAlt(localctx, 1);
-            this.state = 74;
+            this.state = 68;
             this.numberValue();
             break;
         case CqlParser.STRING_LITERAL:
         case CqlParser.QUOTED_STRING_LITERAL:
             this.enterOuterAlt(localctx, 2);
-            this.state = 75;
+            this.state = 69;
             this.stringValue();
             break;
         default:
@@ -1113,11 +995,11 @@ CqlParser.StringValueContext = StringValueContext;
 CqlParser.prototype.stringValue = function() {
 
     var localctx = new StringValueContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 22, CqlParser.RULE_stringValue);
+    this.enterRule(localctx, 20, CqlParser.RULE_stringValue);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 78;
+        this.state = 72;
         _la = this._input.LA(1);
         if(!(_la===CqlParser.STRING_LITERAL || _la===CqlParser.QUOTED_STRING_LITERAL)) {
         this._errHandler.recoverInline(this);
@@ -1187,10 +1069,10 @@ CqlParser.NumberValueContext = NumberValueContext;
 CqlParser.prototype.numberValue = function() {
 
     var localctx = new NumberValueContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 24, CqlParser.RULE_numberValue);
+    this.enterRule(localctx, 22, CqlParser.RULE_numberValue);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 80;
+        this.state = 74;
         this.match(CqlParser.NUMBER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1211,7 +1093,7 @@ CqlParser.prototype.sempred = function(localctx, ruleIndex, predIndex) {
 	switch(ruleIndex) {
 	case 1:
 			return this.clauses_sempred(localctx, predIndex);
-	case 5:
+	case 4:
 			return this.fullTextClause_sempred(localctx, predIndex);
     default:
         throw "No predicate with index:" + ruleIndex;

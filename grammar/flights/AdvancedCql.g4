@@ -1,7 +1,31 @@
 grammar Cql;
 
+tokens {
+  SHORT_IDENTIFIER
+}
+
 @lexer::members {
-  CqlLexer.prototype.setShortIndetifiers= function(shortIdentifiers) {}
+  
+  CqlLexer.SHORT_IDENTIFIER= require('./CqlParser').CqlParser.SHORT_IDENTIFIER;
+  CqlLexer.prototype.shortIdentifiers= [];
+  
+  CqlLexer.prototype.setShortIndetifiers= function(shortIdentifiers) {
+        this.shortIdentifiers = shortIdentifiers;
+        return this;
+  }
+  
+  CqlLexer.prototype.generateShortIdentifierToken= function() {
+       this.type= CqlLexer.SHORT_IDENTIFIER;
+  }
+  
+  CqlLexer.prototype.isShortIdentifierText= function(text) {
+        for (var i= 0; i < this.shortIdentifiers.length; i++) {
+            if (text.startsWith(this.shortIdentifiers[i])) {
+                return true;
+            }
+        }
+        return false;
+  }
 }
 
 search: clauses EOF;
@@ -9,10 +33,13 @@ search: clauses EOF;
 clauses: simpleClause 
 		 	| clauses simpleClause;
 
-simpleClause: attributeClause
+simpleClause: shortClause
+                    | attributeClause
                     | fullTextClause
                     | sortClause
                     ;
+
+shortClause: SHORT_IDENTIFIER value;
 
 attributeClause: attribute operation value;
 
@@ -35,6 +62,7 @@ value: numberValue
             ;
 
 stringValue: QUOTED_STRING_LITERAL 
+                    | ANY_CHAR
                     | STRING_LITERAL
                     ;
                     
@@ -48,7 +76,8 @@ SORT_ASCENDING: 'asc';
 SORT_DESCENDING: 'dsc';
 
 NUMBER: [1-9][0-9]*;
-STRING_LITERAL: ((~["\\ \t:]) | STRING_ESCAPE )+;
+ANY_CHAR: . {this.isShortIdentifierText(this.text)}? {this.generateShortIdentifierToken()};
+STRING_LITERAL: ((~["\\ \t:]) | STRING_ESCAPE )+ {!this.isShortIdentifierText(this.text)}?;
                 
 QUOTED_STRING_LITERAL: '"' ((~["\\]) | STRING_ESCAPE)* '"';
 UNTERMINATED_QUOTED_STRING_LITERAL: '"' ((~["\\]) | STRING_ESCAPE)*;

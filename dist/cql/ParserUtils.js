@@ -11,6 +11,7 @@ ParserUtils.QUOTE= "\"";
 ParserUtils.createSilentParser= function(cqlText) {
    var chars = new InputStream(cqlText);
    var lexer = new CqlLexer(chars);
+   lexer.setShortIndetifiers(['#']);
    var tokens  = new CommonTokenStream(lexer);
    var parser = new CqlParser(tokens);
    parser.buildParseTrees = true;
