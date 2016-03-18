@@ -11,6 +11,7 @@ var SearchInput= React.createClass({
         inputFocussed: "input-focussed",  
         inputChanged: "input-changed",  
         escape: "escape", 
+        arrowLeft: "arrow-left", 
         arrowUp: "arrow-up", 
         arrowRight: "arrow-right", 
         arrowDown: "arrow-down",
@@ -44,12 +45,24 @@ var SearchInput= React.createClass({
         this.$ui.disabledInput.val(this._comittedValue);
     },
     
+    uncommit: function() {
+        this.$ui.enabledInput.val(this._comittedValue);
+        this.$ui.disabledInput.val(this._comittedValue);
+    },
+    
     focus: function() {
         this.$ui.enabledInput.focus();  
     },
     
     getSearchText: function() {
         return this.$ui.enabledInput.val();  
+    },
+    
+    getSearchTextTillSelection: function() {
+        var input= this.$ui.enabledInput.get(0); 
+        var inputText= input.value;
+        var selectionStart= input.selectionStart;
+        return selectionStart > -1 ? inputText.substring(0, selectionStart) : inputText;
     },
     
     setActiveDescendant: function(id) {
@@ -74,15 +87,19 @@ var SearchInput= React.createClass({
         var newInput= proposal.get(Proposal.propDisabled) ? this._comittedValue : this._getValueAfterApplyingProposal(proposal);
         this.$ui.enabledInput.val(newInput);
         if (commit) {
-            this.commit();;
+            this.commit();
         }
     },
     
-    _getValueAfterApplyingProposal: function(proposal) {
+    _getValueAfterApplyingProposal: function(proposal, addEndingString) {
         var proposalText= proposal.get(Proposal.propDisplayString);
         var from= proposal.getSelectionFrom();
+        var till= proposal.getSelectionTill();
         var newInput= this._comittedValue.substring(0, from);
         newInput+= proposalText;
+        if (till !== -1 && (till > from && till + 1 < this._comittedValue.length) || (till > from || till < this._comittedValue.length)) {
+            newInput+= this._comittedValue.substring(till + 1);
+        }
         return newInput;
     },
     
@@ -115,26 +132,21 @@ var SearchInput= React.createClass({
                 this.actions.escape();
                 handled= true;
                 break;
+            case 37: //ARROW_LEFT
+                this.actions.arrowLeft(event);
+                break;
             case 38: //ARROW_UP
                 if (!event.ctrlKey && !event.altKey && !event.metaKey) {
-                    this.actions.arrowUp();
+                    this.actions.arrowUp(event);
                     handled= true;
                 }
                 break;
             case 39: //ARROW_RIGHT
-                if (event.ctrlKey
-                        || event.altKey
-                        || event.metaKey
-                        || event.shiftKey
-                        || this.$ui.enabledInput[0].selectionEnd !== this.getSearchText().length
-                        || this.$ui.enabledInput[0].selectionStart !== this.getSearchText().length) {
-                    break;
-                }
-                this.actions.arrowRight();
+                this.actions.arrowRight(event);
                 break;
             case 40: //ARROW_DOWN
                 if (!event.ctrlKey && !event.altKey && !event.metaKey) {
-                    this.actions.arrowDown();
+                    this.actions.arrowDown(event);
                     handled= true;
                 }
                 break;

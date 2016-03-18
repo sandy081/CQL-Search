@@ -38,7 +38,10 @@ var mixin= {
     
     componentWillMount: function() {
         this.actions= this.actions || {};
-        this.actions= _.mapValues(this.actions, Reflux.createAction);  
+        this.actions= _.mapValues(this.actions, function(actionOrActionName) {
+            var action= typeof actionOrActionName === "object" ? actionOrActionName : {actionName: actionOrActionName, sync: true}
+            return Reflux.createAction(action);
+        });  
     },
     
     componentDidMount: function() {
