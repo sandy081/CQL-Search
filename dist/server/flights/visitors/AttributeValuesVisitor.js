@@ -6,9 +6,8 @@ var AttributeVisitor= require("./AttributeVisitor");
 var ValueVisitor= require("./ValueVisitor");
 var Proposal= require('./../../../shared/models/proposals/Proposal');
 
-var AttributeValuesVisitor= function(input) {
+var AttributeValuesVisitor= function() {
 	CqlVisitor.call(this);
-    this._input= input;
 }
 
 AttributeValuesVisitor.prototype= Object.create(CqlVisitor.prototype);
@@ -19,7 +18,7 @@ AttributeValuesVisitor.prototype.defaultValue= function() {
 };
 
 AttributeValuesVisitor.prototype.aggregateResult= function(aggregate, nextResult) {
-    return _.assign({}, aggregate, nextResult);
+    return _.assign(aggregate, nextResult);
 };
 
 AttributeValuesVisitor.prototype.visitValue= function(ctx) {
