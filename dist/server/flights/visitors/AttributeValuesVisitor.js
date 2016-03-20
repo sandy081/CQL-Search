@@ -20,7 +20,10 @@ AttributeValuesVisitor.prototype.aggregateResult= function(aggregate, nextResult
 
 AttributeValuesVisitor.prototype.visitAttributeClause= function(ctx) {
     var result= {};
-    // TODO: Collect attribute value pair
+    var attribute= new AttributeVisitor().visit(ctx.parentCtx);
+    var text= new ValueVisitor().visit(ctx);
+    // TODO: Uncomment this for enabling filtering
+    result[attribute]= text;
     return result;
 }
 

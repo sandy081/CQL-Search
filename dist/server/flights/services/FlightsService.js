@@ -17,8 +17,11 @@ var FlightsService= function() {};
 
 FlightsService.prototype.search= function(filter) {
     var attributeValues= _getAttributeValuesFrom(filter);
-    var filtered= _toCollection(flights.where(attributeValues));
+    var directFilterValues= _getDirectFilterValue(attributeValues);
+    var filtered= _toCollection(flights.where(directFilterValues));
+    filtered= _filterForMembers(filtered, attributeValues);
     filtered= _transform(filtered, attributeValues);
+    filtered= _sort(filtered, filter);
     return filtered;    
 }
 
@@ -26,13 +29,69 @@ FlightsService.prototype.flightsMessage= function(filter, flights) {
     if (flights.length === 0) {
         return "No flights with the given criteria";
     }
+    
+    // var attributeValues= _getAttributeValuesFrom(filter);
+    // var fromMessage= attributeValues["From"] ? "from " + attributeValues["From"] + " " : "";
+    // var toMessage= attributeValues["To"] ? "to " + attributeValues["To"]  + " " : "";
+    // var departingMessage= _departingMessage(attributeValues.dep || "today");
+    // var returningMessage= attributeValues.ret ? _returnMessage(attributeValues.ret) : "";
+    // return "All flights " + fromMessage + toMessage + departingMessage + returningMessage;
     return null;
 }
+
+var _departingMessage= function(departingDate) {
+    switch (departingDate) {
+        case "today":
+            return "departing today ";
+        case "tomorrow":
+            return "departing tomorrow ";
+        case "2d":
+            return "departing in next two days ";
+        case "3d":
+            return "departing in next three days ";
+    }
+    return "departing on " + departingDate;
+}
+
+var _returnMessage= function(retuningDate) {
+    switch (retuningDate) {
+        case "same":
+            return "returning same day as departing day ";
+        case "next":
+            return "returning next day after departing day ";
+        case "2d":
+            return "returning two days after departing day ";
+        case "3d":
+            return "returning three days after departing day ";
+    }
+    return "returning on " + retuningDate;
+}
+
+var _getDirectFilterValue= function (attributeValues) {
+    var directAttributes= _.transform(Data.Attributes(), function(result, attributes){
+                                _.each(_.filter(attributes, "direct"), function(attribute) {
+                                    result.push(attribute.text);
+                                }); 
+                            }, []);
+    return _.pick(attributeValues, directAttributes);
+};
 
 var _getAttributeValuesFrom= function (filter) {
     var attributeValuesVisitor= new AttributeValuesVisitor();
     var parser= ParserUtils.createSilentParser(filter);
     return attributeValuesVisitor.visit(parser.search());
+};
+
+var _filterForMembers= function (flights, attributeValues) {
+    var members= attributeValues['#'];
+    if (!members) {
+        var children= attributeValues['children'] || 0;
+        var adults= attributeValues['adults'] || 1;
+        members= adults + children;
+    }
+    return _toCollection(flights.filter(function(flight) {
+        return flight.get(FlightModel.propMembers) >= members;  
+    }));
 };
 
 var _transform= function (flights, attributeValues) {
@@ -49,6 +108,26 @@ var _transform= function (flights, attributeValues) {
         transformed.setJourney(isToAndFro);
         return transformed;
     }));
+};
+
+var _sort= function (flights, filter) {
+    var sortAttributes= _getSortAttributes(filter);
+    
+    var sortAscendingToken= ParserUtils.getTokenName(CqlParser.SORT_ASCENDING); 
+    var sortDescendingToken= ParserUtils.getTokenName(CqlParser.SORT_DESCENDING); 
+    if (sortAttributes[sortAscendingToken]) {
+        return _toCollection(flights.sortBy(sortAttributes[sortAscendingToken]));
+    } else if (sortAttributes[sortDescendingToken]) {
+        return _toCollection(_.reverse(flights.sortBy(sortAttributes[sortDescendingToken])));
+    }
+    
+    return _toCollection(flights.sortBy(FlightResultModel.propPriceValue));
+};
+
+var _getSortAttributes= function(filter) {
+    var sortAttributesVisitor= new SortAttributesVisitor();
+    var parser= ParserUtils.createSilentParser(filter);
+    return sortAttributesVisitor.visit(parser.search());
 };
 
 module.exports= FlightsService;

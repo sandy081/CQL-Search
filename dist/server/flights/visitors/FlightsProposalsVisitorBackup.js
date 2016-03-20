@@ -15,8 +15,7 @@ FlightsProposalVisitor.prototype.visitSimpleClause= function(ctx) {
     var handled= this.visitLastChild(ctx);
     if (!handled || ctx.exception !== null) {
         var selection= this._selectionHelper.createSelection(ctx);
-        var needsLeadingSpace= this._selectionHelper.needsLeadingSpace(ctx);
-        this._proposalsBuilder.createAttributeProposals(selection, needsLeadingSpace);
+        this._proposalsBuilder.createAttributeProposals(selection);
     }
     return handled;
 }
@@ -57,8 +56,7 @@ FlightsProposalVisitor.prototype.visitValue= function(ctx) {
 
 FlightsProposalVisitor.prototype.visitFullTextClause= function(ctx) {
     var selection= this._selectionHelper.createSelection(ctx);
-    var addLeadingText= this._selectionHelper.needsLeadingSpace(ctx);
-    this._proposalsBuilder.createAttributeProposals(selection, addLeadingText);
+    this._proposalsBuilder.createAttributeProposals(selection);
     return true;
 }
 
