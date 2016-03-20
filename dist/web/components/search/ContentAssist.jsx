@@ -48,11 +48,12 @@ var ContetnAssist= React.createClass({
     fetchProposals: function(searchText) {
         this.props.model.fetchProposals(searchText)
                         .done(_.bind(function(){
+                            var showProposals= this.props.model.toMenuEntries().length > 0;
                             this.getStateUpdater()
                                     .set(_STATE_MENU_ITEMS_, this.props.model.toMenuEntries())
-                                    .set(_STATE_SHOW_PROPOSALS_, true)
+                                    .set(_STATE_SHOW_PROPOSALS_, showProposals)
                                     .update();
-                            this.$el.addClass("open");
+                            this.$el.toggleClass("open", showProposals);
                             this.actions.proposalsShown();
                         }, this));  
     },
