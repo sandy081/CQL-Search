@@ -10,15 +10,6 @@ var FlightsProposalVisitor= function(proposalsBuilder, selectionHelper) {
 FlightsProposalVisitor.prototype= Object.create(LastChildVisitor.prototype);
 FlightsProposalVisitor.prototype.constructor= FlightsProposalVisitor;
 
-FlightsProposalVisitor.prototype.visitSimpleClause= function(ctx) {
-    var handled= this.visitLastChild(ctx);
-    if (!handled) {
-        var selection= this._selectionHelper.createSelection(ctx);
-        // this._proposalsBuilder.createAttributeProposals(selection);
-    }
-    return handled;
-}
-
 FlightsProposalVisitor.prototype.visitAttribute= function(ctx) {
     var selection= this._selectionHelper.createSelection(ctx);
     // this._proposalsBuilder.createAttributeProposals(selection);
@@ -34,6 +25,15 @@ FlightsProposalVisitor.prototype.visitValue= function(ctx) {
         return true;
     }
     return false;
+}
+
+FlightsProposalVisitor.prototype.visitSimpleClause= function(ctx) {
+    var handled= this.visitLastChild(ctx);
+    if (!handled) {
+        var selection= this._selectionHelper.createSelection(ctx);
+        // this._proposalsBuilder.createAttributeProposals(selection);
+    }
+    return handled;
 }
 
 FlightsProposalVisitor.prototype.visitSortClause= function(ctx) {
