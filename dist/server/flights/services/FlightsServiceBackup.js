@@ -17,8 +17,11 @@ var FlightsService= function() {};
 
 FlightsService.prototype.search= function(filter) {
     var attributeValues= _getAttributeValuesFrom(filter);
-    var filtered= _toCollection(flights.where(attributeValues));
+    var directFilterValues= _getDirectFilterValue(attributeValues);
+    var filtered= _toCollection(flights.where(directFilterValues));
+    filtered= _filterForMembers(filtered, attributeValues);
     filtered= _transform(filtered, attributeValues);
+    filtered= _sort(filtered, filter);
     return filtered;    
 }
 
