@@ -19,7 +19,7 @@ var FlightsProposalsBuilder= function(input) {
     this._values= _toLowerCase(new AttributeValuesVisitor().visit(parser.search())); 
 }
 
-FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, needsLeadingSpace) {
+FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection) {
     var attributeProposals= new AttributeProposals().getProposals(this._getFilterText(selection), this._values);
     this._addToProposals(attributeProposals, selection, false);
 }
