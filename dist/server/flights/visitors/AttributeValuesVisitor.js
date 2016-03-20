@@ -23,7 +23,7 @@ AttributeValuesVisitor.prototype.visitAttributeClause= function(ctx) {
     var attribute= new AttributeVisitor().visit(ctx.parentCtx);
     var text= new ValueVisitor().visit(ctx);
     // TODO: Uncomment this for enabling filtering
-    result[attribute]= text;
+    // result[attribute]= text;
     return result;
 }
 

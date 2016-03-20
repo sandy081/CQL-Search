@@ -14,14 +14,14 @@ FlightsProposalVisitor.prototype.visitSimpleClause= function(ctx) {
     var handled= this.visitLastChild(ctx);
     if (!handled) {
         var selection= this._selectionHelper.createSelection(ctx);
-        this._proposalsBuilder.createAttributeProposals(selection);
+        // this._proposalsBuilder.createAttributeProposals(selection);
     }
     return handled;
 }
 
 FlightsProposalVisitor.prototype.visitAttribute= function(ctx) {
     var selection= this._selectionHelper.createSelection(ctx);
-    this._proposalsBuilder.createAttributeProposals(selection);
+    // this._proposalsBuilder.createAttributeProposals(selection);
     return true;
 }
 
@@ -30,7 +30,7 @@ FlightsProposalVisitor.prototype.visitValue= function(ctx) {
         var attribute= new AttributeVisitor().visit(ctx.parentCtx);
         var selection= this._selectionHelper.createSelection(ctx);
         var needLeadingSpace= this._selectionHelper.needsLeadingSpace(ctx);
-        this._proposalsBuilder.createValueProposals(attribute, selection, needLeadingSpace);
+        // this._proposalsBuilder.createValueProposals(attribute, selection, needLeadingSpace);
         return true;
     }
     return false;
