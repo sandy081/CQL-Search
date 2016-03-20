@@ -1,10 +1,7 @@
 var _= require("lodash");
-var ParserUtils= require("./../../../cql/ParserUtils");
 var CqlVisitor= require("./../../../cql/CqlVisitor").CqlVisitor;
-var CqlParser= require("./../../../cql/generated/grammar/flights/CqlParser").CqlParser;
 var AttributeVisitor= require("./AttributeVisitor");
 var ValueVisitor= require("./ValueVisitor");
-var Proposal= require('./../../../shared/models/proposals/Proposal');
 
 var AttributeValuesVisitor= function() {
 	CqlVisitor.call(this);
