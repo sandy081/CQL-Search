@@ -111,9 +111,8 @@ var _transform= function (flights, attributeValues) {
 };
 
 var _sort= function (flights, filter) {
-    var sortAttributesVisitor= new SortAttributesVisitor();
-    var parser= ParserUtils.createSilentParser(filter);
-    var sortAttributes= sortAttributesVisitor.visit(parser.search());
+    var sortAttributes= _getSortAttributes(filter);
+    
     var sortAscendingToken= ParserUtils.getTokenName(CqlParser.SORT_ASCENDING); 
     var sortDescendingToken= ParserUtils.getTokenName(CqlParser.SORT_DESCENDING); 
     if (sortAttributes[sortAscendingToken]) {
@@ -121,7 +120,14 @@ var _sort= function (flights, filter) {
     } else if (sortAttributes[sortDescendingToken]) {
         return _toCollection(_.reverse(flights.sortBy(sortAttributes[sortDescendingToken])));
     }
+    
     return _toCollection(flights.sortBy(FlightResultModel.propPriceValue));
+};
+
+var _getSortAttributes= function(filter) {
+    var sortAttributesVisitor= new SortAttributesVisitor();
+    var parser= ParserUtils.createSilentParser(filter);
+    return sortAttributesVisitor.visit(parser.search());
 };
 
 module.exports= FlightsService;
