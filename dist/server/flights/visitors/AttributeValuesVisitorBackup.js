@@ -18,9 +18,11 @@ AttributeValuesVisitor.prototype.aggregateResult= function(aggregate, nextResult
     return _.assign(aggregate, nextResult);
 };
 
-AttributeValuesVisitor.prototype.visitAttributeClause= function(ctx) {
+AttributeValuesVisitor.prototype.visitValue= function(ctx) {
     var result= {};
-    // TODO: Collect attribute value pair
+    var attribute= new AttributeVisitor().visit(ctx.parentCtx);
+    var text= new ValueVisitor().visit(ctx);
+    result[attribute]= text;
     return result;
 }
 
