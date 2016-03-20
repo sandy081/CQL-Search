@@ -9,12 +9,18 @@ var ValueVisitor= function() {
 ValueVisitor.prototype= Object.create(CqlVisitor.prototype);
 ValueVisitor.prototype.constructor= ValueVisitor;
 
-ValueVisitor.prototype.visitStringValue= function(ctx) {
-    return ParserUtils.getStringValue(ctx);
-}
-
-ValueVisitor.prototype.visitNumberValue= function(ctx) {
-    return  parseInt(ctx.NUMBER().toString());
+ValueVisitor.prototype.visitValue= function(ctx) {
+    if (ctx.children !== null) {
+        var numberValue= ctx.numberValue();
+        if (numberValue !== null) {
+            return  parseInt(numberValue.NUMBER().toString());    
+        }
+        var stringValue= ctx.stringValue();
+        if (stringValue !== null) {
+            return ParserUtils.getStringValue(stringValue);    
+        }
+    }
+    return null;
 }
 
 module.exports= ValueVisitor;
