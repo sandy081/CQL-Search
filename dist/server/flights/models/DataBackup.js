@@ -1,19 +1,19 @@
 exports.Attributes= function() {
     return {
-        "1": [
+        "Group 1": [
                 {name: "From", text: "From", ops: [":"], type:"city", direct: true},   
                 {name: "To", text: "To", ops: [":"], type:"city", direct: true}   
              ],
-        "2": [
+        "Group 2": [
                 {name: "adults", text: "adults", ops: [":"]},   
                 {name: "infants", text: "infants", ops: [":"]},   
                 {name: "children", text: "children", ops: [":"]}   
              ],
-        "3": [
+        "Group 3": [
                 {name: "Departure", text: "dep", ops: [":"]},   
                 {name: "Return", text: "ret", ops: [":"]}   
              ],
-        "4": [
+        "Group 4": [
                 {name: "Sort ascending", text: "asc:"},   
                 {name: "Sort descending", text: "dsc:"}   
              ]
