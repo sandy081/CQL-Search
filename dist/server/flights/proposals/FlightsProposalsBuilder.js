@@ -16,7 +16,7 @@ var FlightsProposalsBuilder= function(input) {
     this._input= input;
     this._proposals= new Backbone.Collection([], {model: ProposalsGroup});
     var parser= ParserUtils.createSilentParser(input);
-    this._values= _toLowerCase(new AttributeValuesVisitor(input).visit(parser.search())); 
+    this._values= _toLowerCase(new AttributeValuesVisitor().visit(parser.search())); 
 }
 
 FlightsProposalsBuilder.prototype.createAttributeProposals= function(selection, needsLeadingSpace) {
