@@ -45,8 +45,11 @@ ParserUtils.stripQuotes= function(text) {
 
 ParserUtils.getStringValue= function(ctx) {
     if (ctx instanceof CqlParser.StringValueContext) {
-        var parserValue= ctx.STRING_LITERAL() !== null ? ctx.STRING_LITERAL().toString() : ctx.QUOTED_STRING_LITERAL().toString();
-        return ParserUtils.asNormalValue(parserValue);
+        if (ctx.children !== null) {
+            var parserValue= ctx.STRING_LITERAL() !== null ? ctx.STRING_LITERAL().toString() : ctx.QUOTED_STRING_LITERAL().toString();
+            return ParserUtils.asNormalValue(parserValue);
+        }
+        return "";
     }
     throw new Error("Not a string context");
 };
