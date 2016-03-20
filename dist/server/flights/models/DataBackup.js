@@ -1,11 +1,23 @@
 exports.Attributes= function() {
     return {
+        "1": [
+                {name: "From", text: "From", ops: [":"], type:"city", direct: true},   
+                {name: "To", text: "To", ops: [":"], type:"city", direct: true}   
+             ],
+        "2": [
+                {name: "adults", text: "adults", ops: [":"]},   
+                {name: "infants", text: "infants", ops: [":"]},   
+                {name: "children", text: "children", ops: [":"]}   
+             ],
+        "3": [
+                {name: "Departure", text: "dep", ops: [":"]},   
+                {name: "Return", text: "ret", ops: [":"]}   
+             ],
+        "4": [
+                {name: "Sort ascending", text: "asc:"},   
+                {name: "Sort descending", text: "dsc:"}   
+             ]
      };
-}
-
-exports.sortColumns= function() { 
-return [
-    ];
 }
 
 exports.columns= function() { 
@@ -17,8 +29,15 @@ return [
     ];
 }
 
+exports.sortColumns= function() { 
+return [
+        { title: "Price", attribute: "PriceValue" }
+    ];
+}
+
 exports.flights= function() {
     return [
+        
         // Swiss Air
         {From: "Zurich", To: "Madrid", Airlines: {iconUrl: "/images/swiss.png", value:"Swiss Air"}, Adult:100, Child:90, Infant: 10, '#': 5, Currency: "CHF"},   
         {From: "Madrid", To: "Zurich", Airlines: {iconUrl: "/images/swiss.png", value:"Swiss Air"}, Adult:95, Child:85, Infant: 10, '#': 10, Currency: "EURO"},
