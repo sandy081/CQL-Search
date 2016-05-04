@@ -14,7 +14,7 @@ var app= express();
 
 app.use(express.static('dist'));
 app.use(express.static('dist/web'));
-app.use(express.static('node_modules'));
+// app.use(express.static('node_modules'));
 
 app.get('/', function(req, res){
     res.setHeader('Content-Type', 'text/html');   
